@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "es2023",
+    // `dom` for the fetch types the generated client is written against, not for browser globals.
+    "lib": ["es2023", "dom"],
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "types": ["node"],
+
+    // Plain `strict`: the stricter optional-property and index flags are ones the generated
+    // client does not satisfy, and it is not ours to rewrite.
+    "strict": true,
+    "noImplicitOverride": true,
+
+    // Node runs the tests from source, so a test imports the `.ts` file it actually loads.
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    // Node strips types rather than compiling them, so the tests run without a build step.
+    "erasableSyntaxOnly": true,
+    "skipLibCheck": true,
+    "noEmit": true
+  },
+  "include": ["src", "test"]
+}

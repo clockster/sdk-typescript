@@ -1,0 +1,23 @@
+name: Specification drift
+
+# Nightly rather than per pull request: the API deploys on its own schedule, and a change there
+# would otherwise turn unrelated pull requests red.
+on:
+  schedule:
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+
+jobs:
+  drift:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run check:spec

@@ -1,0 +1,59 @@
+{
+  "name": "@clockster/sdk",
+  "version": "0.1.0",
+  "description": "Official TypeScript SDK for the Clockster Company API",
+  "license": "MIT",
+  "author": "Clockster Pte. Ltd.",
+  "homepage": "https://github.com/clockster/sdk-typescript#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clockster/sdk-typescript.git"
+  },
+  "bugs": {
+    "url": "https://github.com/clockster/sdk-typescript/issues"
+  },
+  "keywords": [
+    "clockster",
+    "sdk",
+    "api-client",
+    "openapi",
+    "hr",
+    "workforce-management",
+    "attendance",
+    "payroll"
+  ],
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./webhooks": {
+      "types": "./dist/webhooks.d.ts",
+      "default": "./dist/webhooks.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "spec": "node scripts/sync-spec.mjs",
+    "generate": "openapi-ts",
+    "build": "tsc --project tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test",
+    "check:operations": "node scripts/check-operations.mjs",
+    "check:spec": "node scripts/sync-spec.mjs --check",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@hey-api/openapi-ts": "^0.99.0",
+    "@types/node": "^22.20.1",
+    "typescript": "^5.9.3"
+  }
+}
