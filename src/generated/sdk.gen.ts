@@ -649,6 +649,11 @@ export class Tasks extends HeyApiClient {
      * `pastdue`. Three more exist in the database and none is offered: `finished` and
      * `unfinished` are deprecated spellings, and `pending` is reached only through approval.
      * A value that cannot be explained is worse than one that is absent.
+     *
+     * **Oldest first.** A first call lands on the earliest task this company ever issued,
+     * which for a long-standing one is years back. That order is what lets a full export
+     * finish in one walk, and it is not what you want for "what happened lately": ask with
+     * `updated_since`, or narrow with `due_from` and `due_to`.
      */
     public list<ThrowOnError extends boolean = false>(options?: Options<GetCompanyV3TasksData, ThrowOnError>): RequestResult<GetCompanyV3TasksResponses, GetCompanyV3TasksErrors, ThrowOnError> {
         return (options?.client ?? this.client).get<GetCompanyV3TasksResponses, GetCompanyV3TasksErrors, ThrowOnError>({
@@ -844,6 +849,11 @@ export class UserRequests extends HeyApiClient {
      * `comment` is what the author wrote when filing it, ordinarily the reason. Comments the
      * workflow writes itself — on acknowledgement, or when a spawned task closes — are not
      * answered here.
+     *
+     * **Oldest first.** A first call lands on the earliest request this company ever filed,
+     * which for a long-standing one is years back. That order is what lets a full export
+     * finish in one walk, and it is not what you want for "what changed lately": ask with
+     * `updated_since`.
      *
      * `content` is behind `include=content`: its shape depends on the kind, and one schema
      * describes one shape everywhere else on this surface.
@@ -1206,6 +1216,10 @@ export class Clockster extends HeyApiClient {
      * Whose token this is
      *
      * Confirms which company a key belongs to.
+     *
+     * Answers the id and the name, and nothing else: everything a key opens is reachable from
+     * the endpoints themselves, and a company attribute this surface does not act on would
+     * only read as one it does.
      */
     public me<ThrowOnError extends boolean = false>(options?: Options<GetCompanyV3MeData, ThrowOnError>): RequestResult<GetCompanyV3MeResponses, GetCompanyV3MeErrors, ThrowOnError> {
         return (options?.client ?? this.client).get<GetCompanyV3MeResponses, GetCompanyV3MeErrors, ThrowOnError>({
