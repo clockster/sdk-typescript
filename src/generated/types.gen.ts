@@ -49,6 +49,59 @@ export type LeaveSchedule = {
     leave_type: 'annual' | 'unpaid' | 'sick' | 'unpaid_sick' | 'maternity' | 'paternity' | 'special' | 'day_off' | 'compensatory' | 'personal' | 'emergency' | 'unexcused_absence';
 };
 
+export type Refusal = {
+    error: {
+        code: string;
+        message: string;
+        request_id: string;
+    };
+};
+
+export type ValidationRefusal = {
+    error: {
+        code: string;
+        message: string;
+        request_id: string;
+        errors: {
+            [key: string]: Array<string>;
+        };
+    };
+};
+
+export type PageLinks = {
+    first: null;
+    last: null;
+    prev: null | string;
+    next: null | string;
+};
+
+export type PageMeta = {
+    path: string;
+    per_page: number;
+    next_cursor: null | string;
+    prev_cursor: null | string;
+};
+
+export type EmployeeShort = {
+    id: number;
+    external_id: null | string;
+    code: null | string;
+    first_name: string;
+    middle_name: null | string;
+    last_name: string;
+};
+
+export type UpsertOutcome = {
+    external_id: null | string;
+    id: number;
+    result: string;
+};
+
+export type DeleteOutcome = {
+    id: number;
+    result: string;
+};
+
 export type GetCompanyV3AttendanceData = {
     body?: never;
     path?: never;
@@ -97,56 +150,23 @@ export type GetCompanyV3AttendanceErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type GetCompanyV3AttendanceError = GetCompanyV3AttendanceErrors[keyof GetCompanyV3AttendanceErrors];
@@ -167,14 +187,7 @@ export type GetCompanyV3AttendanceResponses = {
             longitude: null | number;
             address: null | string;
             comment: null | string;
-            user?: {
-                id: number;
-                external_id: null | string;
-                code: null | string;
-                first_name: string;
-                middle_name: null | string;
-                last_name: string;
-            };
+            user?: EmployeeShort;
             location?: {
                 id: number;
                 external_id: null | string;
@@ -196,18 +209,8 @@ export type GetCompanyV3AttendanceResponses = {
                 created_at: string;
             }>;
         }>;
-        links: {
-            first: null;
-            last: null;
-            prev: null | string;
-            next: null | string;
-        };
-        meta: {
-            path: string;
-            per_page: number;
-            next_cursor: null | string;
-            prev_cursor: null | string;
-        };
+        links: PageLinks;
+        meta: PageMeta;
     };
 };
 
@@ -233,56 +236,23 @@ export type PostCompanyV3AttendanceErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type PostCompanyV3AttendanceError = PostCompanyV3AttendanceErrors[keyof PostCompanyV3AttendanceErrors];
@@ -336,56 +306,23 @@ export type GetCompanyV3DepartmentsErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type GetCompanyV3DepartmentsError = GetCompanyV3DepartmentsErrors[keyof GetCompanyV3DepartmentsErrors];
@@ -402,27 +339,10 @@ export type GetCompanyV3DepartmentsResponses = {
             description: null | string;
             created_at: string;
             updated_at: string;
-            managers?: Array<{
-                id: number;
-                external_id: null | string;
-                code: null | string;
-                first_name: string;
-                middle_name: null | string;
-                last_name: string;
-            }>;
+            managers?: Array<EmployeeShort>;
         }>;
-        links: {
-            first: null;
-            last: null;
-            prev: null | string;
-            next: null | string;
-        };
-        meta: {
-            path: string;
-            per_page: number;
-            next_cursor: null | string;
-            prev_cursor: null | string;
-        };
+        links: PageLinks;
+        meta: PageMeta;
     };
 };
 
@@ -445,56 +365,23 @@ export type PostCompanyV3DepartmentsUpsertErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type PostCompanyV3DepartmentsUpsertError = PostCompanyV3DepartmentsUpsertErrors[keyof PostCompanyV3DepartmentsUpsertErrors];
@@ -504,11 +391,7 @@ export type PostCompanyV3DepartmentsUpsertResponses = {
      * Success
      */
     200: {
-        data: Array<{
-            external_id: null | string;
-            id: number;
-            result: string;
-        }>;
+        data: Array<UpsertOutcome>;
     };
 };
 
@@ -530,66 +413,27 @@ export type DeleteCompanyV3DepartmentsByIdErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Response
      */
-    409: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    409: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type DeleteCompanyV3DepartmentsByIdError = DeleteCompanyV3DepartmentsByIdErrors[keyof DeleteCompanyV3DepartmentsByIdErrors];
@@ -599,10 +443,7 @@ export type DeleteCompanyV3DepartmentsByIdResponses = {
      * Success
      */
     200: {
-        data: {
-            id: number;
-            result: string;
-        };
+        data: DeleteOutcome;
     };
 };
 
@@ -629,56 +470,23 @@ export type GetCompanyV3DepartmentsByIdErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type GetCompanyV3DepartmentsByIdError = GetCompanyV3DepartmentsByIdErrors[keyof GetCompanyV3DepartmentsByIdErrors];
@@ -695,14 +503,7 @@ export type GetCompanyV3DepartmentsByIdResponses = {
             description: null | string;
             created_at: string;
             updated_at: string;
-            managers?: Array<{
-                id: number;
-                external_id: null | string;
-                code: null | string;
-                first_name: string;
-                middle_name: null | string;
-                last_name: string;
-            }>;
+            managers?: Array<EmployeeShort>;
         };
     };
 };
@@ -793,56 +594,23 @@ export type GetCompanyV3DocumentsErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type GetCompanyV3DocumentsError = GetCompanyV3DocumentsErrors[keyof GetCompanyV3DocumentsErrors];
@@ -901,18 +669,8 @@ export type GetCompanyV3DocumentsResponses = {
                 has_contract_file: boolean;
             };
         }>;
-        links: {
-            first: null;
-            last: null;
-            prev: null | string;
-            next: null | string;
-        };
-        meta: {
-            path: string;
-            per_page: number;
-            next_cursor: null | string;
-            prev_cursor: null | string;
-        };
+        links: PageLinks;
+        meta: PageMeta;
     };
 };
 
@@ -943,56 +701,23 @@ export type PostCompanyV3DocumentsUpsertErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type PostCompanyV3DocumentsUpsertError = PostCompanyV3DocumentsUpsertErrors[keyof PostCompanyV3DocumentsUpsertErrors];
@@ -1002,11 +727,7 @@ export type PostCompanyV3DocumentsUpsertResponses = {
      * Success
      */
     200: {
-        data: Array<{
-            external_id: null | string;
-            id: number;
-            result: string;
-        }>;
+        data: Array<UpsertOutcome>;
     };
 };
 
@@ -1028,56 +749,23 @@ export type DeleteCompanyV3DocumentsByIdErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type DeleteCompanyV3DocumentsByIdError = DeleteCompanyV3DocumentsByIdErrors[keyof DeleteCompanyV3DocumentsByIdErrors];
@@ -1087,10 +775,7 @@ export type DeleteCompanyV3DocumentsByIdResponses = {
      * Success
      */
     200: {
-        data: {
-            id: number;
-            result: string;
-        };
+        data: DeleteOutcome;
     };
 };
 
@@ -1117,56 +802,23 @@ export type GetCompanyV3DocumentsByIdErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type GetCompanyV3DocumentsByIdError = GetCompanyV3DocumentsByIdErrors[keyof GetCompanyV3DocumentsByIdErrors];
@@ -1244,56 +896,23 @@ export type PostCompanyV3FilesErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type PostCompanyV3FilesError = PostCompanyV3FilesErrors[keyof PostCompanyV3FilesErrors];
@@ -1351,56 +970,23 @@ export type GetCompanyV3LocationsErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type GetCompanyV3LocationsError = GetCompanyV3LocationsErrors[keyof GetCompanyV3LocationsErrors];
@@ -1421,27 +1007,10 @@ export type GetCompanyV3LocationsResponses = {
             radius: number;
             created_at: string;
             updated_at: string;
-            managers?: Array<{
-                id: number;
-                external_id: null | string;
-                code: null | string;
-                first_name: string;
-                middle_name: null | string;
-                last_name: string;
-            }>;
+            managers?: Array<EmployeeShort>;
         }>;
-        links: {
-            first: null;
-            last: null;
-            prev: null | string;
-            next: null | string;
-        };
-        meta: {
-            path: string;
-            per_page: number;
-            next_cursor: null | string;
-            prev_cursor: null | string;
-        };
+        links: PageLinks;
+        meta: PageMeta;
     };
 };
 
@@ -1468,56 +1037,23 @@ export type PostCompanyV3LocationsUpsertErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type PostCompanyV3LocationsUpsertError = PostCompanyV3LocationsUpsertErrors[keyof PostCompanyV3LocationsUpsertErrors];
@@ -1527,11 +1063,7 @@ export type PostCompanyV3LocationsUpsertResponses = {
      * Success
      */
     200: {
-        data: Array<{
-            external_id: null | string;
-            id: number;
-            result: string;
-        }>;
+        data: Array<UpsertOutcome>;
     };
 };
 
@@ -1553,66 +1085,27 @@ export type DeleteCompanyV3LocationsByIdErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Response
      */
-    409: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    409: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type DeleteCompanyV3LocationsByIdError = DeleteCompanyV3LocationsByIdErrors[keyof DeleteCompanyV3LocationsByIdErrors];
@@ -1622,10 +1115,7 @@ export type DeleteCompanyV3LocationsByIdResponses = {
      * Success
      */
     200: {
-        data: {
-            id: number;
-            result: string;
-        };
+        data: DeleteOutcome;
     };
 };
 
@@ -1652,56 +1142,23 @@ export type GetCompanyV3LocationsByIdErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type GetCompanyV3LocationsByIdError = GetCompanyV3LocationsByIdErrors[keyof GetCompanyV3LocationsByIdErrors];
@@ -1722,14 +1179,7 @@ export type GetCompanyV3LocationsByIdResponses = {
             radius: number;
             created_at: string;
             updated_at: string;
-            managers?: Array<{
-                id: number;
-                external_id: null | string;
-                code: null | string;
-                first_name: string;
-                middle_name: null | string;
-                last_name: string;
-            }>;
+            managers?: Array<EmployeeShort>;
         };
     };
 };
@@ -1747,56 +1197,23 @@ export type GetCompanyV3MeErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type GetCompanyV3MeError = GetCompanyV3MeErrors[keyof GetCompanyV3MeErrors];
@@ -1851,56 +1268,23 @@ export type GetCompanyV3PayrollPayslipsErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type GetCompanyV3PayrollPayslipsError = GetCompanyV3PayrollPayslipsErrors[keyof GetCompanyV3PayrollPayslipsErrors];
@@ -1998,56 +1382,23 @@ export type GetCompanyV3PositionsErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type GetCompanyV3PositionsError = GetCompanyV3PositionsErrors[keyof GetCompanyV3PositionsErrors];
@@ -2065,18 +1416,8 @@ export type GetCompanyV3PositionsResponses = {
             created_at: string;
             updated_at: string;
         }>;
-        links: {
-            first: null;
-            last: null;
-            prev: null | string;
-            next: null | string;
-        };
-        meta: {
-            path: string;
-            per_page: number;
-            next_cursor: null | string;
-            prev_cursor: null | string;
-        };
+        links: PageLinks;
+        meta: PageMeta;
     };
 };
 
@@ -2099,56 +1440,23 @@ export type PostCompanyV3PositionsUpsertErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type PostCompanyV3PositionsUpsertError = PostCompanyV3PositionsUpsertErrors[keyof PostCompanyV3PositionsUpsertErrors];
@@ -2158,11 +1466,7 @@ export type PostCompanyV3PositionsUpsertResponses = {
      * Success
      */
     200: {
-        data: Array<{
-            external_id: null | string;
-            id: number;
-            result: string;
-        }>;
+        data: Array<UpsertOutcome>;
     };
 };
 
@@ -2184,66 +1488,27 @@ export type DeleteCompanyV3PositionsByIdErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Response
      */
-    409: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    409: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type DeleteCompanyV3PositionsByIdError = DeleteCompanyV3PositionsByIdErrors[keyof DeleteCompanyV3PositionsByIdErrors];
@@ -2253,10 +1518,7 @@ export type DeleteCompanyV3PositionsByIdResponses = {
      * Success
      */
     200: {
-        data: {
-            id: number;
-            result: string;
-        };
+        data: DeleteOutcome;
     };
 };
 
@@ -2283,56 +1545,23 @@ export type GetCompanyV3PositionsByIdErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type GetCompanyV3PositionsByIdError = GetCompanyV3PositionsByIdErrors[keyof GetCompanyV3PositionsByIdErrors];
@@ -2374,56 +1603,23 @@ export type PostCompanyV3SchedulesErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type PostCompanyV3SchedulesError = PostCompanyV3SchedulesErrors[keyof PostCompanyV3SchedulesErrors];
@@ -2484,66 +1680,27 @@ export type DeleteCompanyV3SchedulesByIdErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Response
      */
-    409: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    409: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type DeleteCompanyV3SchedulesByIdError = DeleteCompanyV3SchedulesByIdErrors[keyof DeleteCompanyV3SchedulesByIdErrors];
@@ -2553,10 +1710,7 @@ export type DeleteCompanyV3SchedulesByIdResponses = {
      * Success
      */
     200: {
-        data: {
-            id: number;
-            result: string;
-        };
+        data: DeleteOutcome;
     };
 };
 
@@ -2578,56 +1732,23 @@ export type GetCompanyV3SchedulesByIdErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type GetCompanyV3SchedulesByIdError = GetCompanyV3SchedulesByIdErrors[keyof GetCompanyV3SchedulesByIdErrors];
@@ -2732,56 +1853,23 @@ export type GetCompanyV3TasksErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type GetCompanyV3TasksError = GetCompanyV3TasksErrors[keyof GetCompanyV3TasksErrors];
@@ -2822,30 +1910,9 @@ export type GetCompanyV3TasksResponses = {
                 order: number;
                 is_completed: boolean;
             }>;
-            managers?: Array<{
-                id: number;
-                external_id: null | string;
-                code: null | string;
-                first_name: string;
-                middle_name: null | string;
-                last_name: string;
-            }>;
-            user?: {
-                id: number;
-                external_id: null | string;
-                code: null | string;
-                first_name: string;
-                middle_name: null | string;
-                last_name: string;
-            };
-            author?: {
-                id: number;
-                external_id: null | string;
-                code: null | string;
-                first_name: string;
-                middle_name: null | string;
-                last_name: string;
-            };
+            managers?: Array<EmployeeShort>;
+            user?: EmployeeShort;
+            author?: EmployeeShort;
         }>;
         meta: {
             per_page: number;
@@ -2891,56 +1958,23 @@ export type PostCompanyV3TasksUpsertErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type PostCompanyV3TasksUpsertError = PostCompanyV3TasksUpsertErrors[keyof PostCompanyV3TasksUpsertErrors];
@@ -2950,11 +1984,7 @@ export type PostCompanyV3TasksUpsertResponses = {
      * Success
      */
     200: {
-        data: Array<{
-            external_id: null | string;
-            id: number;
-            result: string;
-        }>;
+        data: Array<UpsertOutcome>;
     };
 };
 
@@ -2981,56 +2011,23 @@ export type GetCompanyV3TasksByIdErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type GetCompanyV3TasksByIdError = GetCompanyV3TasksByIdErrors[keyof GetCompanyV3TasksByIdErrors];
@@ -3071,30 +2068,9 @@ export type GetCompanyV3TasksByIdResponses = {
                 order: number;
                 is_completed: boolean;
             }>;
-            managers?: Array<{
-                id: number;
-                external_id: null | string;
-                code: null | string;
-                first_name: string;
-                middle_name: null | string;
-                last_name: string;
-            }>;
-            user?: {
-                id: number;
-                external_id: null | string;
-                code: null | string;
-                first_name: string;
-                middle_name: null | string;
-                last_name: string;
-            };
-            author?: {
-                id: number;
-                external_id: null | string;
-                code: null | string;
-                first_name: string;
-                middle_name: null | string;
-                last_name: string;
-            };
+            managers?: Array<EmployeeShort>;
+            user?: EmployeeShort;
+            author?: EmployeeShort;
         }>;
         meta: {
             per_page: number;
@@ -3154,56 +2130,23 @@ export type GetCompanyV3TimesheetsErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type GetCompanyV3TimesheetsError = GetCompanyV3TimesheetsErrors[keyof GetCompanyV3TimesheetsErrors];
@@ -3342,56 +2285,23 @@ export type GetCompanyV3UserFiltersErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type GetCompanyV3UserFiltersError = GetCompanyV3UserFiltersErrors[keyof GetCompanyV3UserFiltersErrors];
@@ -3408,27 +2318,10 @@ export type GetCompanyV3UserFiltersResponses = {
             description: null | string;
             created_at: string;
             updated_at: string;
-            managers?: Array<{
-                id: number;
-                external_id: null | string;
-                code: null | string;
-                first_name: string;
-                middle_name: null | string;
-                last_name: string;
-            }>;
+            managers?: Array<EmployeeShort>;
         }>;
-        links: {
-            first: null;
-            last: null;
-            prev: null | string;
-            next: null | string;
-        };
-        meta: {
-            path: string;
-            per_page: number;
-            next_cursor: null | string;
-            prev_cursor: null | string;
-        };
+        links: PageLinks;
+        meta: PageMeta;
     };
 };
 
@@ -3451,56 +2344,23 @@ export type PostCompanyV3UserFiltersUpsertErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type PostCompanyV3UserFiltersUpsertError = PostCompanyV3UserFiltersUpsertErrors[keyof PostCompanyV3UserFiltersUpsertErrors];
@@ -3510,11 +2370,7 @@ export type PostCompanyV3UserFiltersUpsertResponses = {
      * Success
      */
     200: {
-        data: Array<{
-            external_id: null | string;
-            id: number;
-            result: string;
-        }>;
+        data: Array<UpsertOutcome>;
     };
 };
 
@@ -3536,66 +2392,27 @@ export type DeleteCompanyV3UserFiltersByIdErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Response
      */
-    409: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    409: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type DeleteCompanyV3UserFiltersByIdError = DeleteCompanyV3UserFiltersByIdErrors[keyof DeleteCompanyV3UserFiltersByIdErrors];
@@ -3605,10 +2422,7 @@ export type DeleteCompanyV3UserFiltersByIdResponses = {
      * Success
      */
     200: {
-        data: {
-            id: number;
-            result: string;
-        };
+        data: DeleteOutcome;
     };
 };
 
@@ -3635,56 +2449,23 @@ export type GetCompanyV3UserFiltersByIdErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type GetCompanyV3UserFiltersByIdError = GetCompanyV3UserFiltersByIdErrors[keyof GetCompanyV3UserFiltersByIdErrors];
@@ -3701,14 +2482,7 @@ export type GetCompanyV3UserFiltersByIdResponses = {
             description: null | string;
             created_at: string;
             updated_at: string;
-            managers?: Array<{
-                id: number;
-                external_id: null | string;
-                code: null | string;
-                first_name: string;
-                middle_name: null | string;
-                last_name: string;
-            }>;
+            managers?: Array<EmployeeShort>;
         };
     };
 };
@@ -3759,56 +2533,23 @@ export type GetCompanyV3UserRequestsErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type GetCompanyV3UserRequestsError = GetCompanyV3UserRequestsErrors[keyof GetCompanyV3UserRequestsErrors];
@@ -3834,22 +2575,8 @@ export type GetCompanyV3UserRequestsResponses = {
             currency: null | string;
             created_at: string;
             updated_at: string;
-            user?: {
-                id: number;
-                external_id: null | string;
-                code: null | string;
-                first_name: string;
-                middle_name: null | string;
-                last_name: string;
-            };
-            author?: {
-                id: number;
-                external_id: null | string;
-                code: null | string;
-                first_name: string;
-                middle_name: null | string;
-                last_name: string;
-            };
+            user?: EmployeeShort;
+            author?: EmployeeShort;
             content?: {
                 type: string;
                 clockins: Array<{
@@ -3858,18 +2585,8 @@ export type GetCompanyV3UserRequestsResponses = {
                 }>;
             };
         }>;
-        links: {
-            first: null;
-            last: null;
-            prev: null | string;
-            next: null | string;
-        };
-        meta: {
-            path: string;
-            per_page: number;
-            next_cursor: null | string;
-            prev_cursor: null | string;
-        };
+        links: PageLinks;
+        meta: PageMeta;
     };
 };
 
@@ -3891,56 +2608,23 @@ export type GetCompanyV3UserRequestsByIdErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type GetCompanyV3UserRequestsByIdError = GetCompanyV3UserRequestsByIdErrors[keyof GetCompanyV3UserRequestsByIdErrors];
@@ -4047,56 +2731,23 @@ export type GetCompanyV3UsersErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type GetCompanyV3UsersError = GetCompanyV3UsersErrors[keyof GetCompanyV3UsersErrors];
@@ -4221,18 +2872,8 @@ export type GetCompanyV3UsersResponses = {
                 gov_savings_acc: null | string;
             };
         }>;
-        links: {
-            first: null;
-            last: null;
-            prev: null | string;
-            next: null | string;
-        };
-        meta: {
-            path: string;
-            per_page: number;
-            next_cursor: null | string;
-            prev_cursor: null | string;
-        };
+        links: PageLinks;
+        meta: PageMeta;
     };
 };
 
@@ -4254,56 +2895,23 @@ export type PostCompanyV3UsersDismissErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type PostCompanyV3UsersDismissError = PostCompanyV3UsersDismissErrors[keyof PostCompanyV3UsersDismissErrors];
@@ -4313,11 +2921,7 @@ export type PostCompanyV3UsersDismissResponses = {
      * Success
      */
     200: {
-        data: Array<{
-            external_id: null | string;
-            id: number;
-            result: string;
-        }>;
+        data: Array<UpsertOutcome>;
     };
 };
 
@@ -4362,56 +2966,23 @@ export type PostCompanyV3UsersUpsertErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type PostCompanyV3UsersUpsertError = PostCompanyV3UsersUpsertErrors[keyof PostCompanyV3UsersUpsertErrors];
@@ -4421,11 +2992,7 @@ export type PostCompanyV3UsersUpsertResponses = {
      * Success
      */
     200: {
-        data: Array<{
-            external_id: null | string;
-            id: number;
-            result: string;
-        }>;
+        data: Array<UpsertOutcome>;
     };
 };
 
@@ -4452,56 +3019,23 @@ export type GetCompanyV3UsersByIdErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type GetCompanyV3UsersByIdError = GetCompanyV3UsersByIdErrors[keyof GetCompanyV3UsersByIdErrors];
@@ -4655,56 +3189,23 @@ export type GetCompanyV3WebhooksErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type GetCompanyV3WebhooksError = GetCompanyV3WebhooksErrors[keyof GetCompanyV3WebhooksErrors];
@@ -4735,18 +3236,8 @@ export type GetCompanyV3WebhooksResponses = {
                 disabled_reason: null | string;
             };
         }>;
-        links: {
-            first: null;
-            last: null;
-            prev: null | string;
-            next: null | string;
-        };
-        meta: {
-            path: string;
-            per_page: number;
-            next_cursor: null | string;
-            prev_cursor: null | string;
-        };
+        links: PageLinks;
+        meta: PageMeta;
     };
 };
 
@@ -4780,56 +3271,23 @@ export type PostCompanyV3WebhooksErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type PostCompanyV3WebhooksError = PostCompanyV3WebhooksErrors[keyof PostCompanyV3WebhooksErrors];
@@ -4860,18 +3318,8 @@ export type PostCompanyV3WebhooksResponses = {
                 disabled_reason: null | string;
             };
         }>;
-        links: {
-            first: null;
-            last: null;
-            prev: null | string;
-            next: null | string;
-        };
-        meta: {
-            path: string;
-            per_page: number;
-            next_cursor: null | string;
-            prev_cursor: null | string;
-        };
+        links: PageLinks;
+        meta: PageMeta;
     };
 };
 
@@ -4921,56 +3369,23 @@ export type GetCompanyV3WebhooksDeliveriesErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type GetCompanyV3WebhooksDeliveriesError = GetCompanyV3WebhooksDeliveriesErrors[keyof GetCompanyV3WebhooksDeliveriesErrors];
@@ -4995,18 +3410,8 @@ export type GetCompanyV3WebhooksDeliveriesResponses = {
                 id: number;
             };
         }>;
-        links: {
-            first: null;
-            last: null;
-            prev: null | string;
-            next: null | string;
-        };
-        meta: {
-            path: string;
-            per_page: number;
-            next_cursor: null | string;
-            prev_cursor: null | string;
-        };
+        links: PageLinks;
+        meta: PageMeta;
     };
 };
 
@@ -5028,56 +3433,23 @@ export type GetCompanyV3WebhooksDeliveriesByIdErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type GetCompanyV3WebhooksDeliveriesByIdError = GetCompanyV3WebhooksDeliveriesByIdErrors[keyof GetCompanyV3WebhooksDeliveriesByIdErrors];
@@ -5129,56 +3501,23 @@ export type PostCompanyV3WebhooksDeliveriesByIdRedeliverErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type PostCompanyV3WebhooksDeliveriesByIdRedeliverError = PostCompanyV3WebhooksDeliveriesByIdRedeliverErrors[keyof PostCompanyV3WebhooksDeliveriesByIdRedeliverErrors];
@@ -5188,10 +3527,7 @@ export type PostCompanyV3WebhooksDeliveriesByIdRedeliverResponses = {
      * Success
      */
     200: {
-        data: {
-            id: number;
-            result: string;
-        };
+        data: DeleteOutcome;
     };
 };
 
@@ -5208,56 +3544,23 @@ export type GetCompanyV3WebhooksEventsErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type GetCompanyV3WebhooksEventsError = GetCompanyV3WebhooksEventsErrors[keyof GetCompanyV3WebhooksEventsErrors];
@@ -5289,56 +3592,23 @@ export type DeleteCompanyV3WebhooksByIdErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type DeleteCompanyV3WebhooksByIdError = DeleteCompanyV3WebhooksByIdErrors[keyof DeleteCompanyV3WebhooksByIdErrors];
@@ -5348,10 +3618,7 @@ export type DeleteCompanyV3WebhooksByIdResponses = {
      * Success
      */
     200: {
-        data: {
-            id: number;
-            result: string;
-        };
+        data: DeleteOutcome;
     };
 };
 
@@ -5373,56 +3640,23 @@ export type GetCompanyV3WebhooksByIdErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type GetCompanyV3WebhooksByIdError = GetCompanyV3WebhooksByIdErrors[keyof GetCompanyV3WebhooksByIdErrors];
@@ -5453,18 +3687,8 @@ export type GetCompanyV3WebhooksByIdResponses = {
                 disabled_reason: null | string;
             };
         }>;
-        links: {
-            first: null;
-            last: null;
-            prev: null | string;
-            next: null | string;
-        };
-        meta: {
-            path: string;
-            per_page: number;
-            next_cursor: null | string;
-            prev_cursor: null | string;
-        };
+        links: PageLinks;
+        meta: PageMeta;
     };
 };
 
@@ -5497,56 +3721,23 @@ export type PutCompanyV3WebhooksByIdErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type PutCompanyV3WebhooksByIdError = PutCompanyV3WebhooksByIdErrors[keyof PutCompanyV3WebhooksByIdErrors];
@@ -5577,18 +3768,8 @@ export type PutCompanyV3WebhooksByIdResponses = {
                 disabled_reason: null | string;
             };
         }>;
-        links: {
-            first: null;
-            last: null;
-            prev: null | string;
-            next: null | string;
-        };
-        meta: {
-            path: string;
-            per_page: number;
-            next_cursor: null | string;
-            prev_cursor: null | string;
-        };
+        links: PageLinks;
+        meta: PageMeta;
     };
 };
 
@@ -5616,56 +3797,23 @@ export type PostCompanyV3WebhooksByIdSecretErrors = {
     /**
      * No token, or one this surface does not accept — code `unauthenticated`
      */
-    401: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    401: Refusal;
     /**
      * A token without the company ability — code `forbidden`
      */
-    403: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    403: Refusal;
     /**
      * No such row in the calling company — code `not_found`
      */
-    404: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    404: Refusal;
     /**
      * Refused; `error.code` says why and `error.errors` names the fields
      */
-    422: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-            errors: {
-                per_page: Array<string>;
-            };
-        };
-    };
+    422: ValidationRefusal;
     /**
      * Rate limited; `Retry-After` says when — code `rate_limited`
      */
-    429: {
-        error: {
-            code: string;
-            message: string;
-            request_id: string;
-        };
-    };
+    429: Refusal;
 };
 
 export type PostCompanyV3WebhooksByIdSecretError = PostCompanyV3WebhooksByIdSecretErrors[keyof PostCompanyV3WebhooksByIdSecretErrors];
@@ -5696,18 +3844,8 @@ export type PostCompanyV3WebhooksByIdSecretResponses = {
                 disabled_reason: null | string;
             };
         }>;
-        links: {
-            first: null;
-            last: null;
-            prev: null | string;
-            next: null | string;
-        };
-        meta: {
-            path: string;
-            per_page: number;
-            next_cursor: null | string;
-            prev_cursor: null | string;
-        };
+        links: PageLinks;
+        meta: PageMeta;
     };
 };
 
