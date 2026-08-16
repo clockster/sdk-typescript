@@ -4,6 +4,8 @@ import { Clockster as Generated } from './generated/index.js';
 // Argument and answer types of every operation. The class below shadows the generated one.
 export * from './generated/index.js';
 
+export { paginate, PaginationError, type Page } from './pagination.js';
+
 export const DEFAULT_BASE_URL = 'https://api.clockster.com';
 
 export interface ClocksterOptions {
