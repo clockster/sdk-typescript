@@ -103,15 +103,10 @@ function clocksterQuery_(query) {
       return;
     }
 
-    if (Array.isArray(value)) {
-      value.forEach(function (item) {
-        parts.push(encodeURIComponent(key) + '[]=' + encodeURIComponent(item));
-      });
+    // A list travels comma-separated, which is how the API documents it.
+    const one = Array.isArray(value) ? value.join(',') : value;
 
-      return;
-    }
-
-    parts.push(encodeURIComponent(key) + '=' + encodeURIComponent(value));
+    parts.push(encodeURIComponent(key) + '=' + encodeURIComponent(one));
   });
 
   return parts.length ? '?' + parts.join('&') : '';
