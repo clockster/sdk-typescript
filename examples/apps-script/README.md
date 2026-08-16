@@ -20,10 +20,12 @@ share the key, and so that a copy of the file starts without one.
 ## What it does
 
 **Clockster → Sync employees** fills a sheet named `Employees`: id, your own `external_id`, name,
-phone, location, department, position, hire and dismissal dates.
+phone, location, department, position, hire and dismissal dates. Everybody, including the people
+who have left — the listing answers with only the active ones unless asked.
 
 **Clockster → Sync timesheets** fills `Timesheets` for the current month: planned and worked
-minutes per person per day, with lateness, early leaving, under- and overtime.
+seconds per person per day, with lateness, early leaving, under- and overtime. Seconds because
+that is what the API answers with; divide in the sheet if you want hours.
 
 **Clockster → Run employee sync every morning** installs a 6 a.m. trigger. Running it twice
 replaces the trigger rather than adding a second one.
