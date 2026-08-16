@@ -50,6 +50,21 @@ const timesheets = await clockster.timesheets.list({
 Two envelopes: the client returns `{ data, error }` and the API answers `{ data }`, so rows are
 `response.data.data`.
 
+## Options
+
+```ts
+const clockster = new Clockster({
+  token: process.env.CLOCKSTER_TOKEN,
+  baseUrl: 'https://demo.clockster.com', // a demo stand instead of production
+  userAgent: 'acme-hr/1.4',              // names your integration in our request log
+  fetch: recording,                      // a proxy, a retrying wrapper, a recording fetch
+});
+```
+
+Requests carry `clockster-typescript/<version>` unless `userAgent` says otherwise, so our request
+log shows which client made a call. The token is read per request, so rotating it does not require
+a new client.
+
 ## Refusals
 
 Without `throwOnError` nothing throws and `data` is optional. Narrow on `error`:
