@@ -89,27 +89,32 @@ asking us about a call. `422` adds `error.errors`, naming the fields.
 
 ## Paging
 
-Listings are cursor-paged. Pass the previous `meta.next_cursor` and stop when it is null. A cursor
-is bound to the filters it was issued under; change them and start again.
+Listings are cursor-paged. `paginate` walks the pages and yields the rows:
 
 ```ts
-let cursor: string | null = null;
+import { Clockster, paginate } from '@clockster/sdk';
 
-do {
-  const page: Awaited<ReturnType<typeof clockster.users.list<true>>> = await clockster.users.list({
-    query: { per_page: 100, cursor },
-    throwOnError: true,
-  });
-
-  for (const user of page.data.data) {
-    console.log(user.external_id ?? user.id);
-  }
-
-  cursor = page.data.meta.next_cursor;
-} while (cursor);
+for await (const user of paginate((cursor) =>
+  clockster.users.list({ query: { per_page: 100, cursor } }),
+)) {
+  console.log(user.external_id ?? user.id);
+}
 ```
 
-The annotation is needed only because `cursor` is assigned from the result inside its own loop.
+It takes a function of the cursor rather than the method, so filters go where you would put them
+anyway:
+
+```ts
+for await (const mark of paginate((cursor) =>
+  clockster.attendance.list({ query: { date_from: '2026-08-01', date_to: '2026-08-31', cursor } }),
+)) {
+  console.log(mark.id);
+}
+```
+
+A refused page throws `PaginationError` rather than ending the listing quietly — a half-read
+listing is not a result. A cursor is bound to the filters it was issued under; change them and
+start again.
 
 ## Webhooks
 

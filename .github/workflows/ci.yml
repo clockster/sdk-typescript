@@ -1,9 +1,15 @@
 name: CI
 
 on:
+  # Every branch, so work is checked before a pull request exists. Not tags: a release tag is the
+  # release workflow's, and it runs these same checks itself.
   push:
-    branches: [main]
+    branches: ['**']
   pull_request:
+
+# Nothing here reads or writes the repository beyond checking it out.
+permissions:
+  contents: read
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -11,6 +17,9 @@ concurrency:
 
 jobs:
   check:
+    # A pull request from this repository duplicates the push that its own branch already made;
+    # one from a fork has no such push, and is the only case the pull_request event has to cover.
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -36,6 +45,7 @@ jobs:
       - run: npm run check:operations
 
   generated:
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
