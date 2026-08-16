@@ -116,6 +116,29 @@ A refused page throws `PaginationError` rather than ending the listing quietly â
 listing is not a result. A cursor is bound to the filters it was issued under; change them and
 start again.
 
+Listings answer oldest first, so a first call on a long-lived company lands years back. Ask with
+`updated_since` when you want recent activity rather than all of it.
+
+## Relations
+
+A related object is absent unless `include` names it, and its type says so: `location?` on an
+employee, `user?` on a mark. `include=location` fills it.
+
+```ts
+const users = await clockster.users.list({
+  query: { 'include[]': ['location', 'department'] },
+  throwOnError: true,
+});
+
+console.log(users.data.data[0]?.location?.title);
+```
+
+The key is `include[]` rather than `include`: the API takes it as a repeated parameter, and the
+document names it as it goes on the wire.
+
+An absent key is not the same as a null one. `null` means we know the value is empty; absent means
+you did not ask.
+
 ## Webhooks
 
 `verifyWebhook` takes the body as received and returns the event, so the only path to the event

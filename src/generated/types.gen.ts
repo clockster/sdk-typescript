@@ -158,6 +158,8 @@ export type GetCompanyV3AttendanceResponses = {
     200: {
         data: Array<{
             id: number;
+            user_id: number;
+            location_id: number | null;
             datetime: string;
             status: string;
             source: string;
@@ -165,14 +167,15 @@ export type GetCompanyV3AttendanceResponses = {
             longitude: null | number;
             address: null | string;
             comment: null | string;
-            user: {
+            user?: {
                 id: number;
+                external_id: null | string;
                 code: null | string;
                 first_name: string;
                 middle_name: null | string;
                 last_name: string;
             };
-            location: {
+            location?: {
                 id: number;
                 external_id: null | string;
                 code: null | string;
@@ -184,6 +187,14 @@ export type GetCompanyV3AttendanceResponses = {
                 created_at: string;
                 updated_at: string;
             };
+            attachments?: Array<{
+                id: number;
+                name: string;
+                description: null | string;
+                format: string;
+                url: string;
+                created_at: string;
+            }>;
         }>;
         links: {
             first: null;
@@ -389,15 +400,16 @@ export type GetCompanyV3DepartmentsResponses = {
             external_id: null | string;
             title: string;
             description: null | string;
-            managers: Array<{
+            created_at: string;
+            updated_at: string;
+            managers?: Array<{
                 id: number;
+                external_id: null | string;
                 code: null | string;
                 first_name: string;
                 middle_name: null | string;
                 last_name: string;
             }>;
-            created_at: string;
-            updated_at: string;
         }>;
         links: {
             first: null;
@@ -681,9 +693,9 @@ export type GetCompanyV3DepartmentsByIdResponses = {
             external_id: null | string;
             title: string;
             description: null | string;
-            managers: Array<unknown>;
             created_at: string;
             updated_at: string;
+            managers?: Array<unknown>;
         };
     };
 };
@@ -853,7 +865,7 @@ export type GetCompanyV3DocumentsResponses = {
             };
             created_at: string;
             updated_at: string;
-            attachments: Array<{
+            attachments?: Array<{
                 id: number;
                 name: string;
                 description: null | string;
@@ -861,8 +873,8 @@ export type GetCompanyV3DocumentsResponses = {
                 url: string;
                 created_at: string;
             }>;
-            signers: Array<unknown>;
-            labor_contract: null | {
+            signers?: Array<unknown>;
+            labor_contract?: null | {
                 [key: string]: unknown;
             };
         }>;
@@ -1161,6 +1173,11 @@ export type GetCompanyV3DocumentsByIdResponses = {
             };
             created_at: string;
             updated_at: string;
+            attachments?: Array<unknown>;
+            signers?: Array<unknown>;
+            labor_contract?: null | {
+                [key: string]: unknown;
+            };
         };
     };
 };
@@ -1358,6 +1375,14 @@ export type GetCompanyV3LocationsResponses = {
             radius: number;
             created_at: string;
             updated_at: string;
+            managers?: Array<{
+                id: number;
+                external_id: null | string;
+                code: null | string;
+                first_name: string;
+                middle_name: null | string;
+                last_name: string;
+            }>;
         }>;
         links: {
             first: null;
@@ -1651,6 +1676,7 @@ export type GetCompanyV3LocationsByIdResponses = {
             radius: number;
             created_at: string;
             updated_at: string;
+            managers?: Array<unknown>;
         };
     };
 };
@@ -1730,7 +1756,6 @@ export type GetCompanyV3MeResponses = {
         data: {
             id: number;
             title: string;
-            locale: string;
         };
     };
 };
@@ -2637,7 +2662,7 @@ export type GetCompanyV3TasksData = {
         /**
          * Relations to load, comma-separated. Anything not named is absent from the answer rather than null.
          */
-        'include[]'?: Array<'items' | 'managers'> | null;
+        'include[]'?: Array<'items' | 'managers' | 'user' | 'author'> | null;
     };
     url: '/company/v3/tasks';
 };
@@ -2730,16 +2755,36 @@ export type GetCompanyV3TasksResponses = {
             finished_at: null | string;
             created_at: string;
             updated_at: string;
-            items: Array<{
+            items?: Array<{
                 id: number;
                 title: string;
                 order: number;
                 is_completed: boolean;
             }>;
-            managers: Array<{
+            managers?: Array<{
                 id: number;
                 external_id: null | string;
+                code: null | string;
+                first_name: string;
+                middle_name: null | string;
+                last_name: string;
             }>;
+            user?: {
+                id: number;
+                external_id: null | string;
+                code: null | string;
+                first_name: string;
+                middle_name: null | string;
+                last_name: string;
+            };
+            author?: {
+                id: number;
+                external_id: null | string;
+                code: null | string;
+                first_name: string;
+                middle_name: null | string;
+                last_name: string;
+            };
         }>;
         meta: {
             per_page: number;
@@ -2959,16 +3004,36 @@ export type GetCompanyV3TasksByIdResponses = {
             finished_at: null | string;
             created_at: string;
             updated_at: string;
-            items: Array<{
+            items?: Array<{
                 id: number;
                 title: string;
                 order: number;
                 is_completed: boolean;
             }>;
-            managers: Array<{
+            managers?: Array<{
                 id: number;
                 external_id: null | string;
+                code: null | string;
+                first_name: string;
+                middle_name: null | string;
+                last_name: string;
             }>;
+            user?: {
+                id: number;
+                external_id: null | string;
+                code: null | string;
+                first_name: string;
+                middle_name: null | string;
+                last_name: string;
+            };
+            author?: {
+                id: number;
+                external_id: null | string;
+                code: null | string;
+                first_name: string;
+                middle_name: null | string;
+                last_name: string;
+            };
         }>;
         meta: {
             per_page: number;
@@ -3092,10 +3157,10 @@ export type GetCompanyV3TimesheetsResponses = {
             user: {
                 id: number;
                 external_id: null | string;
-                code: null | string;
-                first_name: string;
-                middle_name: null | string;
-                last_name: string;
+                code?: null | string;
+                first_name?: string;
+                middle_name?: null | string;
+                last_name?: string;
             };
             planned: {
                 schedule_id: number;
@@ -3111,13 +3176,19 @@ export type GetCompanyV3TimesheetsResponses = {
                 grace_end: number;
                 shifts: Array<unknown>;
                 location_id: number | null;
-                location: null | {
-                    [key: string]: unknown;
-                };
                 department_id: number | null;
                 position_id: number | null;
+                location?: null | {
+                    [key: string]: unknown;
+                };
+                department?: null | {
+                    [key: string]: unknown;
+                };
+                position?: null | {
+                    [key: string]: unknown;
+                };
             };
-            actual: {
+            actual?: {
                 in: null | string;
                 out: null | string;
                 time_worked: number;
@@ -3126,7 +3197,7 @@ export type GetCompanyV3TimesheetsResponses = {
                 time_night: number;
                 shifts: Array<unknown>;
             };
-            variance: {
+            variance?: {
                 time_late: number;
                 time_early_left: number;
                 time_overworked: number;
@@ -3239,15 +3310,16 @@ export type GetCompanyV3UserFiltersResponses = {
             external_id: null | string;
             title: string;
             description: null | string;
-            managers: Array<{
+            created_at: string;
+            updated_at: string;
+            managers?: Array<{
                 id: number;
+                external_id: null | string;
                 code: null | string;
                 first_name: string;
                 middle_name: null | string;
                 last_name: string;
             }>;
-            created_at: string;
-            updated_at: string;
         }>;
         links: {
             first: null;
@@ -3531,15 +3603,16 @@ export type GetCompanyV3UserFiltersByIdResponses = {
             external_id: null | string;
             title: string;
             description: null | string;
-            managers: Array<{
+            created_at: string;
+            updated_at: string;
+            managers?: Array<{
                 id: number;
+                external_id: null | string;
                 code: null | string;
                 first_name: string;
                 middle_name: null | string;
                 last_name: string;
             }>;
-            created_at: string;
-            updated_at: string;
         };
     };
 };
@@ -3581,7 +3654,7 @@ export type GetCompanyV3UserRequestsData = {
         /**
          * Relations to load, comma-separated. Anything not named is absent from the answer rather than null.
          */
-        'include[]'?: Array<'content'> | null;
+        'include[]'?: Array<'content' | 'user' | 'author'> | null;
     };
     url: '/company/v3/user-requests';
 };
@@ -3665,6 +3738,29 @@ export type GetCompanyV3UserRequestsResponses = {
             currency: null | string;
             created_at: string;
             updated_at: string;
+            user?: {
+                id: number;
+                external_id: null | string;
+                code: null | string;
+                first_name: string;
+                middle_name: null | string;
+                last_name: string;
+            };
+            author?: {
+                id: number;
+                external_id: null | string;
+                code: null | string;
+                first_name: string;
+                middle_name: null | string;
+                last_name: string;
+            };
+            content?: {
+                type: string;
+                clockins: Array<{
+                    status: string;
+                    datetime: string;
+                }>;
+            };
         }>;
         links: {
             first: null;
@@ -3922,7 +4018,7 @@ export type GetCompanyV3UsersResponses = {
             middle_name: null | string;
             last_name: string;
             email: string;
-            phone: string;
+            phone: null | string;
             extra_phone: null | string;
             role: null | string;
             gender: string;
@@ -3939,7 +4035,11 @@ export type GetCompanyV3UsersResponses = {
             created_at: string;
             updated_at: string;
             dismissed_at: null | string;
-            location: {
+            dismissal?: {
+                id: number;
+                title: string;
+            };
+            location?: {
                 id: number;
                 external_id: null | string;
                 code: null | string;
@@ -3951,13 +4051,78 @@ export type GetCompanyV3UsersResponses = {
                 created_at: string;
                 updated_at: string;
             };
-            department: {
+            locations?: Array<{
+                id: number;
+                external_id: null | string;
+                code: null | string;
+                title: string;
+                description: null | string;
+                latitude: null | number;
+                longitude: null | number;
+                radius: number;
+                created_at: string;
+                updated_at: string;
+            }>;
+            department?: {
                 id: number;
                 external_id: null | string;
                 title: string;
                 description: null | string;
                 created_at: string;
                 updated_at: string;
+            };
+            position?: {
+                id: number;
+                external_id: null | string;
+                title: string;
+                description: null | string;
+                created_at: string;
+                updated_at: string;
+            };
+            user_filters?: Array<{
+                id: number;
+                external_id: null | string;
+                title: string;
+                description: null | string;
+                created_at: string;
+                updated_at: string;
+            }>;
+            meta?: {
+                birth_place: string;
+                marital_status: string;
+                religion: null | string;
+                blood_type: null | string;
+                children: number | null;
+                contact_name: null | string;
+                relationship: null | string;
+                phone: null | string;
+                domicile_address: null | string;
+                domicile_city: null | string;
+                domicile_province: null | string;
+                domicile_district: null | string;
+                domicile_postal_code: null | string;
+                document_address: null | string;
+                document_city: null | string;
+                document_province: null | string;
+                document_district: null | string;
+                document_postal_code: null | string;
+                education_level: null | string;
+                education_institution: null | string;
+                education_major: null | string;
+                graduation_year: number | null;
+                education_gpa: null | number;
+                full_name: null | string;
+                alias_name: null | string;
+                local_name: null | string;
+                nationality: null | string;
+                marriage_date: null | string;
+                retire_age: number | null;
+                retire_date: null | string;
+                ethnic_origin: null | string;
+                contract_number: null | string;
+                health_insurance_id: null | string;
+                gov_savings_id: null | string;
+                gov_savings_acc: null | string;
             };
         }>;
         links: {
@@ -4258,7 +4423,7 @@ export type GetCompanyV3UsersByIdResponses = {
             middle_name: null | string;
             last_name: string;
             email: string;
-            phone: string;
+            phone: null | string;
             extra_phone: null | string;
             role: null | string;
             gender: string;
@@ -4275,6 +4440,95 @@ export type GetCompanyV3UsersByIdResponses = {
             created_at: string;
             updated_at: string;
             dismissed_at: null | string;
+            location?: {
+                id: number;
+                external_id: null | string;
+                code: null | string;
+                title: string;
+                description: null | string;
+                latitude: null | number;
+                longitude: null | number;
+                radius: number;
+                created_at: string;
+                updated_at: string;
+            };
+            locations?: Array<{
+                id: number;
+                external_id: null | string;
+                code: null | string;
+                title: string;
+                description: null | string;
+                latitude: null | number;
+                longitude: null | number;
+                radius: number;
+                created_at: string;
+                updated_at: string;
+            }>;
+            department?: {
+                id: number;
+                external_id: null | string;
+                title: string;
+                description: null | string;
+                created_at: string;
+                updated_at: string;
+            };
+            position?: {
+                id: number;
+                external_id: null | string;
+                title: string;
+                description: null | string;
+                created_at: string;
+                updated_at: string;
+            };
+            user_filters?: Array<{
+                id: number;
+                external_id: null | string;
+                title: string;
+                description: null | string;
+                created_at: string;
+                updated_at: string;
+            }>;
+            dismissal?: {
+                id: number;
+                title: string;
+            };
+            meta?: {
+                birth_place: string;
+                marital_status: string;
+                religion: null | string;
+                blood_type: null | string;
+                children: number | null;
+                contact_name: null | string;
+                relationship: null | string;
+                phone: null | string;
+                domicile_address: null | string;
+                domicile_city: null | string;
+                domicile_province: null | string;
+                domicile_district: null | string;
+                domicile_postal_code: null | string;
+                document_address: null | string;
+                document_city: null | string;
+                document_province: null | string;
+                document_district: null | string;
+                document_postal_code: null | string;
+                education_level: null | string;
+                education_institution: null | string;
+                education_major: null | string;
+                graduation_year: number | null;
+                education_gpa: null | number;
+                full_name: null | string;
+                alias_name: null | string;
+                local_name: null | string;
+                nationality: null | string;
+                marriage_date: null | string;
+                retire_age: number | null;
+                retire_date: null | string;
+                ethnic_origin: null | string;
+                contract_number: null | string;
+                health_insurance_id: null | string;
+                gov_savings_id: null | string;
+                gov_savings_acc: null | string;
+            };
         };
     };
 };
@@ -4638,6 +4892,9 @@ export type GetCompanyV3WebhooksDeliveriesResponses = {
             occurred_at: string;
             next_attempt_at: null | string;
             processed_at: string;
+            payload?: {
+                id: number;
+            };
         }>;
         links: {
             first: null;
