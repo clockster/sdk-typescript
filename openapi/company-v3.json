@@ -428,10 +428,12 @@
             }
           },
           {
-            "name": "users[]",
+            "name": "users",
             "in": "query",
             "required": false,
             "description": "Only rows belonging to these people, by id.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -444,10 +446,12 @@
             }
           },
           {
-            "name": "locations[]",
+            "name": "locations",
             "in": "query",
             "required": false,
             "description": "Only these locations, by id.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -460,10 +464,12 @@
             }
           },
           {
-            "name": "statuses[]",
+            "name": "statuses",
             "in": "query",
             "required": false,
             "description": "Only rows in these states.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -481,10 +487,12 @@
             }
           },
           {
-            "name": "sources[]",
+            "name": "sources",
             "in": "query",
             "required": false,
             "description": "Only marks recorded this way — a device, the mobile app, or a person entering them by hand.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -504,10 +512,12 @@
             }
           },
           {
-            "name": "include[]",
+            "name": "include",
             "in": "query",
             "required": false,
             "description": "Relations to load, comma-separated. Anything not named is absent from the answer rather than null.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -1497,10 +1507,12 @@
             }
           },
           {
-            "name": "include[]",
+            "name": "include",
             "in": "query",
             "required": false,
             "description": "Relations to load, comma-separated. Anything not named is absent from the answer rather than null.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -2298,10 +2310,12 @@
             }
           },
           {
-            "name": "include[]",
+            "name": "include",
             "in": "query",
             "required": false,
             "description": "Relations to load, comma-separated. Anything not named is absent from the answer rather than null.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -2985,10 +2999,12 @@
             }
           },
           {
-            "name": "external_ids[]",
+            "name": "external_ids",
             "in": "query",
             "required": false,
             "description": "Only rows carrying these keys of yours. The other half of an upsert: write with your key, read back with it.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -3002,10 +3018,12 @@
             }
           },
           {
-            "name": "users[]",
+            "name": "users",
             "in": "query",
             "required": false,
             "description": "Only rows belonging to these people, by id.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -3018,10 +3036,12 @@
             }
           },
           {
-            "name": "locations[]",
+            "name": "locations",
             "in": "query",
             "required": false,
             "description": "Only these locations, by id.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -3034,10 +3054,12 @@
             }
           },
           {
-            "name": "departments[]",
+            "name": "departments",
             "in": "query",
             "required": false,
             "description": "Only these departments, by id.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -3050,10 +3072,12 @@
             }
           },
           {
-            "name": "positions[]",
+            "name": "positions",
             "in": "query",
             "required": false,
             "description": "Only these positions, by id.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -3066,10 +3090,12 @@
             }
           },
           {
-            "name": "user_filters[]",
+            "name": "user_filters",
             "in": "query",
             "required": false,
             "description": "Only these user filters, by id.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -3082,10 +3108,12 @@
             }
           },
           {
-            "name": "types[]",
+            "name": "types",
             "in": "query",
             "required": false,
             "description": "Only rows of these types.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -3127,10 +3155,12 @@
             }
           },
           {
-            "name": "employment_types[]",
+            "name": "employment_types",
             "in": "query",
             "required": false,
             "description": "Only documents covering these employment terms.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -3233,10 +3263,12 @@
             }
           },
           {
-            "name": "include[]",
+            "name": "include",
             "in": "query",
             "required": false,
             "description": "Relations to load, comma-separated. Anything not named is absent from the answer rather than null.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -4220,10 +4252,12 @@
             }
           },
           {
-            "name": "include[]",
+            "name": "include",
             "in": "query",
             "required": false,
             "description": "Relations to load, comma-separated. Anything not named is absent from the answer rather than null.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -5274,10 +5308,12 @@
             }
           },
           {
-            "name": "include[]",
+            "name": "include",
             "in": "query",
             "required": false,
             "description": "Relations to load, comma-separated. Anything not named is absent from the answer rather than null.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -5292,10 +5328,12 @@
             }
           },
           {
-            "name": "codes[]",
+            "name": "codes",
             "in": "query",
             "required": false,
             "description": "Only these employee codes.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -6161,10 +6199,12 @@
             }
           },
           {
-            "name": "include[]",
+            "name": "include",
             "in": "query",
             "required": false,
             "description": "Relations to load, comma-separated. Anything not named is absent from the answer rather than null.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -7135,10 +7175,12 @@
             }
           },
           {
-            "name": "users[]",
+            "name": "users",
             "in": "query",
             "required": false,
             "description": "Only rows belonging to these people, by id.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -7151,10 +7193,12 @@
             }
           },
           {
-            "name": "statuses[]",
+            "name": "statuses",
             "in": "query",
             "required": false,
             "description": "Only rows in these states.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -7172,10 +7216,12 @@
             }
           },
           {
-            "name": "months[]",
+            "name": "months",
             "in": "query",
             "required": false,
             "description": "Only these months, as YYYY-MM.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -7805,10 +7851,12 @@
             }
           },
           {
-            "name": "include[]",
+            "name": "include",
             "in": "query",
             "required": false,
             "description": "Relations to load, comma-separated. Anything not named is absent from the answer rather than null.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -8560,10 +8608,12 @@
             }
           },
           {
-            "name": "include[]",
+            "name": "include",
             "in": "query",
             "required": false,
             "description": "Relations to load, comma-separated. Anything not named is absent from the answer rather than null.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -10492,10 +10542,12 @@
             }
           },
           {
-            "name": "external_ids[]",
+            "name": "external_ids",
             "in": "query",
             "required": false,
             "description": "Only rows carrying these keys of yours. The other half of an upsert: write with your key, read back with it.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -10509,10 +10561,12 @@
             }
           },
           {
-            "name": "users[]",
+            "name": "users",
             "in": "query",
             "required": false,
             "description": "Only rows belonging to these people, by id.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -10525,10 +10579,12 @@
             }
           },
           {
-            "name": "categories[]",
+            "name": "categories",
             "in": "query",
             "required": false,
             "description": "Only rows in these categories.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -10541,10 +10597,12 @@
             }
           },
           {
-            "name": "statuses[]",
+            "name": "statuses",
             "in": "query",
             "required": false,
             "description": "Only rows in these states.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -10626,10 +10684,12 @@
             }
           },
           {
-            "name": "include[]",
+            "name": "include",
             "in": "query",
             "required": false,
             "description": "Relations to load, comma-separated. Anything not named is absent from the answer rather than null.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -11690,10 +11750,12 @@
             }
           },
           {
-            "name": "include[]",
+            "name": "include",
             "in": "query",
             "required": false,
             "description": "Relations to load, comma-separated. Anything not named is absent from the answer rather than null.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -12336,10 +12398,12 @@
             }
           },
           {
-            "name": "users[]",
+            "name": "users",
             "in": "query",
             "required": false,
             "description": "Only rows belonging to these people, by id.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -12352,10 +12416,12 @@
             }
           },
           {
-            "name": "locations[]",
+            "name": "locations",
             "in": "query",
             "required": false,
             "description": "Only these locations, by id.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -12368,10 +12434,12 @@
             }
           },
           {
-            "name": "departments[]",
+            "name": "departments",
             "in": "query",
             "required": false,
             "description": "Only these departments, by id.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -12384,10 +12452,12 @@
             }
           },
           {
-            "name": "positions[]",
+            "name": "positions",
             "in": "query",
             "required": false,
             "description": "Only these positions, by id.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -12413,10 +12483,12 @@
             }
           },
           {
-            "name": "include[]",
+            "name": "include",
             "in": "query",
             "required": false,
             "description": "Relations to load, comma-separated. Anything not named is absent from the answer rather than null.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -13040,10 +13112,12 @@
             }
           },
           {
-            "name": "include[]",
+            "name": "include",
             "in": "query",
             "required": false,
             "description": "Relations to load, comma-separated. Anything not named is absent from the answer rather than null.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -13825,10 +13899,12 @@
             }
           },
           {
-            "name": "include[]",
+            "name": "include",
             "in": "query",
             "required": false,
             "description": "Relations to load, comma-separated. Anything not named is absent from the answer rather than null.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -14535,10 +14611,12 @@
             }
           },
           {
-            "name": "types[]",
+            "name": "types",
             "in": "query",
             "required": false,
             "description": "Only rows of these types.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -14557,10 +14635,12 @@
             }
           },
           {
-            "name": "statuses[]",
+            "name": "statuses",
             "in": "query",
             "required": false,
             "description": "Only rows in these states.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -14582,10 +14662,12 @@
             }
           },
           {
-            "name": "subtypes[]",
+            "name": "subtypes",
             "in": "query",
             "required": false,
             "description": "Only rows of these subtypes, which narrow a type further.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -14599,10 +14681,12 @@
             }
           },
           {
-            "name": "users[]",
+            "name": "users",
             "in": "query",
             "required": false,
             "description": "Only rows belonging to these people, by id.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -14628,10 +14712,12 @@
             }
           },
           {
-            "name": "include[]",
+            "name": "include",
             "in": "query",
             "required": false,
             "description": "Relations to load, comma-separated. Anything not named is absent from the answer rather than null.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -15653,10 +15739,12 @@
             }
           },
           {
-            "name": "ids[]",
+            "name": "ids",
             "in": "query",
             "required": false,
             "description": "Only these ids.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -15669,10 +15757,12 @@
             }
           },
           {
-            "name": "codes[]",
+            "name": "codes",
             "in": "query",
             "required": false,
             "description": "Only these employee codes.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -15686,10 +15776,12 @@
             }
           },
           {
-            "name": "external_ids[]",
+            "name": "external_ids",
             "in": "query",
             "required": false,
             "description": "Only rows carrying these keys of yours. The other half of an upsert: write with your key, read back with it.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -15703,10 +15795,12 @@
             }
           },
           {
-            "name": "locations[]",
+            "name": "locations",
             "in": "query",
             "required": false,
             "description": "Only these locations, by id.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -15719,10 +15813,12 @@
             }
           },
           {
-            "name": "departments[]",
+            "name": "departments",
             "in": "query",
             "required": false,
             "description": "Only these departments, by id.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -15735,10 +15831,12 @@
             }
           },
           {
-            "name": "positions[]",
+            "name": "positions",
             "in": "query",
             "required": false,
             "description": "Only these positions, by id.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -15751,10 +15849,12 @@
             }
           },
           {
-            "name": "user_filters[]",
+            "name": "user_filters",
             "in": "query",
             "required": false,
             "description": "Only these user filters, by id.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -15767,10 +15867,12 @@
             }
           },
           {
-            "name": "employment[]",
+            "name": "employment",
             "in": "query",
             "required": false,
             "description": "Only people on these employment terms.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -15784,10 +15886,12 @@
             }
           },
           {
-            "name": "include[]",
+            "name": "include",
             "in": "query",
             "required": false,
             "description": "Relations to load, comma-separated. Anything not named is absent from the answer rather than null.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -17656,10 +17760,12 @@
             }
           },
           {
-            "name": "include[]",
+            "name": "include",
             "in": "query",
             "required": false,
             "description": "Relations to load, comma-separated. Anything not named is absent from the answer rather than null.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -19669,10 +19775,12 @@
             }
           },
           {
-            "name": "webhooks[]",
+            "name": "webhooks",
             "in": "query",
             "required": false,
             "description": "Only deliveries to these endpoints, by id.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -19685,10 +19793,12 @@
             }
           },
           {
-            "name": "events[]",
+            "name": "events",
             "in": "query",
             "required": false,
             "description": "Only deliveries of these events.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",
@@ -19753,10 +19863,12 @@
             }
           },
           {
-            "name": "include[]",
+            "name": "include",
             "in": "query",
             "required": false,
             "description": "Relations to load, comma-separated. Anything not named is absent from the answer rather than null.",
+            "style": "form",
+            "explode": false,
             "schema": {
               "type": [
                 "array",

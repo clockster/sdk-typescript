@@ -126,15 +126,15 @@ employee, `user?` on a mark. `include=location` fills it.
 
 ```ts
 const users = await clockster.users.list({
-  query: { 'include[]': ['location', 'department'] },
+  query: { include: ['location', 'department'] },
   throwOnError: true,
 });
 
 console.log(users.data.data[0]?.location?.title);
 ```
 
-The key is `include[]` rather than `include`: the API takes it as a repeated parameter, and the
-document names it as it goes on the wire.
+Every list parameter takes an array and travels comma-separated: `include`, `ids`, `locations`
+and the rest.
 
 An absent key is not the same as a null one. `null` means we know the value is empty; absent means
 you did not ask.

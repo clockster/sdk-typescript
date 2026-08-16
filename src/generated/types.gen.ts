@@ -72,23 +72,23 @@ export type GetCompanyV3AttendanceData = {
         /**
          * Only rows belonging to these people, by id.
          */
-        'users[]'?: Array<number> | null;
+        users?: Array<number> | null;
         /**
          * Only these locations, by id.
          */
-        'locations[]'?: Array<number> | null;
+        locations?: Array<number> | null;
         /**
          * Only rows in these states.
          */
-        'statuses[]'?: Array<'out' | 'in' | 'break'> | null;
+        statuses?: Array<'out' | 'in' | 'break'> | null;
         /**
          * Only marks recorded this way — a device, the mobile app, or a person entering them by hand.
          */
-        'sources[]'?: Array<'device' | 'mobile' | 'frontend' | 'api' | 'system'> | null;
+        sources?: Array<'device' | 'mobile' | 'frontend' | 'api' | 'system'> | null;
         /**
          * Relations to load, comma-separated. Anything not named is absent from the answer rather than null.
          */
-        'include[]'?: Array<'user' | 'location' | 'attachments'> | null;
+        include?: Array<'user' | 'location' | 'attachments'> | null;
     };
     url: '/company/v3/attendance';
 };
@@ -327,7 +327,7 @@ export type GetCompanyV3DepartmentsData = {
         /**
          * Relations to load, comma-separated. Anything not named is absent from the answer rather than null.
          */
-        'include[]'?: Array<'managers'> | null;
+        include?: Array<'managers'> | null;
     };
     url: '/company/v3/departments';
 };
@@ -620,7 +620,7 @@ export type GetCompanyV3DepartmentsByIdData = {
         /**
          * Relations to load, comma-separated. Anything not named is absent from the answer rather than null.
          */
-        'include[]'?: Array<'managers'> | null;
+        include?: Array<'managers'> | null;
     };
     url: '/company/v3/departments/{id}';
 };
@@ -721,35 +721,35 @@ export type GetCompanyV3DocumentsData = {
         /**
          * Only rows carrying these keys of yours. The other half of an upsert: write with your key, read back with it.
          */
-        'external_ids[]'?: Array<string> | null;
+        external_ids?: Array<string> | null;
         /**
          * Only rows belonging to these people, by id.
          */
-        'users[]'?: Array<number> | null;
+        users?: Array<number> | null;
         /**
          * Only these locations, by id.
          */
-        'locations[]'?: Array<number> | null;
+        locations?: Array<number> | null;
         /**
          * Only these departments, by id.
          */
-        'departments[]'?: Array<number> | null;
+        departments?: Array<number> | null;
         /**
          * Only these positions, by id.
          */
-        'positions[]'?: Array<number> | null;
+        positions?: Array<number> | null;
         /**
          * Only these user filters, by id.
          */
-        'user_filters[]'?: Array<number> | null;
+        user_filters?: Array<number> | null;
         /**
          * Only rows of these types.
          */
-        'types[]'?: Array<'passport' | 'cv' | 'diploma' | 'medical' | 'photo' | 'other' | 'medical_book' | 'employment_agreement' | 'termination_of_employment_agreement' | 'equipment_agreement' | 'application' | 'order' | 'supplementary_agreement' | 'job_description' | 'nda' | 'non_compete_agreement' | 'data_processing_agreement' | 'act_of_service_acceptance' | 'health_and_safety_briefing' | 'shift_schedule' | 'letter' | 'vacation_schedule' | 'contract' | 'agreement' | 'goods_release_note' | 'reconciliation_act' | 'return_to_supplier'> | null;
+        types?: Array<'passport' | 'cv' | 'diploma' | 'medical' | 'photo' | 'other' | 'medical_book' | 'employment_agreement' | 'termination_of_employment_agreement' | 'equipment_agreement' | 'application' | 'order' | 'supplementary_agreement' | 'job_description' | 'nda' | 'non_compete_agreement' | 'data_processing_agreement' | 'act_of_service_acceptance' | 'health_and_safety_briefing' | 'shift_schedule' | 'letter' | 'vacation_schedule' | 'contract' | 'agreement' | 'goods_release_note' | 'reconciliation_act' | 'return_to_supplier'> | null;
         /**
          * Only documents covering these employment terms.
          */
-        'employment_types[]'?: Array<'full_time' | 'part_time' | 'irregular_hours' | 'contract_1' | 'contract_2' | 'apprenticeship' | 'traineeship' | 'piece_rate' | 'probation' | 'outstaffing'> | null;
+        employment_types?: Array<'full_time' | 'part_time' | 'irregular_hours' | 'contract_1' | 'contract_2' | 'apprenticeship' | 'traineeship' | 'piece_rate' | 'probation' | 'outstaffing'> | null;
         /**
          * Free text over the names the section lists.
          */
@@ -777,7 +777,7 @@ export type GetCompanyV3DocumentsData = {
         /**
          * Relations to load, comma-separated. Anything not named is absent from the answer rather than null.
          */
-        'include[]'?: Array<'attachments' | 'signers' | 'labor_contract'> | null;
+        include?: Array<'attachments' | 'signers' | 'labor_contract'> | null;
     };
     url: '/company/v3/documents';
 };
@@ -1085,7 +1085,7 @@ export type GetCompanyV3DocumentsByIdData = {
         /**
          * Relations to load, comma-separated. Anything not named is absent from the answer rather than null.
          */
-        'include[]'?: Array<'attachments' | 'signers' | 'labor_contract'> | null;
+        include?: Array<'attachments' | 'signers' | 'labor_contract'> | null;
     };
     url: '/company/v3/documents/{id}';
 };
@@ -1288,11 +1288,11 @@ export type GetCompanyV3LocationsData = {
         /**
          * Relations to load, comma-separated. Anything not named is absent from the answer rather than null.
          */
-        'include[]'?: Array<'managers'> | null;
+        include?: Array<'managers'> | null;
         /**
          * Only these employee codes.
          */
-        'codes[]'?: Array<string> | null;
+        codes?: Array<string> | null;
         /**
          * Only rows changed at or after this instant (ISO 8601). The cheap way to sync: ask for what moved, not for everything.
          */
@@ -1597,7 +1597,7 @@ export type GetCompanyV3LocationsByIdData = {
         /**
          * Relations to load, comma-separated. Anything not named is absent from the answer rather than null.
          */
-        'include[]'?: Array<'managers'> | null;
+        include?: Array<'managers'> | null;
     };
     url: '/company/v3/locations/{id}';
 };
@@ -1777,15 +1777,15 @@ export type GetCompanyV3PayrollPayslipsData = {
         /**
          * Only rows belonging to these people, by id.
          */
-        'users[]'?: Array<number> | null;
+        users?: Array<number> | null;
         /**
          * Only rows in these states.
          */
-        'statuses[]'?: Array<'draft' | 'approved' | 'paid'> | null;
+        statuses?: Array<'draft' | 'approved' | 'paid'> | null;
         /**
          * Only these months, as YYYY-MM.
          */
-        'months[]'?: Array<string> | null;
+        months?: Array<string> | null;
         /**
          * Only rows changed at or after this instant (ISO 8601). The cheap way to sync: ask for what moved, not for everything.
          */
@@ -1936,7 +1936,7 @@ export type GetCompanyV3PositionsData = {
         /**
          * Relations to load, comma-separated. Anything not named is absent from the answer rather than null.
          */
-        'include[]'?: Array<string> | null;
+        include?: Array<string> | null;
     };
     url: '/company/v3/positions';
 };
@@ -2221,7 +2221,7 @@ export type GetCompanyV3PositionsByIdData = {
         /**
          * Relations to load, comma-separated. Anything not named is absent from the answer rather than null.
          */
-        'include[]'?: Array<string> | null;
+        include?: Array<string> | null;
     };
     url: '/company/v3/positions/{id}';
 };
@@ -2626,19 +2626,19 @@ export type GetCompanyV3TasksData = {
         /**
          * Only rows carrying these keys of yours. The other half of an upsert: write with your key, read back with it.
          */
-        'external_ids[]'?: Array<string> | null;
+        external_ids?: Array<string> | null;
         /**
          * Only rows belonging to these people, by id.
          */
-        'users[]'?: Array<number> | null;
+        users?: Array<number> | null;
         /**
          * Only rows in these categories.
          */
-        'categories[]'?: Array<number> | null;
+        categories?: Array<number> | null;
         /**
          * Only rows in these states.
          */
-        'statuses[]'?: Array<'created' | 'started' | 'paused' | 'completed' | 'incompleted' | 'pastdue'> | null;
+        statuses?: Array<'created' | 'started' | 'paused' | 'completed' | 'incompleted' | 'pastdue'> | null;
         /**
          * Only rows switched on (`true`) or off (`false`). Omit for both.
          */
@@ -2662,7 +2662,7 @@ export type GetCompanyV3TasksData = {
         /**
          * Relations to load, comma-separated. Anything not named is absent from the answer rather than null.
          */
-        'include[]'?: Array<'items' | 'managers' | 'user' | 'author'> | null;
+        include?: Array<'items' | 'managers' | 'user' | 'author'> | null;
     };
     url: '/company/v3/tasks';
 };
@@ -2911,7 +2911,7 @@ export type GetCompanyV3TasksByIdData = {
         /**
          * Relations to load, comma-separated. Anything not named is absent from the answer rather than null.
          */
-        'include[]'?: Array<'items' | 'managers'> | null;
+        include?: Array<'items' | 'managers'> | null;
     };
     url: '/company/v3/tasks/{id}';
 };
@@ -3064,19 +3064,19 @@ export type GetCompanyV3TimesheetsData = {
         /**
          * Only rows belonging to these people, by id.
          */
-        'users[]'?: Array<number> | null;
+        users?: Array<number> | null;
         /**
          * Only these locations, by id.
          */
-        'locations[]'?: Array<number> | null;
+        locations?: Array<number> | null;
         /**
          * Only these departments, by id.
          */
-        'departments[]'?: Array<number> | null;
+        departments?: Array<number> | null;
         /**
          * Only these positions, by id.
          */
-        'positions[]'?: Array<number> | null;
+        positions?: Array<number> | null;
         /**
          * Only people on these employment terms.
          */
@@ -3084,7 +3084,7 @@ export type GetCompanyV3TimesheetsData = {
         /**
          * Relations to load, comma-separated. Anything not named is absent from the answer rather than null.
          */
-        'include[]'?: Array<'actual' | 'variance' | 'user' | 'location' | 'department' | 'position'> | null;
+        include?: Array<'actual' | 'variance' | 'user' | 'location' | 'department' | 'position'> | null;
     };
     url: '/company/v3/timesheets';
 };
@@ -3237,7 +3237,7 @@ export type GetCompanyV3UserFiltersData = {
         /**
          * Relations to load, comma-separated. Anything not named is absent from the answer rather than null.
          */
-        'include[]'?: Array<'managers'> | null;
+        include?: Array<'managers'> | null;
     };
     url: '/company/v3/user-filters';
 };
@@ -3530,7 +3530,7 @@ export type GetCompanyV3UserFiltersByIdData = {
         /**
          * Relations to load, comma-separated. Anything not named is absent from the answer rather than null.
          */
-        'include[]'?: Array<'managers'> | null;
+        include?: Array<'managers'> | null;
     };
     url: '/company/v3/user-filters/{id}';
 };
@@ -3634,19 +3634,19 @@ export type GetCompanyV3UserRequestsData = {
         /**
          * Only rows of these types.
          */
-        'types[]'?: Array<'leave' | 'work' | 'general' | 'finance'> | null;
+        types?: Array<'leave' | 'work' | 'general' | 'finance'> | null;
         /**
          * Only rows in these states.
          */
-        'statuses[]'?: Array<'pending' | 'accepted' | 'rejected' | 'cancelled' | 'approval' | 'execution' | 'signing'> | null;
+        statuses?: Array<'pending' | 'accepted' | 'rejected' | 'cancelled' | 'approval' | 'execution' | 'signing'> | null;
         /**
          * Only rows of these subtypes, which narrow a type further.
          */
-        'subtypes[]'?: Array<string> | null;
+        subtypes?: Array<string> | null;
         /**
          * Only rows belonging to these people, by id.
          */
-        'users[]'?: Array<number> | null;
+        users?: Array<number> | null;
         /**
          * Only rows changed at or after this instant (ISO 8601). The cheap way to sync: ask for what moved, not for everything.
          */
@@ -3654,7 +3654,7 @@ export type GetCompanyV3UserRequestsData = {
         /**
          * Relations to load, comma-separated. Anything not named is absent from the answer rather than null.
          */
-        'include[]'?: Array<'content' | 'user' | 'author'> | null;
+        include?: Array<'content' | 'user' | 'author'> | null;
     };
     url: '/company/v3/user-requests';
 };
@@ -3910,39 +3910,39 @@ export type GetCompanyV3UsersData = {
         /**
          * Only these ids.
          */
-        'ids[]'?: Array<number> | null;
+        ids?: Array<number> | null;
         /**
          * Only these employee codes.
          */
-        'codes[]'?: Array<string> | null;
+        codes?: Array<string> | null;
         /**
          * Only rows carrying these keys of yours. The other half of an upsert: write with your key, read back with it.
          */
-        'external_ids[]'?: Array<string> | null;
+        external_ids?: Array<string> | null;
         /**
          * Only these locations, by id.
          */
-        'locations[]'?: Array<number> | null;
+        locations?: Array<number> | null;
         /**
          * Only these departments, by id.
          */
-        'departments[]'?: Array<number> | null;
+        departments?: Array<number> | null;
         /**
          * Only these positions, by id.
          */
-        'positions[]'?: Array<number> | null;
+        positions?: Array<number> | null;
         /**
          * Only these user filters, by id.
          */
-        'user_filters[]'?: Array<number> | null;
+        user_filters?: Array<number> | null;
         /**
          * Only people on these employment terms.
          */
-        'employment[]'?: Array<string> | null;
+        employment?: Array<string> | null;
         /**
          * Relations to load, comma-separated. Anything not named is absent from the answer rather than null.
          */
-        'include[]'?: Array<'location' | 'locations' | 'department' | 'position' | 'user_filters' | 'dismissal' | 'meta'> | null;
+        include?: Array<'location' | 'locations' | 'department' | 'position' | 'user_filters' | 'dismissal' | 'meta'> | null;
     };
     url: '/company/v3/users';
 };
@@ -4347,7 +4347,7 @@ export type GetCompanyV3UsersByIdData = {
         /**
          * Relations to load, comma-separated. Anything not named is absent from the answer rather than null.
          */
-        'include[]'?: Array<'location' | 'locations' | 'department' | 'position' | 'user_filters' | 'dismissal' | 'meta'> | null;
+        include?: Array<'location' | 'locations' | 'department' | 'position' | 'user_filters' | 'dismissal' | 'meta'> | null;
     };
     url: '/company/v3/users/{id}';
 };
@@ -4793,11 +4793,11 @@ export type GetCompanyV3WebhooksDeliveriesData = {
         /**
          * Only deliveries to these endpoints, by id.
          */
-        'webhooks[]'?: Array<number> | null;
+        webhooks?: Array<number> | null;
         /**
          * Only deliveries of these events.
          */
-        'events[]'?: Array<'user.created' | 'user.updated' | 'user.deleted' | 'user.restored' | 'user.purged' | 'location.created' | 'location.updated' | 'location.deleted' | 'department.created' | 'department.updated' | 'department.deleted' | 'position.created' | 'position.updated' | 'position.deleted' | 'task.created' | 'task.completed' | 'task.approved' | 'task.rejected' | 'task.deleted'> | null;
+        events?: Array<'user.created' | 'user.updated' | 'user.deleted' | 'user.restored' | 'user.purged' | 'location.created' | 'location.updated' | 'location.deleted' | 'department.created' | 'department.updated' | 'department.deleted' | 'position.created' | 'position.updated' | 'position.deleted' | 'task.created' | 'task.completed' | 'task.approved' | 'task.rejected' | 'task.deleted'> | null;
         /**
          * Only deliveries that were accepted (`true`) or that were not (`false`).
          */
@@ -4813,7 +4813,7 @@ export type GetCompanyV3WebhooksDeliveriesData = {
         /**
          * Relations to load, comma-separated. Anything not named is absent from the answer rather than null.
          */
-        'include[]'?: Array<'payload'> | null;
+        include?: Array<'payload'> | null;
     };
     url: '/company/v3/webhooks/deliveries';
 };
