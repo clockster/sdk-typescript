@@ -18,7 +18,8 @@ jobs:
         with:
           node-version: '24'
           registry-url: https://registry.npmjs.org
-          cache: npm
+          # npm asks for the package-manager cache to be off on the publishing job.
+          package-manager-cache: false
 
       - run: npm ci
 
