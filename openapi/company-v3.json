@@ -2367,7 +2367,46 @@
                         },
                         "managers": {
                           "type": "array",
-                          "items": []
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "external_id": {
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              "code": {
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              "first_name": {
+                                "type": "string"
+                              },
+                              "middle_name": {
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              "last_name": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "external_id",
+                              "code",
+                              "first_name",
+                              "middle_name",
+                              "last_name"
+                            ]
+                          }
                         }
                       },
                       "required": [
@@ -2386,9 +2425,9 @@
                 },
                 "example": {
                   "data": {
-                    "id": 85573,
+                    "id": 18620,
                     "external_id": null,
-                    "title": "Administration",
+                    "title": "Ops",
                     "description": null,
                     "created_at": "2026-03-02T12:00:00+00:00",
                     "updated_at": "2026-03-02T12:00:00+00:00"
@@ -3421,12 +3460,98 @@
                           },
                           "signers": {
                             "type": "array",
-                            "items": []
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "type": "string"
+                                },
+                                "status": {
+                                  "type": "string"
+                                },
+                                "signed_at": {
+                                  "type": "string"
+                                },
+                                "signed_via": {
+                                  "type": [
+                                    "null",
+                                    "string"
+                                  ]
+                                },
+                                "party_id": {
+                                  "type": "integer"
+                                },
+                                "party_type": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "status",
+                                "signed_at",
+                                "signed_via",
+                                "party_id",
+                                "party_type"
+                              ]
+                            }
                           },
                           "labor_contract": {
                             "type": [
                               "null",
                               "object"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "external_contract_id": {
+                                "type": "string"
+                              },
+                              "iin": {
+                                "type": "string"
+                              },
+                              "contract_number": {
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              "contract_date": {
+                                "type": "string"
+                              },
+                              "begin_date": {
+                                "type": "string"
+                              },
+                              "end_date": {
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              "termination_date": {
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              "established_post": {
+                                "type": "string"
+                              },
+                              "has_contract_file": {
+                                "type": "boolean"
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "external_contract_id",
+                              "iin",
+                              "contract_number",
+                              "contract_date",
+                              "begin_date",
+                              "end_date",
+                              "termination_date",
+                              "established_post",
+                              "has_contract_file"
                             ]
                           }
                         },
@@ -3532,7 +3657,7 @@
                       "expiration_date": "2027-01-13",
                       "parent_document_id": null,
                       "signature": {
-                        "state": "none",
+                        "state": "pending",
                         "completed_at": null
                       },
                       "created_at": "2026-03-02T09:00:00+00:00",
@@ -4371,16 +4496,135 @@
                         },
                         "attachments": {
                           "type": "array",
-                          "items": []
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "description": {
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              "format": {
+                                "type": "string"
+                              },
+                              "url": {
+                                "type": "string"
+                              },
+                              "created_at": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "name",
+                              "description",
+                              "format",
+                              "url",
+                              "created_at"
+                            ]
+                          }
                         },
                         "signers": {
                           "type": "array",
-                          "items": []
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "type": {
+                                "type": "string"
+                              },
+                              "status": {
+                                "type": "string"
+                              },
+                              "signed_at": {
+                                "type": "string"
+                              },
+                              "signed_via": {
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              "party_id": {
+                                "type": "integer"
+                              },
+                              "party_type": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "type",
+                              "status",
+                              "signed_at",
+                              "signed_via",
+                              "party_id",
+                              "party_type"
+                            ]
+                          }
                         },
                         "labor_contract": {
                           "type": [
                             "null",
                             "object"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "integer"
+                            },
+                            "external_contract_id": {
+                              "type": "string"
+                            },
+                            "iin": {
+                              "type": "string"
+                            },
+                            "contract_number": {
+                              "type": [
+                                "null",
+                                "string"
+                              ]
+                            },
+                            "contract_date": {
+                              "type": "string"
+                            },
+                            "begin_date": {
+                              "type": "string"
+                            },
+                            "end_date": {
+                              "type": [
+                                "null",
+                                "string"
+                              ]
+                            },
+                            "termination_date": {
+                              "type": [
+                                "null",
+                                "string"
+                              ]
+                            },
+                            "established_post": {
+                              "type": "string"
+                            },
+                            "has_contract_file": {
+                              "type": "boolean"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "external_contract_id",
+                            "iin",
+                            "contract_number",
+                            "contract_date",
+                            "begin_date",
+                            "end_date",
+                            "termination_date",
+                            "established_post",
+                            "has_contract_file"
                           ]
                         }
                       },
@@ -4411,20 +4655,20 @@
                 "example": {
                   "data": {
                     "id": 86663,
-                    "external_id": "HR-DOC-4472",
+                    "external_id": "HR-DOC-4471",
                     "user_id": 70753,
                     "author_id": 70753,
                     "party": "employee",
-                    "type": "nda",
-                    "name": "NDA",
-                    "contract_number": null,
-                    "employment_type": null,
-                    "start_date": null,
+                    "type": "employment_agreement",
+                    "name": "Employment agreement",
+                    "contract_number": "EA-2026-0114",
+                    "employment_type": "full_time",
+                    "start_date": "2026-01-14",
                     "end_date": null,
-                    "expiration_date": null,
+                    "expiration_date": "2027-01-13",
                     "parent_document_id": null,
                     "signature": {
-                      "state": "none",
+                      "state": "pending",
                       "completed_at": null
                     },
                     "created_at": "2026-03-02T09:00:00+00:00",
@@ -6277,7 +6521,46 @@
                         },
                         "managers": {
                           "type": "array",
-                          "items": []
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "external_id": {
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              "code": {
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              "first_name": {
+                                "type": "string"
+                              },
+                              "middle_name": {
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              "last_name": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "external_id",
+                              "code",
+                              "first_name",
+                              "middle_name",
+                              "last_name"
+                            ]
+                          }
                         }
                       },
                       "required": [
@@ -6300,14 +6583,14 @@
                 },
                 "example": {
                   "data": {
-                    "id": 94678,
+                    "id": 83977,
                     "external_id": null,
-                    "code": null,
-                    "title": "Office",
-                    "description": null,
-                    "latitude": null,
-                    "longitude": null,
-                    "radius": 100,
+                    "code": "WH-01",
+                    "title": "Warehouse",
+                    "description": "Ground floor",
+                    "latitude": 43.238949,
+                    "longitude": 76.889709,
+                    "radius": 150,
                     "created_at": "2026-03-02T12:00:00+00:00",
                     "updated_at": "2026-03-02T12:00:00+00:00"
                   }
@@ -8677,9 +8960,9 @@
                 },
                 "example": {
                   "data": {
-                    "id": 48898,
+                    "id": 32684,
                     "external_id": null,
-                    "title": "CEO",
+                    "title": "Baker",
                     "description": null,
                     "created_at": "2026-03-02T12:00:00+00:00",
                     "updated_at": "2026-03-02T12:00:00+00:00"
@@ -9876,7 +10159,50 @@
                         },
                         "shifts": {
                           "type": "array",
-                          "items": []
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "start": {
+                                "type": "string"
+                              },
+                              "end": {
+                                "type": "string"
+                              },
+                              "time_planned": {
+                                "type": "integer"
+                              },
+                              "location_id": {
+                                "type": [
+                                  "integer",
+                                  "null"
+                                ]
+                              },
+                              "department_id": {
+                                "type": [
+                                  "integer",
+                                  "null"
+                                ]
+                              },
+                              "position_id": {
+                                "type": [
+                                  "integer",
+                                  "null"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "start",
+                              "end",
+                              "time_planned",
+                              "location_id",
+                              "department_id",
+                              "position_id"
+                            ]
+                          }
                         },
                         "users": {
                           "type": "array",
@@ -12601,7 +12927,132 @@
                               },
                               "shifts": {
                                 "type": "array",
-                                "items": []
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "integer"
+                                    },
+                                    "code": {
+                                      "type": [
+                                        "null",
+                                        "string"
+                                      ]
+                                    },
+                                    "start": {
+                                      "type": "string"
+                                    },
+                                    "end": {
+                                      "type": "string"
+                                    },
+                                    "time_planned": {
+                                      "type": "integer"
+                                    },
+                                    "location_id": {
+                                      "type": [
+                                        "integer",
+                                        "null"
+                                      ]
+                                    },
+                                    "department_id": {
+                                      "type": [
+                                        "integer",
+                                        "null"
+                                      ]
+                                    },
+                                    "position_id": {
+                                      "type": [
+                                        "integer",
+                                        "null"
+                                      ]
+                                    },
+                                    "location": {
+                                      "type": [
+                                        "null",
+                                        "object"
+                                      ],
+                                      "properties": {
+                                        "id": {
+                                          "type": "integer"
+                                        },
+                                        "external_id": {
+                                          "type": [
+                                            "null",
+                                            "string"
+                                          ]
+                                        },
+                                        "title": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "external_id",
+                                        "title"
+                                      ]
+                                    },
+                                    "department": {
+                                      "type": [
+                                        "null",
+                                        "object"
+                                      ],
+                                      "properties": {
+                                        "id": {
+                                          "type": "integer"
+                                        },
+                                        "external_id": {
+                                          "type": [
+                                            "null",
+                                            "string"
+                                          ]
+                                        },
+                                        "title": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "external_id",
+                                        "title"
+                                      ]
+                                    },
+                                    "position": {
+                                      "type": [
+                                        "null",
+                                        "object"
+                                      ],
+                                      "properties": {
+                                        "id": {
+                                          "type": "integer"
+                                        },
+                                        "external_id": {
+                                          "type": [
+                                            "null",
+                                            "string"
+                                          ]
+                                        },
+                                        "title": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "external_id",
+                                        "title"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "code",
+                                    "start",
+                                    "end",
+                                    "time_planned",
+                                    "location_id",
+                                    "department_id",
+                                    "position_id"
+                                  ]
+                                }
                               },
                               "location_id": {
                                 "type": [
@@ -12625,18 +13076,75 @@
                                 "type": [
                                   "null",
                                   "object"
+                                ],
+                                "properties": {
+                                  "id": {
+                                    "type": "integer"
+                                  },
+                                  "external_id": {
+                                    "type": [
+                                      "null",
+                                      "string"
+                                    ]
+                                  },
+                                  "title": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "external_id",
+                                  "title"
                                 ]
                               },
                               "department": {
                                 "type": [
                                   "null",
                                   "object"
+                                ],
+                                "properties": {
+                                  "id": {
+                                    "type": "integer"
+                                  },
+                                  "external_id": {
+                                    "type": [
+                                      "null",
+                                      "string"
+                                    ]
+                                  },
+                                  "title": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "external_id",
+                                  "title"
                                 ]
                               },
                               "position": {
                                 "type": [
                                   "null",
                                   "object"
+                                ],
+                                "properties": {
+                                  "id": {
+                                    "type": "integer"
+                                  },
+                                  "external_id": {
+                                    "type": [
+                                      "null",
+                                      "string"
+                                    ]
+                                  },
+                                  "title": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "external_id",
+                                  "title"
                                 ]
                               }
                             },
@@ -12687,7 +13195,29 @@
                               },
                               "shifts": {
                                 "type": "array",
-                                "items": []
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "integer"
+                                    },
+                                    "in": {
+                                      "type": "string"
+                                    },
+                                    "out": {
+                                      "type": "string"
+                                    },
+                                    "time_worked": {
+                                      "type": "integer"
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "in",
+                                    "out",
+                                    "time_worked"
+                                  ]
+                                }
                               }
                             },
                             "required": [
@@ -12810,6 +13340,51 @@
                         "location_id": null,
                         "department_id": null,
                         "position_id": null
+                      }
+                    },
+                    {
+                      "date": "2026-04-08",
+                      "user": {
+                        "id": 70753,
+                        "external_id": "HR-1001"
+                      },
+                      "planned": {
+                        "schedule_id": 40941,
+                        "type": "work",
+                        "leave_type": null,
+                        "is_split": true,
+                        "timezone": "+05:00",
+                        "start": "08:00:00",
+                        "end": "20:00:00",
+                        "time_planned": 28800,
+                        "break_time": 0,
+                        "grace_start": 0,
+                        "grace_end": 0,
+                        "shifts": [
+                          {
+                            "id": 47566,
+                            "code": null,
+                            "start": "08:00:00",
+                            "end": "12:00:00",
+                            "time_planned": 14400,
+                            "location_id": 83977,
+                            "department_id": 35628,
+                            "position_id": 54888
+                          },
+                          {
+                            "id": 47566,
+                            "code": null,
+                            "start": "16:00:00",
+                            "end": "20:00:00",
+                            "time_planned": 14400,
+                            "location_id": null,
+                            "department_id": null,
+                            "position_id": null
+                          }
+                        ],
+                        "location_id": 83977,
+                        "department_id": 35628,
+                        "position_id": 54888
                       }
                     }
                   ],
@@ -19715,9 +20290,19 @@
                   },
                   "auth_basic": {
                     "type": [
-                      "array",
+                      "object",
                       "null"
-                    ]
+                    ],
+                    "properties": {
+                      "username": {
+                        "type": "string",
+                        "maxLength": 255
+                      },
+                      "password": {
+                        "type": "string",
+                        "maxLength": 255
+                      }
+                    }
                   },
                   "auth_token": {
                     "type": [
@@ -22207,9 +22792,19 @@
                   },
                   "auth_basic": {
                     "type": [
-                      "array",
+                      "object",
                       "null"
-                    ]
+                    ],
+                    "properties": {
+                      "username": {
+                        "type": "string",
+                        "maxLength": 255
+                      },
+                      "password": {
+                        "type": "string",
+                        "maxLength": 255
+                      }
+                    }
                   },
                   "auth_token": {
                     "type": [

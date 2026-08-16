@@ -695,7 +695,14 @@ export type GetCompanyV3DepartmentsByIdResponses = {
             description: null | string;
             created_at: string;
             updated_at: string;
-            managers?: Array<unknown>;
+            managers?: Array<{
+                id: number;
+                external_id: null | string;
+                code: null | string;
+                first_name: string;
+                middle_name: null | string;
+                last_name: string;
+            }>;
         };
     };
 };
@@ -873,9 +880,25 @@ export type GetCompanyV3DocumentsResponses = {
                 url: string;
                 created_at: string;
             }>;
-            signers?: Array<unknown>;
+            signers?: Array<{
+                type: string;
+                status: string;
+                signed_at: string;
+                signed_via: null | string;
+                party_id: number;
+                party_type: string;
+            }>;
             labor_contract?: null | {
-                [key: string]: unknown;
+                id: number;
+                external_contract_id: string;
+                iin: string;
+                contract_number: null | string;
+                contract_date: string;
+                begin_date: string;
+                end_date: null | string;
+                termination_date: null | string;
+                established_post: string;
+                has_contract_file: boolean;
             };
         }>;
         links: {
@@ -1173,10 +1196,33 @@ export type GetCompanyV3DocumentsByIdResponses = {
             };
             created_at: string;
             updated_at: string;
-            attachments?: Array<unknown>;
-            signers?: Array<unknown>;
+            attachments?: Array<{
+                id: number;
+                name: string;
+                description: null | string;
+                format: string;
+                url: string;
+                created_at: string;
+            }>;
+            signers?: Array<{
+                type: string;
+                status: string;
+                signed_at: string;
+                signed_via: null | string;
+                party_id: number;
+                party_type: string;
+            }>;
             labor_contract?: null | {
-                [key: string]: unknown;
+                id: number;
+                external_contract_id: string;
+                iin: string;
+                contract_number: null | string;
+                contract_date: string;
+                begin_date: string;
+                end_date: null | string;
+                termination_date: null | string;
+                established_post: string;
+                has_contract_file: boolean;
             };
         };
     };
@@ -1676,7 +1722,14 @@ export type GetCompanyV3LocationsByIdResponses = {
             radius: number;
             created_at: string;
             updated_at: string;
-            managers?: Array<unknown>;
+            managers?: Array<{
+                id: number;
+                external_id: null | string;
+                code: null | string;
+                first_name: string;
+                middle_name: null | string;
+                last_name: string;
+            }>;
         };
     };
 };
@@ -2600,7 +2653,15 @@ export type GetCompanyV3SchedulesByIdResponses = {
             location_id: number | null;
             department_id: number | null;
             position_id: number | null;
-            shifts: Array<unknown>;
+            shifts: Array<{
+                id: number;
+                start: string;
+                end: string;
+                time_planned: number;
+                location_id: number | null;
+                department_id: number | null;
+                position_id: number | null;
+            }>;
             users: Array<{
                 id: number;
                 external_id: null | string;
@@ -3174,18 +3235,48 @@ export type GetCompanyV3TimesheetsResponses = {
                 break_time: number;
                 grace_start: number;
                 grace_end: number;
-                shifts: Array<unknown>;
+                shifts: Array<{
+                    id: number;
+                    code: null | string;
+                    start: string;
+                    end: string;
+                    time_planned: number;
+                    location_id: number | null;
+                    department_id: number | null;
+                    position_id: number | null;
+                    location?: null | {
+                        id: number;
+                        external_id: null | string;
+                        title: string;
+                    };
+                    department?: null | {
+                        id: number;
+                        external_id: null | string;
+                        title: string;
+                    };
+                    position?: null | {
+                        id: number;
+                        external_id: null | string;
+                        title: string;
+                    };
+                }>;
                 location_id: number | null;
                 department_id: number | null;
                 position_id: number | null;
                 location?: null | {
-                    [key: string]: unknown;
+                    id: number;
+                    external_id: null | string;
+                    title: string;
                 };
                 department?: null | {
-                    [key: string]: unknown;
+                    id: number;
+                    external_id: null | string;
+                    title: string;
                 };
                 position?: null | {
-                    [key: string]: unknown;
+                    id: number;
+                    external_id: null | string;
+                    title: string;
                 };
             };
             actual?: {
@@ -3195,7 +3286,12 @@ export type GetCompanyV3TimesheetsResponses = {
                 time_break: number;
                 time_worked_day_off: number;
                 time_night: number;
-                shifts: Array<unknown>;
+                shifts: Array<{
+                    id: number;
+                    in: string;
+                    out: string;
+                    time_worked: number;
+                }>;
             };
             variance?: {
                 time_late: number;
@@ -4662,7 +4758,10 @@ export type PostCompanyV3WebhooksData = {
         url: string;
         contact_email?: string | null;
         events: Array<'user.created' | 'user.updated' | 'user.deleted' | 'user.restored' | 'user.purged' | 'location.created' | 'location.updated' | 'location.deleted' | 'department.created' | 'department.updated' | 'department.deleted' | 'position.created' | 'position.updated' | 'position.deleted' | 'task.created' | 'task.completed' | 'task.approved' | 'task.rejected' | 'task.deleted'>;
-        auth_basic?: Array<unknown> | null;
+        auth_basic?: {
+            username?: string;
+            password?: string;
+        } | null;
         auth_token?: string | null;
         active: boolean;
     };
@@ -5377,7 +5476,10 @@ export type PutCompanyV3WebhooksByIdData = {
         url: string;
         contact_email?: string | null;
         events: Array<'user.created' | 'user.updated' | 'user.deleted' | 'user.restored' | 'user.purged' | 'location.created' | 'location.updated' | 'location.deleted' | 'department.created' | 'department.updated' | 'department.deleted' | 'position.created' | 'position.updated' | 'position.deleted' | 'task.created' | 'task.completed' | 'task.approved' | 'task.rejected' | 'task.deleted'>;
-        auth_basic?: Array<unknown> | null;
+        auth_basic?: {
+            username?: string;
+            password?: string;
+        } | null;
         auth_token?: string | null;
         active: boolean;
     };
