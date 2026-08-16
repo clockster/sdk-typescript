@@ -8,7 +8,9 @@ function clocksterSyncEmployees() {
   clocksterFillSheet_({
     sheet: 'Employees',
     path: 'users',
-    query: { per_page: 100, include: ['location', 'department', 'position'] },
+    // `status` decides whether the people who left are in the answer, and `active` is the default —
+    // without `all` the dismissal column below can never fill.
+    query: { per_page: 100, status: 'all', include: ['location', 'department', 'position'] },
     headers: ['id', 'external_id', 'code', 'Name', 'Phone', 'Location', 'Department', 'Position', 'Hired', 'Dismissed'],
     row: function (user) {
       return [
@@ -34,8 +36,9 @@ function clocksterSyncTimesheets() {
   clocksterFillSheet_({
     sheet: 'Timesheets',
     path: 'timesheets',
+    // No `per_page` here: how many rows fifty people produce depends on the window, so this
+    // listing sizes its own page and reports what it chose in `meta.users_per_page`.
     query: {
-      per_page: 100,
       date_from: clocksterDate_(first),
       date_to: clocksterDate_(today),
       // `user` too: without it a row names the employee by id alone and the name column is empty.
