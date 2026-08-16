@@ -2589,7 +2589,10 @@
                                   "type": "string"
                                 },
                                 "signed_at": {
-                                  "type": "string"
+                                  "type": [
+                                    "null",
+                                    "string"
+                                  ]
                                 },
                                 "signed_via": {
                                   "type": [
@@ -2636,10 +2639,16 @@
                                 ]
                               },
                               "contract_date": {
-                                "type": "string"
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
                               },
                               "begin_date": {
-                                "type": "string"
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
                               },
                               "end_date": {
                                 "type": [
@@ -3321,7 +3330,10 @@
                                 "type": "string"
                               },
                               "signed_at": {
-                                "type": "string"
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
                               },
                               "signed_via": {
                                 "type": [
@@ -3368,10 +3380,16 @@
                               ]
                             },
                             "contract_date": {
-                              "type": "string"
+                              "type": [
+                                "null",
+                                "string"
+                              ]
                             },
                             "begin_date": {
-                              "type": "string"
+                              "type": [
+                                "null",
+                                "string"
+                              ]
                             },
                             "end_date": {
                               "type": [
@@ -5111,16 +5129,28 @@
                             "type": "object",
                             "properties": {
                               "basic_rate": {
-                                "type": "integer"
+                                "type": [
+                                  "null",
+                                  "number"
+                                ]
                               },
                               "basic_type": {
-                                "type": "string"
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
                               },
                               "work_days": {
-                                "type": "integer"
+                                "type": [
+                                  "integer",
+                                  "null"
+                                ]
                               },
                               "worked_days": {
-                                "type": "integer"
+                                "type": [
+                                  "integer",
+                                  "null"
+                                ]
                               }
                             },
                             "required": [
@@ -5304,7 +5334,7 @@
                       "take_home": 1250.5,
                       "ctc": 1500,
                       "salary": {
-                        "basic_rate": 1000,
+                        "basic_rate": 1000.5,
                         "basic_type": "fixed",
                         "work_days": 21,
                         "worked_days": 20
@@ -7973,7 +8003,9 @@
                 "type": "string",
                 "enum": [
                   "items",
-                  "managers"
+                  "managers",
+                  "user",
+                  "author"
                 ]
               }
             }
@@ -7988,237 +8020,201 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "integer"
-                          },
-                          "external_id": {
-                            "type": [
-                              "null",
-                              "string"
-                            ]
-                          },
-                          "title": {
-                            "type": "string"
-                          },
-                          "description": {
-                            "type": [
-                              "null",
-                              "string"
-                            ]
-                          },
-                          "status": {
-                            "type": "string"
-                          },
-                          "active": {
-                            "type": "boolean"
-                          },
-                          "priority": {
-                            "type": "integer"
-                          },
-                          "user_id": {
-                            "type": "integer"
-                          },
-                          "author_id": {
-                            "type": "integer"
-                          },
-                          "category_id": {
-                            "type": [
-                              "integer",
-                              "null"
-                            ]
-                          },
-                          "location_id": {
-                            "type": [
-                              "integer",
-                              "null"
-                            ]
-                          },
-                          "department_id": {
-                            "type": [
-                              "integer",
-                              "null"
-                            ]
-                          },
-                          "position_id": {
-                            "type": [
-                              "integer",
-                              "null"
-                            ]
-                          },
-                          "due_date": {
-                            "type": "string"
-                          },
-                          "time_start": {
-                            "type": "string"
-                          },
-                          "time_end": {
-                            "type": "string"
-                          },
-                          "timezone": {
-                            "type": "string"
-                          },
-                          "kpi_plan": {
-                            "type": "integer"
-                          },
-                          "kpi_fact": {
-                            "type": "integer"
-                          },
-                          "time_worked": {
-                            "type": "integer"
-                          },
-                          "started_at": {
-                            "type": [
-                              "null",
-                              "string"
-                            ]
-                          },
-                          "finished_at": {
-                            "type": [
-                              "null",
-                              "string"
-                            ]
-                          },
-                          "created_at": {
-                            "type": "string"
-                          },
-                          "updated_at": {
-                            "type": "string"
-                          },
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "external_id": {
+                          "type": [
+                            "null",
+                            "string"
+                          ]
+                        },
+                        "title": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": [
+                            "null",
+                            "string"
+                          ]
+                        },
+                        "status": {
+                          "type": "string"
+                        },
+                        "active": {
+                          "type": "boolean"
+                        },
+                        "priority": {
+                          "type": "integer"
+                        },
+                        "user_id": {
+                          "type": "integer"
+                        },
+                        "author_id": {
+                          "type": "integer"
+                        },
+                        "category_id": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ]
+                        },
+                        "location_id": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ]
+                        },
+                        "department_id": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ]
+                        },
+                        "position_id": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ]
+                        },
+                        "due_date": {
+                          "type": "string"
+                        },
+                        "time_start": {
+                          "type": "string"
+                        },
+                        "time_end": {
+                          "type": "string"
+                        },
+                        "timezone": {
+                          "type": "string"
+                        },
+                        "kpi_plan": {
+                          "type": "integer"
+                        },
+                        "kpi_fact": {
+                          "type": "integer"
+                        },
+                        "time_worked": {
+                          "type": "integer"
+                        },
+                        "started_at": {
+                          "type": [
+                            "null",
+                            "string"
+                          ]
+                        },
+                        "finished_at": {
+                          "type": [
+                            "null",
+                            "string"
+                          ]
+                        },
+                        "created_at": {
+                          "type": "string"
+                        },
+                        "updated_at": {
+                          "type": "string"
+                        },
+                        "items": {
+                          "type": "array",
                           "items": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "id": {
-                                  "type": "integer"
-                                },
-                                "title": {
-                                  "type": "string"
-                                },
-                                "order": {
-                                  "type": "integer"
-                                },
-                                "is_completed": {
-                                  "type": "boolean"
-                                }
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer"
                               },
-                              "required": [
-                                "id",
-                                "title",
-                                "order",
-                                "is_completed"
-                              ]
-                            }
-                          },
-                          "managers": {
-                            "type": "array",
-                            "items": {
-                              "$ref": "#/components/schemas/EmployeeShort"
-                            }
-                          },
-                          "user": {
-                            "$ref": "#/components/schemas/EmployeeShort"
-                          },
-                          "author": {
+                              "title": {
+                                "type": "string"
+                              },
+                              "order": {
+                                "type": "integer"
+                              },
+                              "is_completed": {
+                                "type": "boolean"
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "title",
+                              "order",
+                              "is_completed"
+                            ]
+                          }
+                        },
+                        "managers": {
+                          "type": "array",
+                          "items": {
                             "$ref": "#/components/schemas/EmployeeShort"
                           }
                         },
-                        "required": [
-                          "id",
-                          "external_id",
-                          "title",
-                          "description",
-                          "status",
-                          "active",
-                          "priority",
-                          "user_id",
-                          "author_id",
-                          "category_id",
-                          "location_id",
-                          "department_id",
-                          "position_id",
-                          "due_date",
-                          "time_start",
-                          "time_end",
-                          "timezone",
-                          "kpi_plan",
-                          "kpi_fact",
-                          "time_worked",
-                          "started_at",
-                          "finished_at",
-                          "created_at",
-                          "updated_at"
-                        ]
-                      }
-                    },
-                    "meta": {
-                      "type": "object",
-                      "properties": {
-                        "per_page": {
-                          "type": "integer"
+                        "user": {
+                          "$ref": "#/components/schemas/EmployeeShort"
                         },
-                        "next_cursor": {
-                          "type": [
-                            "null",
-                            "string"
-                          ]
-                        },
-                        "prev_cursor": {
-                          "type": [
-                            "null",
-                            "string"
-                          ]
+                        "author": {
+                          "$ref": "#/components/schemas/EmployeeShort"
                         }
                       },
                       "required": [
-                        "per_page",
-                        "next_cursor",
-                        "prev_cursor"
+                        "id",
+                        "external_id",
+                        "title",
+                        "description",
+                        "status",
+                        "active",
+                        "priority",
+                        "user_id",
+                        "author_id",
+                        "category_id",
+                        "location_id",
+                        "department_id",
+                        "position_id",
+                        "due_date",
+                        "time_start",
+                        "time_end",
+                        "timezone",
+                        "kpi_plan",
+                        "kpi_fact",
+                        "time_worked",
+                        "started_at",
+                        "finished_at",
+                        "created_at",
+                        "updated_at"
                       ]
                     }
                   },
                   "required": [
-                    "data",
-                    "meta"
+                    "data"
                   ]
                 },
                 "example": {
-                  "data": [
-                    {
-                      "id": 85398,
-                      "external_id": "WO-4471",
-                      "title": "Replace the filter",
-                      "description": "Unit 3, second floor",
-                      "status": "created",
-                      "active": true,
-                      "priority": 1,
-                      "user_id": 70753,
-                      "author_id": 70753,
-                      "category_id": null,
-                      "location_id": 83977,
-                      "department_id": 18620,
-                      "position_id": null,
-                      "due_date": "2026-04-06",
-                      "time_start": "09:00:00",
-                      "time_end": "18:00:00",
-                      "timezone": "+05:00",
-                      "kpi_plan": 10,
-                      "kpi_fact": 0,
-                      "time_worked": 0,
-                      "started_at": null,
-                      "finished_at": null,
-                      "created_at": "2026-03-02T12:00:00+00:00",
-                      "updated_at": "2026-03-02T12:00:00+00:00"
-                    }
-                  ],
-                  "meta": {
-                    "per_page": 50,
-                    "next_cursor": null,
-                    "prev_cursor": null
+                  "data": {
+                    "id": 85398,
+                    "external_id": "WO-4471",
+                    "title": "Replace the filter",
+                    "description": "Unit 3, second floor",
+                    "status": "created",
+                    "active": true,
+                    "priority": 1,
+                    "user_id": 70753,
+                    "author_id": 70753,
+                    "category_id": null,
+                    "location_id": 83977,
+                    "department_id": 18620,
+                    "position_id": null,
+                    "due_date": "2026-04-06",
+                    "time_start": "09:00:00",
+                    "time_end": "18:00:00",
+                    "timezone": "+05:00",
+                    "kpi_plan": 10,
+                    "kpi_fact": 0,
+                    "time_worked": 0,
+                    "started_at": null,
+                    "finished_at": null,
+                    "created_at": "2026-03-02T12:00:00+00:00",
+                    "updated_at": "2026-03-02T12:00:00+00:00"
                   }
                 }
               }
@@ -8523,7 +8519,10 @@
                             ]
                           },
                           "planned": {
-                            "type": "object",
+                            "type": [
+                              "null",
+                              "object"
+                            ],
                             "properties": {
                               "schedule_id": {
                                 "type": "integer"
@@ -10109,7 +10108,10 @@
                             "type": "string"
                           },
                           "subtype": {
-                            "type": "string"
+                            "type": [
+                              "null",
+                              "string"
+                            ]
                           },
                           "status": {
                             "type": "string"
@@ -10124,10 +10126,16 @@
                             "type": "object",
                             "properties": {
                               "date_start": {
-                                "type": "string"
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
                               },
                               "date_end": {
-                                "type": "string"
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
                               }
                             },
                             "required": [
@@ -10188,11 +10196,19 @@
                                     "datetime"
                                   ]
                                 }
+                              },
+                              "amount": {
+                                "type": [
+                                  "null",
+                                  "number"
+                                ]
+                              },
+                              "currency_id": {
+                                "type": "integer"
                               }
                             },
                             "required": [
-                              "type",
-                              "clockins"
+                              "type"
                             ]
                           }
                         },
@@ -10241,6 +10257,23 @@
                       "comment": "Forgot to badge in, the terminal was down",
                       "amount": null,
                       "currency": null,
+                      "created_at": "2026-03-02T12:00:00+00:00",
+                      "updated_at": "2026-03-02T12:00:00+00:00"
+                    },
+                    {
+                      "id": "9f2b1c7a-4d3e-4b8a-9f10-2c5d6e7a8b90",
+                      "type": "finance",
+                      "subtype": "advance-payment",
+                      "status": "pending",
+                      "user_id": 70753,
+                      "author_id": 70753,
+                      "period": {
+                        "date_start": null,
+                        "date_end": null
+                      },
+                      "comment": null,
+                      "amount": 1500.5,
+                      "currency": "KZT",
                       "created_at": "2026-03-02T12:00:00+00:00",
                       "updated_at": "2026-03-02T12:00:00+00:00"
                     }
@@ -10391,7 +10424,10 @@
                           "type": "string"
                         },
                         "subtype": {
-                          "type": "string"
+                          "type": [
+                            "null",
+                            "string"
+                          ]
                         },
                         "status": {
                           "type": "string"
@@ -13360,163 +13396,138 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "integer"
-                          },
-                          "title": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "title": {
+                          "type": "string"
+                        },
+                        "url": {
+                          "type": "string"
+                        },
+                        "contact_email": {
+                          "type": "string"
+                        },
+                        "secret": {
+                          "type": "string"
+                        },
+                        "events": {
+                          "type": "array",
+                          "items": {
                             "type": "string"
-                          },
-                          "url": {
-                            "type": "string"
-                          },
-                          "contact_email": {
-                            "type": "string"
-                          },
-                          "secret": {
-                            "type": "string"
-                          },
-                          "events": {
-                            "type": "array",
-                            "items": {
-                              "type": "string"
-                            }
-                          },
-                          "auth": {
-                            "type": "object",
-                            "properties": {
-                              "type": {
-                                "type": "string"
-                              },
-                              "username": {
-                                "type": [
-                                  "null",
-                                  "string"
-                                ]
-                              }
-                            },
-                            "required": [
-                              "type",
-                              "username"
-                            ]
-                          },
-                          "active": {
-                            "type": "boolean"
-                          },
-                          "health": {
-                            "type": "object",
-                            "properties": {
-                              "consecutive_failures": {
-                                "type": "integer"
-                              },
-                              "last_success_at": {
-                                "type": [
-                                  "null",
-                                  "string"
-                                ]
-                              },
-                              "last_failure_at": {
-                                "type": [
-                                  "null",
-                                  "string"
-                                ]
-                              },
-                              "last_failure_status": {
-                                "type": [
-                                  "integer",
-                                  "null"
-                                ]
-                              },
-                              "disabled_at": {
-                                "type": [
-                                  "null",
-                                  "string"
-                                ]
-                              },
-                              "disabled_reason": {
-                                "type": [
-                                  "null",
-                                  "string"
-                                ]
-                              }
-                            },
-                            "required": [
-                              "consecutive_failures",
-                              "last_success_at",
-                              "last_failure_at",
-                              "last_failure_status",
-                              "disabled_at",
-                              "disabled_reason"
-                            ]
                           }
                         },
-                        "required": [
-                          "id",
-                          "title",
-                          "url",
-                          "contact_email",
-                          "secret",
-                          "events",
-                          "auth",
-                          "active",
-                          "health"
-                        ]
-                      }
-                    },
-                    "links": {
-                      "$ref": "#/components/schemas/PageLinks"
-                    },
-                    "meta": {
-                      "$ref": "#/components/schemas/PageMeta"
+                        "auth": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string"
+                            },
+                            "username": {
+                              "type": [
+                                "null",
+                                "string"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "username"
+                          ]
+                        },
+                        "active": {
+                          "type": "boolean"
+                        },
+                        "health": {
+                          "type": "object",
+                          "properties": {
+                            "consecutive_failures": {
+                              "type": "integer"
+                            },
+                            "last_success_at": {
+                              "type": [
+                                "null",
+                                "string"
+                              ]
+                            },
+                            "last_failure_at": {
+                              "type": [
+                                "null",
+                                "string"
+                              ]
+                            },
+                            "last_failure_status": {
+                              "type": [
+                                "integer",
+                                "null"
+                              ]
+                            },
+                            "disabled_at": {
+                              "type": [
+                                "null",
+                                "string"
+                              ]
+                            },
+                            "disabled_reason": {
+                              "type": [
+                                "null",
+                                "string"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "consecutive_failures",
+                            "last_success_at",
+                            "last_failure_at",
+                            "last_failure_status",
+                            "disabled_at",
+                            "disabled_reason"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "title",
+                        "url",
+                        "contact_email",
+                        "secret",
+                        "events",
+                        "auth",
+                        "active",
+                        "health"
+                      ]
                     }
                   },
                   "required": [
-                    "data",
-                    "links",
-                    "meta"
+                    "data"
                   ]
                 },
                 "example": {
-                  "data": [
-                    {
-                      "id": 44459,
-                      "title": "Task tracker",
-                      "url": "https://partner.test/hook",
-                      "contact_email": "integrations@partner.test",
-                      "secret": "0000000000000000000000000000000000000000000000000000000000000000",
-                      "events": [
-                        "task.completed",
-                        "task.approved"
-                      ],
-                      "auth": {
-                        "type": "none",
-                        "username": null
-                      },
-                      "active": true,
-                      "health": {
-                        "consecutive_failures": 0,
-                        "last_success_at": null,
-                        "last_failure_at": null,
-                        "last_failure_status": null,
-                        "disabled_at": null,
-                        "disabled_reason": null
-                      }
+                  "data": {
+                    "id": 44459,
+                    "title": "Roster sync",
+                    "url": "https://partner.test/roster",
+                    "contact_email": "integrations@partner.test",
+                    "secret": "0000000000000000000000000000000000000000000000000000000000000000",
+                    "events": [
+                      "user.created",
+                      "user.updated"
+                    ],
+                    "auth": {
+                      "type": "none",
+                      "username": null
+                    },
+                    "active": true,
+                    "health": {
+                      "consecutive_failures": 0,
+                      "last_success_at": null,
+                      "last_failure_at": null,
+                      "last_failure_status": null,
+                      "disabled_at": null,
+                      "disabled_reason": null
                     }
-                  ],
-                  "links": {
-                    "first": null,
-                    "last": null,
-                    "prev": null,
-                    "next": null
-                  },
-                  "meta": {
-                    "path": "http://api.clockster.local/company/v3/webhooks",
-                    "per_page": 50,
-                    "next_cursor": null,
-                    "prev_cursor": null
                   }
                 }
               }
@@ -13895,7 +13906,10 @@
                             ]
                           },
                           "processed_at": {
-                            "type": "string"
+                            "type": [
+                              "null",
+                              "string"
+                            ]
                           },
                           "payload": {
                             "type": "object",
@@ -13948,7 +13962,7 @@
                       "failure_reason": null,
                       "occurred_at": "2026-03-02T09:00:00+00:00",
                       "next_attempt_at": "2026-03-02T09:05:00+00:00",
-                      "processed_at": "2026-03-02T09:00:01+00:00"
+                      "processed_at": null
                     },
                     {
                       "id": 61985,
@@ -13959,7 +13973,7 @@
                       "response_status": 200,
                       "failure_reason": null,
                       "occurred_at": "2026-03-02T09:00:00+00:00",
-                      "next_attempt_at": "2026-03-02T09:05:00+00:00",
+                      "next_attempt_at": null,
                       "processed_at": "2026-03-02T09:00:01+00:00"
                     }
                   ],
@@ -14604,163 +14618,138 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "integer"
-                          },
-                          "title": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "title": {
+                          "type": "string"
+                        },
+                        "url": {
+                          "type": "string"
+                        },
+                        "contact_email": {
+                          "type": "string"
+                        },
+                        "secret": {
+                          "type": "string"
+                        },
+                        "events": {
+                          "type": "array",
+                          "items": {
                             "type": "string"
-                          },
-                          "url": {
-                            "type": "string"
-                          },
-                          "contact_email": {
-                            "type": "string"
-                          },
-                          "secret": {
-                            "type": "string"
-                          },
-                          "events": {
-                            "type": "array",
-                            "items": {
-                              "type": "string"
-                            }
-                          },
-                          "auth": {
-                            "type": "object",
-                            "properties": {
-                              "type": {
-                                "type": "string"
-                              },
-                              "username": {
-                                "type": [
-                                  "null",
-                                  "string"
-                                ]
-                              }
-                            },
-                            "required": [
-                              "type",
-                              "username"
-                            ]
-                          },
-                          "active": {
-                            "type": "boolean"
-                          },
-                          "health": {
-                            "type": "object",
-                            "properties": {
-                              "consecutive_failures": {
-                                "type": "integer"
-                              },
-                              "last_success_at": {
-                                "type": [
-                                  "null",
-                                  "string"
-                                ]
-                              },
-                              "last_failure_at": {
-                                "type": [
-                                  "null",
-                                  "string"
-                                ]
-                              },
-                              "last_failure_status": {
-                                "type": [
-                                  "integer",
-                                  "null"
-                                ]
-                              },
-                              "disabled_at": {
-                                "type": [
-                                  "null",
-                                  "string"
-                                ]
-                              },
-                              "disabled_reason": {
-                                "type": [
-                                  "null",
-                                  "string"
-                                ]
-                              }
-                            },
-                            "required": [
-                              "consecutive_failures",
-                              "last_success_at",
-                              "last_failure_at",
-                              "last_failure_status",
-                              "disabled_at",
-                              "disabled_reason"
-                            ]
                           }
                         },
-                        "required": [
-                          "id",
-                          "title",
-                          "url",
-                          "contact_email",
-                          "secret",
-                          "events",
-                          "auth",
-                          "active",
-                          "health"
-                        ]
-                      }
-                    },
-                    "links": {
-                      "$ref": "#/components/schemas/PageLinks"
-                    },
-                    "meta": {
-                      "$ref": "#/components/schemas/PageMeta"
+                        "auth": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string"
+                            },
+                            "username": {
+                              "type": [
+                                "null",
+                                "string"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "username"
+                          ]
+                        },
+                        "active": {
+                          "type": "boolean"
+                        },
+                        "health": {
+                          "type": "object",
+                          "properties": {
+                            "consecutive_failures": {
+                              "type": "integer"
+                            },
+                            "last_success_at": {
+                              "type": [
+                                "null",
+                                "string"
+                              ]
+                            },
+                            "last_failure_at": {
+                              "type": [
+                                "null",
+                                "string"
+                              ]
+                            },
+                            "last_failure_status": {
+                              "type": [
+                                "integer",
+                                "null"
+                              ]
+                            },
+                            "disabled_at": {
+                              "type": [
+                                "null",
+                                "string"
+                              ]
+                            },
+                            "disabled_reason": {
+                              "type": [
+                                "null",
+                                "string"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "consecutive_failures",
+                            "last_success_at",
+                            "last_failure_at",
+                            "last_failure_status",
+                            "disabled_at",
+                            "disabled_reason"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "title",
+                        "url",
+                        "contact_email",
+                        "secret",
+                        "events",
+                        "auth",
+                        "active",
+                        "health"
+                      ]
                     }
                   },
                   "required": [
-                    "data",
-                    "links",
-                    "meta"
+                    "data"
                   ]
                 },
                 "example": {
-                  "data": [
-                    {
-                      "id": 44459,
-                      "title": "Task tracker",
-                      "url": "https://partner.test/hook",
-                      "contact_email": "integrations@partner.test",
-                      "secret": "0000000000000000000000000000000000000000000000000000000000000000",
-                      "events": [
-                        "task.completed",
-                        "task.approved"
-                      ],
-                      "auth": {
-                        "type": "none",
-                        "username": null
-                      },
-                      "active": true,
-                      "health": {
-                        "consecutive_failures": 0,
-                        "last_success_at": null,
-                        "last_failure_at": null,
-                        "last_failure_status": null,
-                        "disabled_at": null,
-                        "disabled_reason": null
-                      }
+                  "data": {
+                    "id": 44459,
+                    "title": "Task tracker",
+                    "url": "https://partner.test/hook",
+                    "contact_email": "integrations@partner.test",
+                    "secret": "0000000000000000000000000000000000000000000000000000000000000000",
+                    "events": [
+                      "task.completed",
+                      "task.approved"
+                    ],
+                    "auth": {
+                      "type": "none",
+                      "username": null
+                    },
+                    "active": true,
+                    "health": {
+                      "consecutive_failures": 0,
+                      "last_success_at": null,
+                      "last_failure_at": null,
+                      "last_failure_status": null,
+                      "disabled_at": null,
+                      "disabled_reason": null
                     }
-                  ],
-                  "links": {
-                    "first": null,
-                    "last": null,
-                    "prev": null,
-                    "next": null
-                  },
-                  "meta": {
-                    "path": "http://api.clockster.local/company/v3/webhooks",
-                    "per_page": 50,
-                    "next_cursor": null,
-                    "prev_cursor": null
                   }
                 }
               }
@@ -14884,163 +14873,137 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "integer"
-                          },
-                          "title": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "title": {
+                          "type": "string"
+                        },
+                        "url": {
+                          "type": "string"
+                        },
+                        "contact_email": {
+                          "type": "string"
+                        },
+                        "secret": {
+                          "type": "string"
+                        },
+                        "events": {
+                          "type": "array",
+                          "items": {
                             "type": "string"
-                          },
-                          "url": {
-                            "type": "string"
-                          },
-                          "contact_email": {
-                            "type": "string"
-                          },
-                          "secret": {
-                            "type": "string"
-                          },
-                          "events": {
-                            "type": "array",
-                            "items": {
-                              "type": "string"
-                            }
-                          },
-                          "auth": {
-                            "type": "object",
-                            "properties": {
-                              "type": {
-                                "type": "string"
-                              },
-                              "username": {
-                                "type": [
-                                  "null",
-                                  "string"
-                                ]
-                              }
-                            },
-                            "required": [
-                              "type",
-                              "username"
-                            ]
-                          },
-                          "active": {
-                            "type": "boolean"
-                          },
-                          "health": {
-                            "type": "object",
-                            "properties": {
-                              "consecutive_failures": {
-                                "type": "integer"
-                              },
-                              "last_success_at": {
-                                "type": [
-                                  "null",
-                                  "string"
-                                ]
-                              },
-                              "last_failure_at": {
-                                "type": [
-                                  "null",
-                                  "string"
-                                ]
-                              },
-                              "last_failure_status": {
-                                "type": [
-                                  "integer",
-                                  "null"
-                                ]
-                              },
-                              "disabled_at": {
-                                "type": [
-                                  "null",
-                                  "string"
-                                ]
-                              },
-                              "disabled_reason": {
-                                "type": [
-                                  "null",
-                                  "string"
-                                ]
-                              }
-                            },
-                            "required": [
-                              "consecutive_failures",
-                              "last_success_at",
-                              "last_failure_at",
-                              "last_failure_status",
-                              "disabled_at",
-                              "disabled_reason"
-                            ]
                           }
                         },
-                        "required": [
-                          "id",
-                          "title",
-                          "url",
-                          "contact_email",
-                          "secret",
-                          "events",
-                          "auth",
-                          "active",
-                          "health"
-                        ]
-                      }
-                    },
-                    "links": {
-                      "$ref": "#/components/schemas/PageLinks"
-                    },
-                    "meta": {
-                      "$ref": "#/components/schemas/PageMeta"
+                        "auth": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string"
+                            },
+                            "username": {
+                              "type": [
+                                "null",
+                                "string"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "username"
+                          ]
+                        },
+                        "active": {
+                          "type": "boolean"
+                        },
+                        "health": {
+                          "type": "object",
+                          "properties": {
+                            "consecutive_failures": {
+                              "type": "integer"
+                            },
+                            "last_success_at": {
+                              "type": [
+                                "null",
+                                "string"
+                              ]
+                            },
+                            "last_failure_at": {
+                              "type": [
+                                "null",
+                                "string"
+                              ]
+                            },
+                            "last_failure_status": {
+                              "type": [
+                                "integer",
+                                "null"
+                              ]
+                            },
+                            "disabled_at": {
+                              "type": [
+                                "null",
+                                "string"
+                              ]
+                            },
+                            "disabled_reason": {
+                              "type": [
+                                "null",
+                                "string"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "consecutive_failures",
+                            "last_success_at",
+                            "last_failure_at",
+                            "last_failure_status",
+                            "disabled_at",
+                            "disabled_reason"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "title",
+                        "url",
+                        "contact_email",
+                        "secret",
+                        "events",
+                        "auth",
+                        "active",
+                        "health"
+                      ]
                     }
                   },
                   "required": [
-                    "data",
-                    "links",
-                    "meta"
+                    "data"
                   ]
                 },
                 "example": {
-                  "data": [
-                    {
-                      "id": 44459,
-                      "title": "Task tracker",
-                      "url": "https://partner.test/hook",
-                      "contact_email": "integrations@partner.test",
-                      "secret": "0000000000000000000000000000000000000000000000000000000000000000",
-                      "events": [
-                        "task.completed",
-                        "task.approved"
-                      ],
-                      "auth": {
-                        "type": "none",
-                        "username": null
-                      },
-                      "active": true,
-                      "health": {
-                        "consecutive_failures": 0,
-                        "last_success_at": null,
-                        "last_failure_at": null,
-                        "last_failure_status": null,
-                        "disabled_at": null,
-                        "disabled_reason": null
-                      }
+                  "data": {
+                    "id": 44459,
+                    "title": "Task tracker",
+                    "url": "https://partner.test/hook",
+                    "contact_email": "ops@partner.test",
+                    "secret": "0000000000000000000000000000000000000000000000000000000000000000",
+                    "events": [
+                      "task.completed"
+                    ],
+                    "auth": {
+                      "type": "none",
+                      "username": null
+                    },
+                    "active": false,
+                    "health": {
+                      "consecutive_failures": 0,
+                      "last_success_at": null,
+                      "last_failure_at": null,
+                      "last_failure_status": null,
+                      "disabled_at": null,
+                      "disabled_reason": null
                     }
-                  ],
-                  "links": {
-                    "first": null,
-                    "last": null,
-                    "prev": null,
-                    "next": null
-                  },
-                  "meta": {
-                    "path": "http://api.clockster.local/company/v3/webhooks",
-                    "per_page": 50,
-                    "next_cursor": null,
-                    "prev_cursor": null
                   }
                 }
               }
@@ -15402,163 +15365,137 @@
                   "type": "object",
                   "properties": {
                     "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "integer"
-                          },
-                          "title": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "title": {
+                          "type": "string"
+                        },
+                        "url": {
+                          "type": "string"
+                        },
+                        "contact_email": {
+                          "type": "string"
+                        },
+                        "secret": {
+                          "type": "string"
+                        },
+                        "events": {
+                          "type": "array",
+                          "items": {
                             "type": "string"
-                          },
-                          "url": {
-                            "type": "string"
-                          },
-                          "contact_email": {
-                            "type": "string"
-                          },
-                          "secret": {
-                            "type": "string"
-                          },
-                          "events": {
-                            "type": "array",
-                            "items": {
-                              "type": "string"
-                            }
-                          },
-                          "auth": {
-                            "type": "object",
-                            "properties": {
-                              "type": {
-                                "type": "string"
-                              },
-                              "username": {
-                                "type": [
-                                  "null",
-                                  "string"
-                                ]
-                              }
-                            },
-                            "required": [
-                              "type",
-                              "username"
-                            ]
-                          },
-                          "active": {
-                            "type": "boolean"
-                          },
-                          "health": {
-                            "type": "object",
-                            "properties": {
-                              "consecutive_failures": {
-                                "type": "integer"
-                              },
-                              "last_success_at": {
-                                "type": [
-                                  "null",
-                                  "string"
-                                ]
-                              },
-                              "last_failure_at": {
-                                "type": [
-                                  "null",
-                                  "string"
-                                ]
-                              },
-                              "last_failure_status": {
-                                "type": [
-                                  "integer",
-                                  "null"
-                                ]
-                              },
-                              "disabled_at": {
-                                "type": [
-                                  "null",
-                                  "string"
-                                ]
-                              },
-                              "disabled_reason": {
-                                "type": [
-                                  "null",
-                                  "string"
-                                ]
-                              }
-                            },
-                            "required": [
-                              "consecutive_failures",
-                              "last_success_at",
-                              "last_failure_at",
-                              "last_failure_status",
-                              "disabled_at",
-                              "disabled_reason"
-                            ]
                           }
                         },
-                        "required": [
-                          "id",
-                          "title",
-                          "url",
-                          "contact_email",
-                          "secret",
-                          "events",
-                          "auth",
-                          "active",
-                          "health"
-                        ]
-                      }
-                    },
-                    "links": {
-                      "$ref": "#/components/schemas/PageLinks"
-                    },
-                    "meta": {
-                      "$ref": "#/components/schemas/PageMeta"
+                        "auth": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string"
+                            },
+                            "username": {
+                              "type": [
+                                "null",
+                                "string"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "username"
+                          ]
+                        },
+                        "active": {
+                          "type": "boolean"
+                        },
+                        "health": {
+                          "type": "object",
+                          "properties": {
+                            "consecutive_failures": {
+                              "type": "integer"
+                            },
+                            "last_success_at": {
+                              "type": [
+                                "null",
+                                "string"
+                              ]
+                            },
+                            "last_failure_at": {
+                              "type": [
+                                "null",
+                                "string"
+                              ]
+                            },
+                            "last_failure_status": {
+                              "type": [
+                                "integer",
+                                "null"
+                              ]
+                            },
+                            "disabled_at": {
+                              "type": [
+                                "null",
+                                "string"
+                              ]
+                            },
+                            "disabled_reason": {
+                              "type": [
+                                "null",
+                                "string"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "consecutive_failures",
+                            "last_success_at",
+                            "last_failure_at",
+                            "last_failure_status",
+                            "disabled_at",
+                            "disabled_reason"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "title",
+                        "url",
+                        "contact_email",
+                        "secret",
+                        "events",
+                        "auth",
+                        "active",
+                        "health"
+                      ]
                     }
                   },
                   "required": [
-                    "data",
-                    "links",
-                    "meta"
+                    "data"
                   ]
                 },
                 "example": {
-                  "data": [
-                    {
-                      "id": 44459,
-                      "title": "Task tracker",
-                      "url": "https://partner.test/hook",
-                      "contact_email": "integrations@partner.test",
-                      "secret": "0000000000000000000000000000000000000000000000000000000000000000",
-                      "events": [
-                        "task.completed",
-                        "task.approved"
-                      ],
-                      "auth": {
-                        "type": "none",
-                        "username": null
-                      },
-                      "active": true,
-                      "health": {
-                        "consecutive_failures": 0,
-                        "last_success_at": null,
-                        "last_failure_at": null,
-                        "last_failure_status": null,
-                        "disabled_at": null,
-                        "disabled_reason": null
-                      }
+                  "data": {
+                    "id": 44459,
+                    "title": "Task tracker",
+                    "url": "https://partner.test/hook",
+                    "contact_email": "ops@partner.test",
+                    "secret": "0000000000000000000000000000000000000000000000000000000000000000",
+                    "events": [
+                      "task.completed"
+                    ],
+                    "auth": {
+                      "type": "none",
+                      "username": null
+                    },
+                    "active": false,
+                    "health": {
+                      "consecutive_failures": 0,
+                      "last_success_at": null,
+                      "last_failure_at": null,
+                      "last_failure_status": null,
+                      "disabled_at": null,
+                      "disabled_reason": null
                     }
-                  ],
-                  "links": {
-                    "first": null,
-                    "last": null,
-                    "prev": null,
-                    "next": null
-                  },
-                  "meta": {
-                    "path": "http://api.clockster.local/company/v3/webhooks",
-                    "per_page": 50,
-                    "next_cursor": null,
-                    "prev_cursor": null
                   }
                 }
               }

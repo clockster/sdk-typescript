@@ -651,7 +651,7 @@ export type GetCompanyV3DocumentsResponses = {
             signers?: Array<{
                 type: string;
                 status: string;
-                signed_at: string;
+                signed_at: null | string;
                 signed_via: null | string;
                 party_id: number;
                 party_type: string;
@@ -661,8 +661,8 @@ export type GetCompanyV3DocumentsResponses = {
                 external_contract_id: string;
                 iin: string;
                 contract_number: null | string;
-                contract_date: string;
-                begin_date: string;
+                contract_date: null | string;
+                begin_date: null | string;
                 end_date: null | string;
                 termination_date: null | string;
                 established_post: string;
@@ -859,7 +859,7 @@ export type GetCompanyV3DocumentsByIdResponses = {
             signers?: Array<{
                 type: string;
                 status: string;
-                signed_at: string;
+                signed_at: null | string;
                 signed_via: null | string;
                 party_id: number;
                 party_type: string;
@@ -869,8 +869,8 @@ export type GetCompanyV3DocumentsByIdResponses = {
                 external_contract_id: string;
                 iin: string;
                 contract_number: null | string;
-                contract_date: string;
-                begin_date: string;
+                contract_date: null | string;
+                begin_date: null | string;
                 end_date: null | string;
                 termination_date: null | string;
                 established_post: string;
@@ -1311,10 +1311,10 @@ export type GetCompanyV3PayrollPayslipsResponses = {
             take_home: number;
             ctc: number;
             salary: {
-                basic_rate: number;
-                basic_type: string;
-                work_days: number;
-                worked_days: number;
+                basic_rate: null | number;
+                basic_type: null | string;
+                work_days: number | null;
+                worked_days: number | null;
             };
             additions: Array<{
                 title: string;
@@ -2002,7 +2002,7 @@ export type GetCompanyV3TasksByIdData = {
         /**
          * Relations to load, comma-separated. Anything not named is absent from the answer rather than null.
          */
-        include?: Array<'items' | 'managers'> | null;
+        include?: Array<'items' | 'managers' | 'user' | 'author'> | null;
     };
     url: '/company/v3/tasks/{id}';
 };
@@ -2037,7 +2037,7 @@ export type GetCompanyV3TasksByIdResponses = {
      * Success
      */
     200: {
-        data: Array<{
+        data: {
             id: number;
             external_id: null | string;
             title: string;
@@ -2071,11 +2071,6 @@ export type GetCompanyV3TasksByIdResponses = {
             managers?: Array<EmployeeShort>;
             user?: EmployeeShort;
             author?: EmployeeShort;
-        }>;
-        meta: {
-            per_page: number;
-            next_cursor: null | string;
-            prev_cursor: null | string;
         };
     };
 };
@@ -2166,7 +2161,7 @@ export type GetCompanyV3TimesheetsResponses = {
                 middle_name?: null | string;
                 last_name?: string;
             };
-            planned: {
+            planned: null | {
                 schedule_id: number;
                 type: string;
                 leave_type: null | string;
@@ -2562,13 +2557,13 @@ export type GetCompanyV3UserRequestsResponses = {
         data: Array<{
             id: string;
             type: string;
-            subtype: string;
+            subtype: null | string;
             status: string;
             user_id: number;
             author_id: number;
             period: {
-                date_start: string;
-                date_end: string;
+                date_start: null | string;
+                date_end: null | string;
             };
             comment: null | string;
             amount: null | number;
@@ -2579,10 +2574,12 @@ export type GetCompanyV3UserRequestsResponses = {
             author?: EmployeeShort;
             content?: {
                 type: string;
-                clockins: Array<{
+                clockins?: Array<{
                     status: string;
                     datetime: string;
                 }>;
+                amount?: null | number;
+                currency_id?: number;
             };
         }>;
         links: PageLinks;
@@ -2637,7 +2634,7 @@ export type GetCompanyV3UserRequestsByIdResponses = {
         data: {
             id: string;
             type: string;
-            subtype: string;
+            subtype: null | string;
             status: string;
             user_id: number;
             author_id: number;
@@ -3297,7 +3294,7 @@ export type PostCompanyV3WebhooksResponses = {
      * Created
      */
     201: {
-        data: Array<{
+        data: {
             id: number;
             title: string;
             url: string;
@@ -3317,9 +3314,7 @@ export type PostCompanyV3WebhooksResponses = {
                 disabled_at: null | string;
                 disabled_reason: null | string;
             };
-        }>;
-        links: PageLinks;
-        meta: PageMeta;
+        };
     };
 };
 
@@ -3405,7 +3400,7 @@ export type GetCompanyV3WebhooksDeliveriesResponses = {
             failure_reason: null | string;
             occurred_at: string;
             next_attempt_at: null | string;
-            processed_at: string;
+            processed_at: null | string;
             payload?: {
                 id: number;
             };
@@ -3666,7 +3661,7 @@ export type GetCompanyV3WebhooksByIdResponses = {
      * Success
      */
     200: {
-        data: Array<{
+        data: {
             id: number;
             title: string;
             url: string;
@@ -3686,9 +3681,7 @@ export type GetCompanyV3WebhooksByIdResponses = {
                 disabled_at: null | string;
                 disabled_reason: null | string;
             };
-        }>;
-        links: PageLinks;
-        meta: PageMeta;
+        };
     };
 };
 
@@ -3747,7 +3740,7 @@ export type PutCompanyV3WebhooksByIdResponses = {
      * Success
      */
     200: {
-        data: Array<{
+        data: {
             id: number;
             title: string;
             url: string;
@@ -3767,9 +3760,7 @@ export type PutCompanyV3WebhooksByIdResponses = {
                 disabled_at: null | string;
                 disabled_reason: null | string;
             };
-        }>;
-        links: PageLinks;
-        meta: PageMeta;
+        };
     };
 };
 
@@ -3823,7 +3814,7 @@ export type PostCompanyV3WebhooksByIdSecretResponses = {
      * Success
      */
     200: {
-        data: Array<{
+        data: {
             id: number;
             title: string;
             url: string;
@@ -3843,9 +3834,7 @@ export type PostCompanyV3WebhooksByIdSecretResponses = {
                 disabled_at: null | string;
                 disabled_reason: null | string;
             };
-        }>;
-        links: PageLinks;
-        meta: PageMeta;
+        };
     };
 };
 
