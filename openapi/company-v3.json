@@ -96,7 +96,9 @@
               "work",
               "free",
               "leave"
-            ]
+            ],
+            "x-clockster-set": "SchedulesType",
+            "description": "Which kind of day this is, and with it what else the item requires."
           },
           "dates": {
             "type": "array",
@@ -105,7 +107,8 @@
             "items": {
               "type": "string",
               "format": "date"
-            }
+            },
+            "description": "The days this applies to, each `YYYY-MM-DD`. No repeats."
           },
           "users": {
             "type": "array",
@@ -113,42 +116,50 @@
             "maxItems": 200,
             "items": {
               "type": "integer"
-            }
+            },
+            "description": "Who the day is for, by id. At least one, and no repeats."
           },
           "location_id": {
             "type": [
               "integer",
               "null"
-            ]
+            ],
+            "description": "The location this is filed against, by id. Null clears it."
           },
           "department_id": {
             "type": [
               "integer",
               "null"
-            ]
+            ],
+            "description": "The department this is filed against, by id. Null clears it."
           },
           "position_id": {
             "type": [
               "integer",
               "null"
-            ]
+            ],
+            "description": "The position this is filed against, by id. Null clears it."
           },
           "timezone": {
-            "type": "string"
+            "type": "string",
+            "pattern": "^(?:Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])$",
+            "description": "The UTC offset the clock times beside it are read in — `Z`, or `+05:00`. An offset rather than a zone name, so the day is fixed to a moment rather than to a rule that may be changed later."
           },
           "start": {
             "type": [
               "string",
               "null"
             ],
-            "format": "date-time"
+            "format": "date-time",
+            "description": "When it starts, as a clock time `HH:MM:SS`, read in the offset beside it."
           },
           "end": {
             "type": [
               "string",
               "null"
             ],
-            "format": "date-time"
+            "format": "date-time",
+            "description": "When it ends, as a clock time `HH:MM:SS`, read in the offset beside it."
           },
           "break_time": {
             "type": [
@@ -156,7 +167,8 @@
               "null"
             ],
             "minimum": 0,
-            "maximum": 43200
+            "maximum": 43200,
+            "description": "Unpaid break within the day, in seconds."
           },
           "grace_start": {
             "type": [
@@ -164,7 +176,8 @@
               "null"
             ],
             "minimum": 0,
-            "maximum": 3600
+            "maximum": 3600,
+            "description": "How late an arrival still counts as on time, in seconds."
           },
           "grace_end": {
             "type": [
@@ -172,7 +185,8 @@
               "null"
             ],
             "minimum": 0,
-            "maximum": 3600
+            "maximum": 3600,
+            "description": "How early a departure still counts as a full day, in seconds."
           },
           "shifts": {
             "type": [
@@ -186,36 +200,42 @@
               "properties": {
                 "start": {
                   "type": "string",
-                  "format": "date-time"
+                  "format": "date-time",
+                  "description": "When it starts, as a clock time `HH:MM:SS`, read in the offset beside it."
                 },
                 "end": {
                   "type": "string",
-                  "format": "date-time"
+                  "format": "date-time",
+                  "description": "When it ends, as a clock time `HH:MM:SS`, read in the offset beside it."
                 },
                 "location_id": {
                   "type": [
                     "integer",
                     "null"
-                  ]
+                  ],
+                  "description": "The location this is filed against, by id. Null clears it."
                 },
                 "department_id": {
                   "type": [
                     "integer",
                     "null"
-                  ]
+                  ],
+                  "description": "The department this is filed against, by id. Null clears it."
                 },
                 "position_id": {
                   "type": [
                     "integer",
                     "null"
-                  ]
+                  ],
+                  "description": "The position this is filed against, by id. Null clears it."
                 }
               },
               "required": [
                 "start",
                 "end"
               ]
-            }
+            },
+            "description": "Split the day into shifts instead of one span. Each carries its own clock times and may sit somewhere other than the day does."
           }
         },
         "required": [
@@ -234,7 +254,9 @@
               "work",
               "free",
               "leave"
-            ]
+            ],
+            "x-clockster-set": "SchedulesType",
+            "description": "Which kind of day this is, and with it what else the item requires."
           },
           "dates": {
             "type": "array",
@@ -243,7 +265,8 @@
             "items": {
               "type": "string",
               "format": "date"
-            }
+            },
+            "description": "The days this applies to, each `YYYY-MM-DD`. No repeats."
           },
           "users": {
             "type": "array",
@@ -251,36 +274,44 @@
             "maxItems": 200,
             "items": {
               "type": "integer"
-            }
+            },
+            "description": "Who the day is for, by id. At least one, and no repeats."
           },
           "location_id": {
             "type": [
               "integer",
               "null"
-            ]
+            ],
+            "description": "The location this is filed against, by id. Null clears it."
           },
           "department_id": {
             "type": [
               "integer",
               "null"
-            ]
+            ],
+            "description": "The department this is filed against, by id. Null clears it."
           },
           "position_id": {
             "type": [
               "integer",
               "null"
-            ]
+            ],
+            "description": "The position this is filed against, by id. Null clears it."
           },
           "timezone": {
-            "type": "string"
+            "type": "string",
+            "pattern": "^(?:Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])$",
+            "description": "The UTC offset the clock times beside it are read in — `Z`, or `+05:00`. An offset rather than a zone name, so the day is fixed to a moment rather than to a rule that may be changed later."
           },
           "start": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "description": "When it starts, as a clock time `HH:MM:SS`, read in the offset beside it."
           },
           "end": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "description": "When it ends, as a clock time `HH:MM:SS`, read in the offset beside it."
           },
           "time_planned": {
             "type": [
@@ -288,7 +319,8 @@
               "null"
             ],
             "minimum": 0,
-            "maximum": 86400
+            "maximum": 86400,
+            "description": "How long the person is expected to work that day, in seconds."
           }
         },
         "required": [
@@ -309,7 +341,9 @@
               "work",
               "free",
               "leave"
-            ]
+            ],
+            "x-clockster-set": "SchedulesType",
+            "description": "Which kind of day this is, and with it what else the item requires."
           },
           "dates": {
             "type": "array",
@@ -318,7 +352,8 @@
             "items": {
               "type": "string",
               "format": "date"
-            }
+            },
+            "description": "The days this applies to, each `YYYY-MM-DD`. No repeats."
           },
           "users": {
             "type": "array",
@@ -326,25 +361,29 @@
             "maxItems": 200,
             "items": {
               "type": "integer"
-            }
+            },
+            "description": "Who the day is for, by id. At least one, and no repeats."
           },
           "location_id": {
             "type": [
               "integer",
               "null"
-            ]
+            ],
+            "description": "The location this is filed against, by id. Null clears it."
           },
           "department_id": {
             "type": [
               "integer",
               "null"
-            ]
+            ],
+            "description": "The department this is filed against, by id. Null clears it."
           },
           "position_id": {
             "type": [
               "integer",
               "null"
-            ]
+            ],
+            "description": "The position this is filed against, by id. Null clears it."
           },
           "leave_type": {
             "type": "string",
@@ -361,7 +400,9 @@
               "personal",
               "emergency",
               "unexcused_absence"
-            ]
+            ],
+            "x-clockster-set": "SchedulesLeaveType",
+            "description": "What kind of leave the day is."
           }
         },
         "required": [
@@ -681,7 +722,8 @@
                   "out",
                   "in",
                   "break"
-                ]
+                ],
+                "x-clockster-set": "AttendanceStatus"
               }
             }
           },
@@ -706,7 +748,8 @@
                   "frontend",
                   "api",
                   "system"
-                ]
+                ],
+                "x-clockster-set": "AttendanceSource"
               }
             }
           },
@@ -728,7 +771,8 @@
                   "user",
                   "location",
                   "attachments"
-                ]
+                ],
+                "x-clockster-set": "AttendanceInclude"
               }
             }
           }
@@ -1235,19 +1279,22 @@
                       "type": "object",
                       "properties": {
                         "user_id": {
-                          "type": "integer"
+                          "type": "integer",
+                          "description": "The employee this belongs to, by the id this API issued."
                         },
                         "location_id": {
                           "type": [
                             "integer",
                             "null"
-                          ]
+                          ],
+                          "description": "Where the mark was made, by id."
                         },
                         "shift_id": {
                           "type": [
                             "integer",
                             "null"
-                          ]
+                          ],
+                          "description": "The shift this mark belongs to, by id, where you know which one it is."
                         },
                         "status": {
                           "type": "string",
@@ -1255,18 +1302,22 @@
                             "out",
                             "in",
                             "break"
-                          ]
+                          ],
+                          "x-clockster-set": "AttendanceStatus",
+                          "description": "What the mark is: coming in, going out, or going on a break."
                         },
                         "datetime": {
                           "type": "string",
-                          "format": "date-time"
+                          "format": "date-time",
+                          "description": "When it happened, as `2026-08-01T09:00:00+05:00`. The offset is part of it rather than optional. Not in the future, and at most 24 hours late."
                         },
                         "comment": {
                           "type": [
                             "string",
                             "null"
                           ],
-                          "maxLength": 250
+                          "maxLength": 250,
+                          "description": "A note carried alongside, for people to read."
                         }
                       },
                       "required": [
@@ -1274,7 +1325,8 @@
                         "status",
                         "datetime"
                       ]
-                    }
+                    },
+                    "description": "The marks to record, up to 100 a call."
                   }
                 },
                 "required": [
@@ -1362,7 +1414,8 @@
                 "type": "string",
                 "enum": [
                   "managers"
-                ]
+                ],
+                "x-clockster-set": "DepartmentsInclude"
               }
             }
           }
@@ -1724,25 +1777,29 @@
                         "external_id": {
                           "type": "string",
                           "minLength": 1,
-                          "maxLength": 64
+                          "maxLength": 64,
+                          "description": "Your own key for this row. Send it on every write and the next one updates rather than duplicates."
                         },
                         "title": {
                           "type": "string",
-                          "maxLength": 200
+                          "maxLength": 200,
+                          "description": "The name this is shown under."
                         },
                         "description": {
                           "type": [
                             "string",
                             "null"
                           ],
-                          "maxLength": 500
+                          "maxLength": 500,
+                          "description": "Free text about this row, for people rather than for your code."
                         }
                       },
                       "required": [
                         "external_id",
                         "title"
                       ]
-                    }
+                    },
+                    "description": "The rows to write. Each carries your own `external_id`, and a row already stored under that key is updated rather than added."
                   }
                 },
                 "required": [
@@ -1787,7 +1844,8 @@
                 "type": "string",
                 "enum": [
                   "managers"
-                ]
+                ],
+                "x-clockster-set": "DepartmentsInclude"
               }
             }
           }
@@ -2153,7 +2211,8 @@
               "enum": [
                 "employee",
                 "counterparty"
-              ]
+              ],
+              "x-clockster-set": "DocumentsParty"
             }
           },
           {
@@ -2308,7 +2367,8 @@
                   "goods_release_note",
                   "reconciliation_act",
                   "return_to_supplier"
-                ]
+                ],
+                "x-clockster-set": "DocumentsType"
               }
             }
           },
@@ -2338,7 +2398,8 @@
                   "piece_rate",
                   "probation",
                   "outstaffing"
-                ]
+                ],
+                "x-clockster-set": "DocumentsEmploymentType"
               }
             }
           },
@@ -2438,7 +2499,8 @@
                   "attachments",
                   "signers",
                   "labor_contract"
-                ]
+                ],
+                "x-clockster-set": "DocumentsInclude"
               }
             }
           }
@@ -3024,7 +3086,8 @@
                         "external_id": {
                           "type": "string",
                           "minLength": 1,
-                          "maxLength": 64
+                          "maxLength": 64,
+                          "description": "Your own key for this row. Send it on every write and the next one updates rather than duplicates."
                         },
                         "type": {
                           "type": "string",
@@ -3056,24 +3119,29 @@
                             "goods_release_note",
                             "reconciliation_act",
                             "return_to_supplier"
-                          ]
+                          ],
+                          "x-clockster-set": "DocumentsType",
+                          "description": "Which kind of document this is."
                         },
                         "user_id": {
-                          "type": "integer"
+                          "type": "integer",
+                          "description": "The employee this belongs to, by the id this API issued."
                         },
                         "name": {
                           "type": [
                             "string",
                             "null"
                           ],
-                          "maxLength": 255
+                          "maxLength": 255,
+                          "description": "What to call this document."
                         },
                         "contract_number": {
                           "type": [
                             "string",
                             "null"
                           ],
-                          "maxLength": 255
+                          "maxLength": 255,
+                          "description": "The number written on the contract."
                         },
                         "employment_type": {
                           "type": [
@@ -3091,28 +3159,33 @@
                             "piece_rate",
                             "probation",
                             "outstaffing"
-                          ]
+                          ],
+                          "x-clockster-set": "DocumentsEmploymentType",
+                          "description": "The terms the contract is on."
                         },
                         "start_date": {
                           "type": [
                             "string",
                             "null"
                           ],
-                          "format": "date"
+                          "format": "date",
+                          "description": "The day it begins, `YYYY-MM-DD`."
                         },
                         "end_date": {
                           "type": [
                             "string",
                             "null"
                           ],
-                          "format": "date"
+                          "format": "date",
+                          "description": "The day it ends, `YYYY-MM-DD`."
                         },
                         "expiration_date": {
                           "type": [
                             "string",
                             "null"
                           ],
-                          "format": "date"
+                          "format": "date",
+                          "description": "The day it stops being valid, `YYYY-MM-DD`."
                         },
                         "parent_external_id": {
                           "type": [
@@ -3120,13 +3193,15 @@
                             "null"
                           ],
                           "minLength": 1,
-                          "maxLength": 64
+                          "maxLength": 64,
+                          "description": "The document this one hangs under, by your key for that one."
                         },
                         "file_id": {
                           "type": [
                             "integer",
                             "null"
-                          ]
+                          ],
+                          "description": "The stored file this points at, from `POST /files`. Upload the bytes first and name the id it answered with."
                         }
                       },
                       "required": [
@@ -3134,7 +3209,8 @@
                         "type",
                         "user_id"
                       ]
-                    }
+                    },
+                    "description": "The documents to write, up to 100 a call."
                   }
                 },
                 "required": [
@@ -3181,7 +3257,8 @@
                   "attachments",
                   "signers",
                   "labor_contract"
-                ]
+                ],
+                "x-clockster-set": "DocumentsInclude"
               }
             }
           }
@@ -3871,7 +3948,8 @@
                       "string",
                       "null"
                     ],
-                    "maxLength": 100
+                    "maxLength": 100,
+                    "description": "What to call this document."
                   }
                 },
                 "required": [
@@ -3946,7 +4024,8 @@
                 "type": "string",
                 "enum": [
                   "managers"
-                ]
+                ],
+                "x-clockster-set": "LocationsInclude"
               }
             }
           },
@@ -4365,25 +4444,29 @@
                         "external_id": {
                           "type": "string",
                           "minLength": 1,
-                          "maxLength": 64
+                          "maxLength": 64,
+                          "description": "Your own key for this row. Send it on every write and the next one updates rather than duplicates."
                         },
                         "title": {
                           "type": "string",
-                          "maxLength": 200
+                          "maxLength": 200,
+                          "description": "The name this is shown under."
                         },
                         "description": {
                           "type": [
                             "string",
                             "null"
                           ],
-                          "maxLength": 500
+                          "maxLength": 500,
+                          "description": "Free text about this row, for people rather than for your code."
                         },
                         "code": {
                           "type": [
                             "string",
                             "null"
                           ],
-                          "maxLength": 50
+                          "maxLength": 50,
+                          "description": "A short code people read, yours to choose. The listing beside this write can filter on it."
                         },
                         "latitude": {
                           "type": [
@@ -4391,7 +4474,8 @@
                             "null"
                           ],
                           "minimum": -90,
-                          "maximum": 90
+                          "maximum": 90,
+                          "description": "Where the location is. A mobile clock-in is checked against this and `radius`."
                         },
                         "longitude": {
                           "type": [
@@ -4399,22 +4483,22 @@
                             "null"
                           ],
                           "minimum": -180,
-                          "maximum": 180
+                          "maximum": 180,
+                          "description": "Where the location is. A mobile clock-in is checked against this and `radius`."
                         },
                         "radius": {
-                          "type": [
-                            "integer",
-                            "null"
-                          ],
-                          "minimum": 1,
-                          "maximum": 30000
+                          "type": "integer",
+                          "minimum": 50,
+                          "maximum": 700,
+                          "description": "How far from those coordinates a mobile clock-in still counts, in metres. A location written without one gets 100."
                         }
                       },
                       "required": [
                         "external_id",
                         "title"
                       ]
-                    }
+                    },
+                    "description": "The rows to write. Each carries your own `external_id`, and a row already stored under that key is updated rather than added."
                   }
                 },
                 "required": [
@@ -4459,7 +4543,8 @@
                 "type": "string",
                 "enum": [
                   "managers"
-                ]
+                ],
+                "x-clockster-set": "LocationsInclude"
               }
             }
           }
@@ -5017,7 +5102,8 @@
                   "draft",
                   "approved",
                   "paid"
-                ]
+                ],
+                "x-clockster-set": "PayrollPayslipsStatus"
               }
             }
           },
@@ -5902,25 +5988,29 @@
                         "external_id": {
                           "type": "string",
                           "minLength": 1,
-                          "maxLength": 64
+                          "maxLength": 64,
+                          "description": "Your own key for this row. Send it on every write and the next one updates rather than duplicates."
                         },
                         "title": {
                           "type": "string",
-                          "maxLength": 200
+                          "maxLength": 200,
+                          "description": "The name this is shown under."
                         },
                         "description": {
                           "type": [
                             "string",
                             "null"
                           ],
-                          "maxLength": 500
+                          "maxLength": 500,
+                          "description": "Free text about this row, for people rather than for your code."
                         }
                       },
                       "required": [
                         "external_id",
                         "title"
                       ]
-                    }
+                    },
+                    "description": "The rows to write. Each carries your own `external_id`, and a row already stored under that key is updated rather than added."
                   }
                 },
                 "required": [
@@ -6674,7 +6764,8 @@
                         }
                       }
                     },
-                    "maxItems": 25
+                    "maxItems": 25,
+                    "description": "The days to write, up to 25 a call. Each is one of three shapes, and `type` says which."
                   }
                 },
                 "required": [
@@ -7256,7 +7347,8 @@
                   "completed",
                   "incompleted",
                   "pastdue"
-                ]
+                ],
+                "x-clockster-set": "TasksStatus"
               }
             }
           },
@@ -7340,7 +7432,8 @@
                   "managers",
                   "user",
                   "author"
-                ]
+                ],
+                "x-clockster-set": "TasksInclude"
               }
             }
           }
@@ -7832,89 +7925,106 @@
                         "external_id": {
                           "type": "string",
                           "minLength": 1,
-                          "maxLength": 64
+                          "maxLength": 64,
+                          "description": "Your own key for this row. Send it on every write and the next one updates rather than duplicates."
                         },
                         "title": {
                           "type": "string",
-                          "maxLength": 255
+                          "maxLength": 255,
+                          "description": "The name this is shown under."
                         },
                         "description": {
                           "type": [
                             "string",
                             "null"
                           ],
-                          "maxLength": 1000
+                          "maxLength": 1000,
+                          "description": "Free text about this row, for people rather than for your code."
                         },
                         "user_id": {
-                          "type": "integer"
+                          "type": "integer",
+                          "description": "The employee this belongs to, by the id this API issued."
                         },
                         "category_id": {
                           "type": [
                             "integer",
                             "null"
-                          ]
+                          ],
+                          "description": "The category it belongs to, by id."
                         },
                         "location_id": {
                           "type": [
                             "integer",
                             "null"
-                          ]
+                          ],
+                          "description": "The location this is filed against, by id. Null clears it."
                         },
                         "department_id": {
                           "type": [
                             "integer",
                             "null"
-                          ]
+                          ],
+                          "description": "The department this is filed against, by id. Null clears it."
                         },
                         "position_id": {
                           "type": [
                             "integer",
                             "null"
-                          ]
+                          ],
+                          "description": "The position this is filed against, by id. Null clears it."
                         },
                         "due_date": {
                           "type": [
                             "string",
                             "null"
                           ],
-                          "format": "date"
+                          "format": "date",
+                          "description": "The day it is due, `YYYY-MM-DD`."
                         },
                         "time_start": {
                           "type": [
                             "string",
                             "null"
                           ],
-                          "format": "date-time"
+                          "format": "date-time",
+                          "description": "When in the day it starts, as a clock time `HH:MM:SS`."
                         },
                         "time_end": {
                           "type": [
                             "string",
                             "null"
                           ],
-                          "format": "date-time"
+                          "format": "date-time",
+                          "description": "When in the day it ends, as a clock time `HH:MM:SS`."
                         },
                         "timezone": {
                           "type": [
                             "string",
                             "null"
-                          ]
+                          ],
+                          "pattern": "^(?:Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])$",
+                          "description": "The UTC offset the clock times beside it are read in — `Z`, or `+05:00`. An offset rather than a zone name, so the day is fixed to a moment rather than to a rule that may be changed later."
                         },
                         "priority": {
                           "type": "integer",
                           "enum": [
-                            "0",
-                            "1"
-                          ]
+                            0,
+                            1
+                          ],
+                          "x-clockster-set": "TasksPriority",
+                          "description": "Whether the task is flagged as a priority: `1` if it is, `0` if not."
                         },
                         "active": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Whether the task is active."
                         },
                         "kpi_plan": {
                           "type": [
                             "number",
                             "null"
                           ],
-                          "minimum": 0
+                          "minimum": 0,
+                          "description": "The planned figure this task is measured against."
                         },
                         "managers": {
                           "type": [
@@ -7924,7 +8034,8 @@
                           "maxItems": 10,
                           "items": {
                             "type": "integer"
-                          }
+                          },
+                          "description": "Who may decide on this task, by id. Up to ten."
                         },
                         "items": {
                           "type": [
@@ -7937,20 +8048,23 @@
                             "properties": {
                               "title": {
                                 "type": "string",
-                                "maxLength": 500
+                                "maxLength": 500,
+                                "description": "The name this is shown under."
                               },
                               "order": {
                                 "type": [
                                   "integer",
                                   "null"
                                 ],
-                                "minimum": 0
+                                "minimum": 0,
+                                "description": "Where this item sits in the checklist, counting from zero."
                               }
                             },
                             "required": [
                               "title"
                             ]
-                          }
+                          },
+                          "description": "The checklist inside this task, in the order given."
                         }
                       },
                       "required": [
@@ -7958,7 +8072,8 @@
                         "title",
                         "user_id"
                       ]
-                    }
+                    },
+                    "description": "The tasks to write, up to 100 a call."
                   }
                 },
                 "required": [
@@ -8006,7 +8121,8 @@
                   "managers",
                   "user",
                   "author"
-                ]
+                ],
+                "x-clockster-set": "TasksInclude"
               }
             }
           }
@@ -8461,7 +8577,8 @@
                   "location",
                   "department",
                   "position"
-                ]
+                ],
+                "x-clockster-set": "TimesheetsInclude"
               }
             }
           }
@@ -9202,7 +9319,8 @@
                 "type": "string",
                 "enum": [
                   "managers"
-                ]
+                ],
+                "x-clockster-set": "UserFiltersInclude"
               }
             }
           }
@@ -9548,25 +9666,29 @@
                         "external_id": {
                           "type": "string",
                           "minLength": 1,
-                          "maxLength": 64
+                          "maxLength": 64,
+                          "description": "Your own key for this row. Send it on every write and the next one updates rather than duplicates."
                         },
                         "title": {
                           "type": "string",
-                          "maxLength": 200
+                          "maxLength": 200,
+                          "description": "The name this is shown under."
                         },
                         "description": {
                           "type": [
                             "string",
                             "null"
                           ],
-                          "maxLength": 500
+                          "maxLength": 500,
+                          "description": "Free text about this row, for people rather than for your code."
                         }
                       },
                       "required": [
                         "external_id",
                         "title"
                       ]
-                    }
+                    },
+                    "description": "The rows to write. Each carries your own `external_id`, and a row already stored under that key is updated rather than added."
                   }
                 },
                 "required": [
@@ -9611,7 +9733,8 @@
                 "type": "string",
                 "enum": [
                   "managers"
-                ]
+                ],
+                "x-clockster-set": "UserFiltersInclude"
               }
             }
           }
@@ -9984,7 +10107,8 @@
                   "work",
                   "general",
                   "finance"
-                ]
+                ],
+                "x-clockster-set": "UserRequestsType"
               }
             }
           },
@@ -10011,7 +10135,8 @@
                   "approval",
                   "execution",
                   "signing"
-                ]
+                ],
+                "x-clockster-set": "UserRequestsStatus"
               }
             }
           },
@@ -10083,7 +10208,8 @@
                   "content",
                   "user",
                   "author"
-                ]
+                ],
+                "x-clockster-set": "UserRequestsInclude"
               }
             }
           }
@@ -10730,7 +10856,8 @@
                 "dismissed",
                 "all"
               ],
-              "default": "active"
+              "default": "active",
+              "x-clockster-set": "UsersStatus"
             }
           },
           {
@@ -10876,7 +11003,19 @@
               "maxItems": 100,
               "items": {
                 "type": "string",
-                "maxLength": 50
+                "enum": [
+                  "full_time",
+                  "part_time",
+                  "irregular_hours",
+                  "contract_1",
+                  "contract_2",
+                  "apprenticeship",
+                  "traineeship",
+                  "piece_rate",
+                  "probation",
+                  "outstaffing"
+                ],
+                "x-clockster-set": "UsersEmployment"
               }
             }
           },
@@ -10902,7 +11041,8 @@
                   "user_filters",
                   "dismissal",
                   "meta"
-                ]
+                ],
+                "x-clockster-set": "UsersInclude"
               }
             }
           }
@@ -11855,13 +11995,16 @@
                       "properties": {
                         "external_id": {
                           "type": "string",
-                          "maxLength": 64
+                          "maxLength": 64,
+                          "description": "Who to dismiss, by your key for them. This or `id`, exactly one per item."
                         },
                         "id": {
-                          "type": "integer"
+                          "type": "integer",
+                          "description": "Who to dismiss, by the id this API issued. This or `external_id`, exactly one per item."
                         }
                       }
-                    }
+                    },
+                    "description": "The people to dismiss, up to 100 a call."
                   }
                 },
                 "required": [
@@ -12029,25 +12172,29 @@
                             "null"
                           ],
                           "minLength": 1,
-                          "maxLength": 64
+                          "maxLength": 64,
+                          "description": "Your own key for this row. Send it on every write and the next one updates rather than duplicates."
                         },
                         "first_name": {
                           "type": "string",
-                          "maxLength": 20
+                          "maxLength": 20,
+                          "description": "Given name. The one field every person must have."
                         },
                         "middle_name": {
                           "type": [
                             "string",
                             "null"
                           ],
-                          "maxLength": 40
+                          "maxLength": 40,
+                          "description": "Middle name, where the place they live uses one."
                         },
                         "last_name": {
                           "type": [
                             "string",
                             "null"
                           ],
-                          "maxLength": 40
+                          "maxLength": 40,
+                          "description": "Family name."
                         },
                         "code": {
                           "type": [
@@ -12055,13 +12202,17 @@
                             "null"
                           ],
                           "minLength": 1,
-                          "maxLength": 40
+                          "maxLength": 40,
+                          "description": "A short code people read, yours to choose. The listing beside this write can filter on it."
                         },
                         "email": {
                           "type": [
                             "string",
                             "null"
-                          ]
+                          ],
+                          "format": "email",
+                          "maxLength": 255,
+                          "description": "Their email address."
                         },
                         "phone": {
                           "type": [
@@ -12069,7 +12220,8 @@
                             "null"
                           ],
                           "minLength": 10,
-                          "maxLength": 21
+                          "maxLength": 21,
+                          "description": "Their phone number."
                         },
                         "extra_phone": {
                           "type": [
@@ -12077,14 +12229,17 @@
                             "null"
                           ],
                           "minLength": 10,
-                          "maxLength": 21
+                          "maxLength": 21,
+                          "description": "A second phone number."
                         },
                         "role": {
                           "type": "string",
                           "enum": [
                             "admin",
                             "employee"
-                          ]
+                          ],
+                          "x-clockster-set": "UsersRole",
+                          "description": "Whether the person administers the company or is an employee in it."
                         },
                         "gender": {
                           "type": [
@@ -12095,7 +12250,9 @@
                             "male",
                             "female",
                             "other"
-                          ]
+                          ],
+                          "x-clockster-set": "UsersGender",
+                          "description": "Their gender, as the personnel file records it."
                         },
                         "locale": {
                           "type": [
@@ -12113,56 +12270,65 @@
                             "fr",
                             "vi",
                             "zh"
-                          ]
+                          ],
+                          "x-clockster-set": "UsersLocale",
+                          "description": "Which language the application speaks to them in."
                         },
                         "timezone": {
                           "type": [
                             "string",
                             "null"
                           ],
-                          "maxLength": 64
+                          "maxLength": 64,
+                          "description": "The zone they work in, as a name — `Asia/Almaty`. A name rather than an offset, unlike a schedule or a task, because a person's zone follows the rules of the place they are in."
                         },
                         "date_hire": {
                           "type": [
                             "string",
                             "null"
                           ],
-                          "format": "date"
+                          "format": "date",
+                          "description": "The day they started, `YYYY-MM-DD`."
                         },
                         "date_leave": {
                           "type": [
                             "string",
                             "null"
                           ],
-                          "format": "date"
+                          "format": "date",
+                          "description": "The day they leave or left, `YYYY-MM-DD`. Filled in for you on a dismissal that does not carry one."
                         },
                         "date_birth": {
                           "type": [
                             "string",
                             "null"
                           ],
-                          "format": "date"
+                          "format": "date",
+                          "description": "Their date of birth, `YYYY-MM-DD`."
                         },
                         "national_id": {
                           "type": [
                             "string",
                             "null"
                           ],
-                          "maxLength": 20
+                          "maxLength": 20,
+                          "description": "Their national identifier."
                         },
                         "tax_id": {
                           "type": [
                             "string",
                             "null"
                           ],
-                          "maxLength": 20
+                          "maxLength": 20,
+                          "description": "Their tax identifier."
                         },
                         "insurance_id": {
                           "type": [
                             "string",
                             "null"
                           ],
-                          "maxLength": 20
+                          "maxLength": 20,
+                          "description": "Their insurance identifier."
                         },
                         "employment": {
                           "type": [
@@ -12180,17 +12346,21 @@
                             "piece_rate",
                             "probation",
                             "outstaffing"
-                          ]
+                          ],
+                          "x-clockster-set": "UsersEmployment",
+                          "description": "The terms they are employed on."
                         },
                         "responsibility": {
                           "type": [
                             "string",
                             "null"
                           ],
-                          "maxLength": 5000
+                          "maxLength": 5000,
+                          "description": "Free text about what this person is responsible for."
                         },
                         "location_id": {
-                          "type": "integer"
+                          "type": "integer",
+                          "description": "The location they are filed under, by id. Required — everybody belongs somewhere."
                         },
                         "locations": {
                           "type": [
@@ -12200,19 +12370,22 @@
                           "maxItems": 50,
                           "items": {
                             "type": "integer"
-                          }
+                          },
+                          "description": "Every other location they may work at, by id, beside the one they are filed under."
                         },
                         "department_id": {
                           "type": [
                             "integer",
                             "null"
-                          ]
+                          ],
+                          "description": "The department this is filed against, by id. Null clears it."
                         },
                         "position_id": {
                           "type": [
                             "integer",
                             "null"
-                          ]
+                          ],
+                          "description": "The position this is filed against, by id. Null clears it."
                         },
                         "user_filters": {
                           "type": [
@@ -12222,7 +12395,8 @@
                           "maxItems": 50,
                           "items": {
                             "type": "integer"
-                          }
+                          },
+                          "description": "The groupings they belong to, by id."
                         }
                       },
                       "required": [
@@ -12230,7 +12404,8 @@
                         "role",
                         "location_id"
                       ]
-                    }
+                    },
+                    "description": "The people to write, up to 100 a call."
                   }
                 },
                 "required": [
@@ -12281,7 +12456,8 @@
                   "user_filters",
                   "dismissal",
                   "meta"
-                ]
+                ],
+                "x-clockster-set": "UsersInclude"
               }
             }
           }
@@ -13637,18 +13813,22 @@
                       "string",
                       "null"
                     ],
-                    "maxLength": 255
+                    "maxLength": 255,
+                    "description": "What to call this endpoint, so a list of them reads."
                   },
                   "url": {
                     "type": "string",
-                    "maxLength": 2048
+                    "maxLength": 2048,
+                    "description": "Where deliveries are posted. `http` or `https`."
                   },
                   "contact_email": {
                     "type": [
                       "string",
                       "null"
                     ],
-                    "maxLength": 255
+                    "format": "email",
+                    "maxLength": 255,
+                    "description": "An address to reach you about this endpoint."
                   },
                   "events": {
                     "type": "array",
@@ -13676,8 +13856,10 @@
                         "task.approved",
                         "task.rejected",
                         "task.deleted"
-                      ]
-                    }
+                      ],
+                      "x-clockster-set": "WebhooksEvent"
+                    },
+                    "description": "Which events this endpoint receives. At least one, and no repeats."
                   },
                   "auth_basic": {
                     "type": [
@@ -13687,23 +13869,28 @@
                     "properties": {
                       "username": {
                         "type": "string",
-                        "maxLength": 255
+                        "maxLength": 255,
+                        "description": "The user for `auth_basic`."
                       },
                       "password": {
                         "type": "string",
-                        "maxLength": 255
+                        "maxLength": 255,
+                        "description": "The password for `auth_basic`."
                       }
-                    }
+                    },
+                    "description": "Send deliveries with HTTP basic authentication. Not alongside `auth_token`."
                   },
                   "auth_token": {
                     "type": [
                       "string",
                       "null"
                     ],
-                    "maxLength": 2048
+                    "maxLength": 2048,
+                    "description": "Send deliveries carrying this bearer token. Not alongside `auth_basic`."
                   },
                   "active": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Whether the endpoint receives deliveries. False stops them without deleting it."
                   }
                 },
                 "required": [
@@ -13803,7 +13990,8 @@
                   "task.approved",
                   "task.rejected",
                   "task.deleted"
-                ]
+                ],
+                "x-clockster-set": "WebhooksEvent"
               }
             }
           },
@@ -13854,7 +14042,8 @@
                 "type": "string",
                 "enum": [
                   "payload"
-                ]
+                ],
+                "x-clockster-set": "WebhooksDeliveriesInclude"
               }
             }
           }
@@ -15113,18 +15302,22 @@
                       "string",
                       "null"
                     ],
-                    "maxLength": 255
+                    "maxLength": 255,
+                    "description": "What to call this endpoint, so a list of them reads."
                   },
                   "url": {
                     "type": "string",
-                    "maxLength": 2048
+                    "maxLength": 2048,
+                    "description": "Where deliveries are posted. `http` or `https`."
                   },
                   "contact_email": {
                     "type": [
                       "string",
                       "null"
                     ],
-                    "maxLength": 255
+                    "format": "email",
+                    "maxLength": 255,
+                    "description": "An address to reach you about this endpoint."
                   },
                   "events": {
                     "type": "array",
@@ -15152,8 +15345,10 @@
                         "task.approved",
                         "task.rejected",
                         "task.deleted"
-                      ]
-                    }
+                      ],
+                      "x-clockster-set": "WebhooksEvent"
+                    },
+                    "description": "Which events this endpoint receives. At least one, and no repeats."
                   },
                   "auth_basic": {
                     "type": [
@@ -15163,23 +15358,28 @@
                     "properties": {
                       "username": {
                         "type": "string",
-                        "maxLength": 255
+                        "maxLength": 255,
+                        "description": "The user for `auth_basic`."
                       },
                       "password": {
                         "type": "string",
-                        "maxLength": 255
+                        "maxLength": 255,
+                        "description": "The password for `auth_basic`."
                       }
-                    }
+                    },
+                    "description": "Send deliveries with HTTP basic authentication. Not alongside `auth_token`."
                   },
                   "auth_token": {
                     "type": [
                       "string",
                       "null"
                     ],
-                    "maxLength": 2048
+                    "maxLength": 2048,
+                    "description": "Send deliveries carrying this bearer token. Not alongside `auth_basic`."
                   },
                   "active": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Whether the endpoint receives deliveries. False stops them without deleting it."
                   }
                 },
                 "required": [
