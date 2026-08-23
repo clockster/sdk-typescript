@@ -8,7 +8,8 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      # write, so the tag gets a release with the changelog's section for it.
+      contents: write
       # Trusted publishing: npm accepts this run's OIDC token instead of a stored npm token.
       id-token: write
     steps:
@@ -36,4 +37,23 @@ jobs:
           declared="$(node -p 'require("./package.json").version')"
           test "$tagged" = "$declared" || { echo "::error::Tag $tagged does not match package.json $declared."; exit 1; }
 
+      # The notes are the changelog's section for this tag: written with the change and reviewed
+      # with it, rather than from memory once it is out. No section, no release.
+      - name: Read the release notes
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          awk -v want="## $version" '
+            $0 == want { inside = 1; next }
+            inside && /^## / { exit }
+            inside { print }
+          ' CHANGELOG.md > "$RUNNER_TEMP/notes.md"
+
+          grep -q '[^[:space:]]' "$RUNNER_TEMP/notes.md" \
+            || { echo "::error::CHANGELOG.md has no section for $version."; exit 1; }
+
       - run: npm publish --access public
+
+      - name: Publish the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" --title "$GITHUB_REF_NAME" --notes-file "$RUNNER_TEMP/notes.md"
