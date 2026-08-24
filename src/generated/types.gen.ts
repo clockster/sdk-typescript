@@ -5,47 +5,152 @@ export type ClientOptions = {
 };
 
 export type WorkSchedule = {
+    /**
+     * Which kind of day this is, and with it what else the item requires.
+     */
     type: 'work' | 'free' | 'leave';
+    /**
+     * The days this applies to, each `YYYY-MM-DD`. No repeats.
+     */
     dates: Array<string>;
+    /**
+     * Who the day is for, by id. At least one, and no repeats.
+     */
     users: Array<number>;
+    /**
+     * The location this is filed against, by id. Null clears it.
+     */
     location_id?: number | null;
+    /**
+     * The department this is filed against, by id. Null clears it.
+     */
     department_id?: number | null;
+    /**
+     * The position this is filed against, by id. Null clears it.
+     */
     position_id?: number | null;
+    /**
+     * The UTC offset the clock times beside it are read in — `Z`, or `+05:00`. An offset rather than a zone name, so the day is fixed to a moment rather than to a rule that may be changed later.
+     */
     timezone: string;
+    /**
+     * When it starts, as a clock time `HH:MM:SS`, read in the offset beside it.
+     */
     start?: string | null;
+    /**
+     * When it ends, as a clock time `HH:MM:SS`, read in the offset beside it.
+     */
     end?: string | null;
+    /**
+     * Unpaid break within the day, in seconds.
+     */
     break_time?: number | null;
+    /**
+     * How late an arrival still counts as on time, in seconds.
+     */
     grace_start?: number | null;
+    /**
+     * How early a departure still counts as a full day, in seconds.
+     */
     grace_end?: number | null;
+    /**
+     * Split the day into shifts instead of one span. Each carries its own clock times and may sit somewhere other than the day does.
+     */
     shifts?: Array<{
+        /**
+         * When it starts, as a clock time `HH:MM:SS`, read in the offset beside it.
+         */
         start: string;
+        /**
+         * When it ends, as a clock time `HH:MM:SS`, read in the offset beside it.
+         */
         end: string;
+        /**
+         * The location this is filed against, by id. Null clears it.
+         */
         location_id?: number | null;
+        /**
+         * The department this is filed against, by id. Null clears it.
+         */
         department_id?: number | null;
+        /**
+         * The position this is filed against, by id. Null clears it.
+         */
         position_id?: number | null;
     }> | null;
 };
 
 export type FreeSchedule = {
+    /**
+     * Which kind of day this is, and with it what else the item requires.
+     */
     type: 'work' | 'free' | 'leave';
+    /**
+     * The days this applies to, each `YYYY-MM-DD`. No repeats.
+     */
     dates: Array<string>;
+    /**
+     * Who the day is for, by id. At least one, and no repeats.
+     */
     users: Array<number>;
+    /**
+     * The location this is filed against, by id. Null clears it.
+     */
     location_id?: number | null;
+    /**
+     * The department this is filed against, by id. Null clears it.
+     */
     department_id?: number | null;
+    /**
+     * The position this is filed against, by id. Null clears it.
+     */
     position_id?: number | null;
+    /**
+     * The UTC offset the clock times beside it are read in — `Z`, or `+05:00`. An offset rather than a zone name, so the day is fixed to a moment rather than to a rule that may be changed later.
+     */
     timezone: string;
+    /**
+     * When it starts, as a clock time `HH:MM:SS`, read in the offset beside it.
+     */
     start: string;
+    /**
+     * When it ends, as a clock time `HH:MM:SS`, read in the offset beside it.
+     */
     end: string;
+    /**
+     * How long the person is expected to work that day, in seconds.
+     */
     time_planned?: number | null;
 };
 
 export type LeaveSchedule = {
+    /**
+     * Which kind of day this is, and with it what else the item requires.
+     */
     type: 'work' | 'free' | 'leave';
+    /**
+     * The days this applies to, each `YYYY-MM-DD`. No repeats.
+     */
     dates: Array<string>;
+    /**
+     * Who the day is for, by id. At least one, and no repeats.
+     */
     users: Array<number>;
+    /**
+     * The location this is filed against, by id. Null clears it.
+     */
     location_id?: number | null;
+    /**
+     * The department this is filed against, by id. Null clears it.
+     */
     department_id?: number | null;
+    /**
+     * The position this is filed against, by id. Null clears it.
+     */
     position_id?: number | null;
+    /**
+     * What kind of leave the day is.
+     */
     leave_type: 'annual' | 'unpaid' | 'sick' | 'unpaid_sick' | 'maternity' | 'paternity' | 'special' | 'day_off' | 'compensatory' | 'personal' | 'emergency' | 'unexcused_absence';
 };
 
@@ -218,12 +323,33 @@ export type GetCompanyV3AttendanceResponse = GetCompanyV3AttendanceResponses[key
 
 export type PostCompanyV3AttendanceData = {
     body: {
+        /**
+         * The marks to record, up to 100 a call.
+         */
         attendance: Array<{
+            /**
+             * The employee this belongs to, by the id this API issued.
+             */
             user_id: number;
+            /**
+             * Where the mark was made, by id.
+             */
             location_id?: number | null;
+            /**
+             * The shift this mark belongs to, by id, where you know which one it is.
+             */
             shift_id?: number | null;
+            /**
+             * What the mark is: coming in, going out, or going on a break.
+             */
             status: 'out' | 'in' | 'break';
+            /**
+             * When it happened, as `2026-08-01T09:00:00+05:00`. The offset is part of it rather than optional. Not in the future, and at most 24 hours late.
+             */
             datetime: string;
+            /**
+             * A note carried alongside, for people to read.
+             */
             comment?: string | null;
         }>;
     };
@@ -350,9 +476,21 @@ export type GetCompanyV3DepartmentsResponse = GetCompanyV3DepartmentsResponses[k
 
 export type PostCompanyV3DepartmentsUpsertData = {
     body: {
+        /**
+         * The rows to write. Each carries your own `external_id`, and a row already stored under that key is updated rather than added.
+         */
         items: Array<{
+            /**
+             * Your own key for this row. Send it on every write and the next one updates rather than duplicates.
+             */
             external_id: string;
+            /**
+             * The name this is shown under.
+             */
             title: string;
+            /**
+             * Free text about this row, for people rather than for your code.
+             */
             description?: string | null;
         }>;
     };
@@ -678,17 +816,53 @@ export type GetCompanyV3DocumentsResponse = GetCompanyV3DocumentsResponses[keyof
 
 export type PostCompanyV3DocumentsUpsertData = {
     body: {
+        /**
+         * The documents to write, up to 100 a call.
+         */
         documents: Array<{
+            /**
+             * Your own key for this row. Send it on every write and the next one updates rather than duplicates.
+             */
             external_id: string;
+            /**
+             * Which kind of document this is.
+             */
             type: 'passport' | 'cv' | 'diploma' | 'medical' | 'photo' | 'other' | 'medical_book' | 'employment_agreement' | 'termination_of_employment_agreement' | 'equipment_agreement' | 'application' | 'order' | 'supplementary_agreement' | 'job_description' | 'nda' | 'non_compete_agreement' | 'data_processing_agreement' | 'act_of_service_acceptance' | 'health_and_safety_briefing' | 'shift_schedule' | 'letter' | 'vacation_schedule' | 'contract' | 'agreement' | 'goods_release_note' | 'reconciliation_act' | 'return_to_supplier';
+            /**
+             * The employee this belongs to, by the id this API issued.
+             */
             user_id: number;
+            /**
+             * What to call this document.
+             */
             name?: string | null;
+            /**
+             * The number written on the contract.
+             */
             contract_number?: string | null;
+            /**
+             * The terms the contract is on.
+             */
             employment_type?: 'full_time' | 'part_time' | 'irregular_hours' | 'contract_1' | 'contract_2' | 'apprenticeship' | 'traineeship' | 'piece_rate' | 'probation' | 'outstaffing';
+            /**
+             * The day it begins, `YYYY-MM-DD`.
+             */
             start_date?: string | null;
+            /**
+             * The day it ends, `YYYY-MM-DD`.
+             */
             end_date?: string | null;
+            /**
+             * The day it stops being valid, `YYYY-MM-DD`.
+             */
             expiration_date?: string | null;
+            /**
+             * The document this one hangs under, by your key for that one.
+             */
             parent_external_id?: string | null;
+            /**
+             * The stored file this points at, from `POST /files`. Upload the bytes first and name the id it answered with.
+             */
             file_id?: number | null;
         }>;
     };
@@ -885,6 +1059,9 @@ export type GetCompanyV3DocumentsByIdResponse = GetCompanyV3DocumentsByIdRespons
 export type PostCompanyV3FilesData = {
     body: {
         file: Blob | File;
+        /**
+         * What to call this document.
+         */
         name?: string | null;
     };
     path?: never;
@@ -1018,14 +1195,38 @@ export type GetCompanyV3LocationsResponse = GetCompanyV3LocationsResponses[keyof
 
 export type PostCompanyV3LocationsUpsertData = {
     body: {
+        /**
+         * The rows to write. Each carries your own `external_id`, and a row already stored under that key is updated rather than added.
+         */
         items: Array<{
+            /**
+             * Your own key for this row. Send it on every write and the next one updates rather than duplicates.
+             */
             external_id: string;
+            /**
+             * The name this is shown under.
+             */
             title: string;
+            /**
+             * Free text about this row, for people rather than for your code.
+             */
             description?: string | null;
+            /**
+             * A short code people read, yours to choose. The listing beside this write can filter on it.
+             */
             code?: string | null;
+            /**
+             * Where the location is. A mobile clock-in is checked against this and `radius`.
+             */
             latitude?: number | null;
+            /**
+             * Where the location is. A mobile clock-in is checked against this and `radius`.
+             */
             longitude?: number | null;
-            radius?: number | null;
+            /**
+             * How far from those coordinates a mobile clock-in still counts, in metres. A location written without one gets 100.
+             */
+            radius?: number;
         }>;
     };
     path?: never;
@@ -1425,9 +1626,21 @@ export type GetCompanyV3PositionsResponse = GetCompanyV3PositionsResponses[keyof
 
 export type PostCompanyV3PositionsUpsertData = {
     body: {
+        /**
+         * The rows to write. Each carries your own `external_id`, and a row already stored under that key is updated rather than added.
+         */
         items: Array<{
+            /**
+             * Your own key for this row. Send it on every write and the next one updates rather than duplicates.
+             */
             external_id: string;
+            /**
+             * The name this is shown under.
+             */
             title: string;
+            /**
+             * Free text about this row, for people rather than for your code.
+             */
             description?: string | null;
         }>;
     };
@@ -1586,6 +1799,9 @@ export type GetCompanyV3PositionsByIdResponse = GetCompanyV3PositionsByIdRespons
 
 export type PostCompanyV3SchedulesData = {
     body: {
+        /**
+         * The days to write, up to 25 a call. Each is one of three shapes, and `type` says which.
+         */
         schedules: Array<WorkSchedule | FreeSchedule | LeaveSchedule>;
     };
     headers?: {
@@ -1926,25 +2142,85 @@ export type GetCompanyV3TasksResponse = GetCompanyV3TasksResponses[keyof GetComp
 
 export type PostCompanyV3TasksUpsertData = {
     body: {
+        /**
+         * The tasks to write, up to 100 a call.
+         */
         tasks: Array<{
+            /**
+             * Your own key for this row. Send it on every write and the next one updates rather than duplicates.
+             */
             external_id: string;
+            /**
+             * The name this is shown under.
+             */
             title: string;
+            /**
+             * Free text about this row, for people rather than for your code.
+             */
             description?: string | null;
+            /**
+             * The employee this belongs to, by the id this API issued.
+             */
             user_id: number;
+            /**
+             * The category it belongs to, by id.
+             */
             category_id?: number | null;
+            /**
+             * The location this is filed against, by id. Null clears it.
+             */
             location_id?: number | null;
+            /**
+             * The department this is filed against, by id. Null clears it.
+             */
             department_id?: number | null;
+            /**
+             * The position this is filed against, by id. Null clears it.
+             */
             position_id?: number | null;
+            /**
+             * The day it is due, `YYYY-MM-DD`.
+             */
             due_date?: string | null;
+            /**
+             * When in the day it starts, as a clock time `HH:MM:SS`.
+             */
             time_start?: string | null;
+            /**
+             * When in the day it ends, as a clock time `HH:MM:SS`.
+             */
             time_end?: string | null;
+            /**
+             * The UTC offset the clock times beside it are read in — `Z`, or `+05:00`. An offset rather than a zone name, so the day is fixed to a moment rather than to a rule that may be changed later.
+             */
             timezone?: string | null;
-            priority?: '0' | '1';
+            /**
+             * Whether the task is flagged as a priority: `1` if it is, `0` if not.
+             */
+            priority?: 0 | 1;
+            /**
+             * Whether the task is active.
+             */
             active?: boolean;
+            /**
+             * The planned figure this task is measured against.
+             */
             kpi_plan?: number | null;
+            /**
+             * Who may decide on this task, by id. Up to ten.
+             */
             managers?: Array<number> | null;
+            /**
+             * The checklist inside this task, in the order given.
+             */
             items?: Array<{
+                /**
+                 * The name this is shown under.
+                 */
                 title: string;
+                /**
+                 * Where this item sits in the checklist, counting from zero.
+                 */
                 order?: number | null;
             }> | null;
         }>;
@@ -2324,9 +2600,21 @@ export type GetCompanyV3UserFiltersResponse = GetCompanyV3UserFiltersResponses[k
 
 export type PostCompanyV3UserFiltersUpsertData = {
     body: {
+        /**
+         * The rows to write. Each carries your own `external_id`, and a row already stored under that key is updated rather than added.
+         */
         items: Array<{
+            /**
+             * Your own key for this row. Send it on every write and the next one updates rather than duplicates.
+             */
             external_id: string;
+            /**
+             * The name this is shown under.
+             */
             title: string;
+            /**
+             * Free text about this row, for people rather than for your code.
+             */
             description?: string | null;
         }>;
     };
@@ -2715,7 +3003,7 @@ export type GetCompanyV3UsersData = {
         /**
          * Only people on these employment terms.
          */
-        employment?: Array<string> | null;
+        employment?: Array<'full_time' | 'part_time' | 'irregular_hours' | 'contract_1' | 'contract_2' | 'apprenticeship' | 'traineeship' | 'piece_rate' | 'probation' | 'outstaffing'> | null;
         /**
          * Relations to load, comma-separated. Anything not named is absent from the answer rather than null.
          */
@@ -2878,8 +3166,17 @@ export type GetCompanyV3UsersResponse = GetCompanyV3UsersResponses[keyof GetComp
 
 export type PostCompanyV3UsersDismissData = {
     body: {
+        /**
+         * The people to dismiss, up to 100 a call.
+         */
         users: Array<{
+            /**
+             * Who to dismiss, by your key for them. This or `id`, exactly one per item.
+             */
             external_id?: string;
+            /**
+             * Who to dismiss, by the id this API issued. This or `external_id`, exactly one per item.
+             */
             id?: number;
         }>;
     };
@@ -2926,31 +3223,109 @@ export type PostCompanyV3UsersDismissResponse = PostCompanyV3UsersDismissRespons
 
 export type PostCompanyV3UsersUpsertData = {
     body: {
+        /**
+         * The people to write, up to 100 a call.
+         */
         users: Array<{
+            /**
+             * Your own key for this row. Send it on every write and the next one updates rather than duplicates.
+             */
             external_id?: string | null;
+            /**
+             * Given name. The one field every person must have.
+             */
             first_name: string;
+            /**
+             * Middle name, where the place they live uses one.
+             */
             middle_name?: string | null;
+            /**
+             * Family name.
+             */
             last_name?: string | null;
+            /**
+             * A short code people read, yours to choose. The listing beside this write can filter on it.
+             */
             code?: string | null;
+            /**
+             * Their email address.
+             */
             email?: string | null;
+            /**
+             * Their phone number.
+             */
             phone?: string | null;
+            /**
+             * A second phone number.
+             */
             extra_phone?: string | null;
+            /**
+             * Whether the person administers the company or is an employee in it.
+             */
             role: 'admin' | 'employee';
+            /**
+             * Their gender, as the personnel file records it.
+             */
             gender?: 'male' | 'female' | 'other';
+            /**
+             * Which language the application speaks to them in.
+             */
             locale?: 'en' | 'ru' | 'kk' | 'uk' | 'id' | 'uz' | 'az' | 'fr' | 'vi' | 'zh';
+            /**
+             * The zone they work in, as a name — `Asia/Almaty`. A name rather than an offset, unlike a schedule or a task, because a person's zone follows the rules of the place they are in.
+             */
             timezone?: string | null;
+            /**
+             * The day they started, `YYYY-MM-DD`.
+             */
             date_hire?: string | null;
+            /**
+             * The day they leave or left, `YYYY-MM-DD`. Filled in for you on a dismissal that does not carry one.
+             */
             date_leave?: string | null;
+            /**
+             * Their date of birth, `YYYY-MM-DD`.
+             */
             date_birth?: string | null;
+            /**
+             * Their national identifier.
+             */
             national_id?: string | null;
+            /**
+             * Their tax identifier.
+             */
             tax_id?: string | null;
+            /**
+             * Their insurance identifier.
+             */
             insurance_id?: string | null;
+            /**
+             * The terms they are employed on.
+             */
             employment?: 'full_time' | 'part_time' | 'irregular_hours' | 'contract_1' | 'contract_2' | 'apprenticeship' | 'traineeship' | 'piece_rate' | 'probation' | 'outstaffing';
+            /**
+             * Free text about what this person is responsible for.
+             */
             responsibility?: string | null;
+            /**
+             * The location they are filed under, by id. Required — everybody belongs somewhere.
+             */
             location_id: number;
+            /**
+             * Every other location they may work at, by id, beside the one they are filed under.
+             */
             locations?: Array<number> | null;
+            /**
+             * The department this is filed against, by id. Null clears it.
+             */
             department_id?: number | null;
+            /**
+             * The position this is filed against, by id. Null clears it.
+             */
             position_id?: number | null;
+            /**
+             * The groupings they belong to, by id.
+             */
             user_filters?: Array<number> | null;
         }>;
     };
@@ -3242,15 +3617,42 @@ export type GetCompanyV3WebhooksResponse = GetCompanyV3WebhooksResponses[keyof G
 
 export type PostCompanyV3WebhooksData = {
     body: {
+        /**
+         * What to call this endpoint, so a list of them reads.
+         */
         title?: string | null;
+        /**
+         * Where deliveries are posted. `http` or `https`.
+         */
         url: string;
+        /**
+         * An address to reach you about this endpoint.
+         */
         contact_email?: string | null;
+        /**
+         * Which events this endpoint receives. At least one, and no repeats.
+         */
         events: Array<'user.created' | 'user.updated' | 'user.deleted' | 'user.restored' | 'user.purged' | 'location.created' | 'location.updated' | 'location.deleted' | 'department.created' | 'department.updated' | 'department.deleted' | 'position.created' | 'position.updated' | 'position.deleted' | 'task.created' | 'task.completed' | 'task.approved' | 'task.rejected' | 'task.deleted'>;
+        /**
+         * Send deliveries with HTTP basic authentication. Not alongside `auth_token`.
+         */
         auth_basic?: {
+            /**
+             * The user for `auth_basic`.
+             */
             username?: string;
+            /**
+             * The password for `auth_basic`.
+             */
             password?: string;
         } | null;
+        /**
+         * Send deliveries carrying this bearer token. Not alongside `auth_basic`.
+         */
         auth_token?: string | null;
+        /**
+         * Whether the endpoint receives deliveries. False stops them without deleting it.
+         */
         active: boolean;
     };
     headers?: {
@@ -3689,15 +4091,42 @@ export type GetCompanyV3WebhooksByIdResponse = GetCompanyV3WebhooksByIdResponses
 
 export type PutCompanyV3WebhooksByIdData = {
     body: {
+        /**
+         * What to call this endpoint, so a list of them reads.
+         */
         title?: string | null;
+        /**
+         * Where deliveries are posted. `http` or `https`.
+         */
         url: string;
+        /**
+         * An address to reach you about this endpoint.
+         */
         contact_email?: string | null;
+        /**
+         * Which events this endpoint receives. At least one, and no repeats.
+         */
         events: Array<'user.created' | 'user.updated' | 'user.deleted' | 'user.restored' | 'user.purged' | 'location.created' | 'location.updated' | 'location.deleted' | 'department.created' | 'department.updated' | 'department.deleted' | 'position.created' | 'position.updated' | 'position.deleted' | 'task.created' | 'task.completed' | 'task.approved' | 'task.rejected' | 'task.deleted'>;
+        /**
+         * Send deliveries with HTTP basic authentication. Not alongside `auth_token`.
+         */
         auth_basic?: {
+            /**
+             * The user for `auth_basic`.
+             */
             username?: string;
+            /**
+             * The password for `auth_basic`.
+             */
             password?: string;
         } | null;
+        /**
+         * Send deliveries carrying this bearer token. Not alongside `auth_basic`.
+         */
         auth_token?: string | null;
+        /**
+         * Whether the endpoint receives deliveries. False stops them without deleting it.
+         */
         active: boolean;
     };
     path: {

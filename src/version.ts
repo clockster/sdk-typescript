@@ -4,7 +4,7 @@
  * A leaf module: the version is kept in step with package.json by a test, and nothing else here
  * reads both.
  */
-export const VERSION = '0.7.1';
+export const VERSION = '0.8.0';
 
 /**
  * Sent so our request log says which client made a call rather than which runtime did.
