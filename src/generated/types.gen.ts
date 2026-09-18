@@ -691,7 +691,7 @@ export type GetCompanyV3DocumentsData = {
         /**
          * Only rows of these types.
          */
-        types?: Array<'passport' | 'cv' | 'diploma' | 'medical' | 'photo' | 'other' | 'medical_book' | 'employment_agreement' | 'termination_of_employment_agreement' | 'equipment_agreement' | 'application' | 'order' | 'supplementary_agreement' | 'job_description' | 'nda' | 'non_compete_agreement' | 'data_processing_agreement' | 'act_of_service_acceptance' | 'health_and_safety_briefing' | 'shift_schedule' | 'letter' | 'vacation_schedule' | 'contract' | 'agreement' | 'goods_release_note' | 'reconciliation_act' | 'return_to_supplier'> | null;
+        types?: Array<'passport' | 'cv' | 'diploma' | 'medical' | 'photo' | 'other' | 'medical_book' | 'employment_agreement' | 'termination_of_employment_agreement' | 'equipment_agreement' | 'application' | 'order' | 'supplementary_agreement' | 'job_description' | 'nda' | 'non_compete_agreement' | 'data_processing_agreement' | 'act_of_service_acceptance' | 'health_and_safety_briefing' | 'shift_schedule' | 'letter' | 'vacation_schedule' | 'contract' | 'agreement' | 'goods_release_note' | 'reconciliation_act' | 'return_to_supplier' | 'driver_license' | 'birth_certificate' | 'marriage_certificate' | 'divorce_certificate' | 'change_fio_certificate'> | null;
         /**
          * Only documents covering these employment terms.
          */
@@ -827,7 +827,7 @@ export type PostCompanyV3DocumentsUpsertData = {
             /**
              * Which kind of document this is.
              */
-            type: 'passport' | 'cv' | 'diploma' | 'medical' | 'photo' | 'other' | 'medical_book' | 'employment_agreement' | 'termination_of_employment_agreement' | 'equipment_agreement' | 'application' | 'order' | 'supplementary_agreement' | 'job_description' | 'nda' | 'non_compete_agreement' | 'data_processing_agreement' | 'act_of_service_acceptance' | 'health_and_safety_briefing' | 'shift_schedule' | 'letter' | 'vacation_schedule' | 'contract' | 'agreement' | 'goods_release_note' | 'reconciliation_act' | 'return_to_supplier';
+            type: 'passport' | 'cv' | 'diploma' | 'medical' | 'photo' | 'other' | 'medical_book' | 'employment_agreement' | 'termination_of_employment_agreement' | 'equipment_agreement' | 'application' | 'order' | 'supplementary_agreement' | 'job_description' | 'nda' | 'non_compete_agreement' | 'data_processing_agreement' | 'act_of_service_acceptance' | 'health_and_safety_briefing' | 'shift_schedule' | 'letter' | 'vacation_schedule' | 'contract' | 'agreement' | 'goods_release_note' | 'reconciliation_act' | 'return_to_supplier' | 'driver_license' | 'birth_certificate' | 'marriage_certificate' | 'divorce_certificate' | 'change_fio_certificate';
             /**
              * The employee this belongs to, by the id this API issued.
              */
