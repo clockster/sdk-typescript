@@ -2336,7 +2336,7 @@
                 "array",
                 "null"
               ],
-              "maxItems": 27,
+              "maxItems": 32,
               "items": {
                 "type": "string",
                 "enum": [
@@ -2366,7 +2366,12 @@
                   "agreement",
                   "goods_release_note",
                   "reconciliation_act",
-                  "return_to_supplier"
+                  "return_to_supplier",
+                  "driver_license",
+                  "birth_certificate",
+                  "marriage_certificate",
+                  "divorce_certificate",
+                  "change_fio_certificate"
                 ],
                 "x-clockster-set": "DocumentsType"
               }
@@ -3118,7 +3123,12 @@
                             "agreement",
                             "goods_release_note",
                             "reconciliation_act",
-                            "return_to_supplier"
+                            "return_to_supplier",
+                            "driver_license",
+                            "birth_certificate",
+                            "marriage_certificate",
+                            "divorce_certificate",
+                            "change_fio_certificate"
                           ],
                           "x-clockster-set": "DocumentsType",
                           "description": "Which kind of document this is."
