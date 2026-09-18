@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.9.0
+
+### May break your build (types only)
+
+Nothing. The five values are additive.
+
+### Changed in the API
+
+Reaches you whether or not you update this package.
+
+- A document's `type` also takes `driver_license`, `birth_certificate`, `marriage_certificate`,
+  `divorce_certificate` and `change_fio_certificate` — in the `types` filter and in
+  `POST /documents/upsert`.
+
 ## 0.8.0
 
 ### May break your build (types only)
