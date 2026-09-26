@@ -97,6 +97,7 @@ asking us about a call. `422` adds `error.errors`, naming the fields.
 | `documents` | `list` `get` `upsert` `delete` |
 | `files` | `upload` |
 | `payroll.payslips` | `list` |
+| `payroll.singleAdjustments` | `list` `create` `delete` |
 | `userRequests` | `list` `get` |
 | `webhooks` | `list` `get` `create` `update` `delete` `rotateSecret` |
 | `webhooks.deliveries` | `list` `get` `redeliver` |

@@ -1551,6 +1551,221 @@ export type GetCompanyV3PayrollPayslipsResponses = {
 
 export type GetCompanyV3PayrollPayslipsResponse = GetCompanyV3PayrollPayslipsResponses[keyof GetCompanyV3PayrollPayslipsResponses];
 
+export type GetCompanyV3PayrollSingleAdjustmentsData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * How many rows one page holds. Defaults to 50.
+         */
+        per_page?: number;
+        /**
+         * The `meta.next_cursor` of the previous page. Omit it for the first. A cursor is bound to the filters it was issued under — change them and start again.
+         */
+        cursor?: string | null;
+        /**
+         * Only rows belonging to these people, by id.
+         */
+        users?: Array<number> | null;
+        /**
+         * Only rows of these types.
+         */
+        types?: Array<'service_charge' | 'single_addition_pre_tax' | 'single_addition_post_tax' | 'single_loan' | 'single_deduction_pre_tax' | 'single_deduction_post_tax'> | null;
+        /**
+         * Start of the window, inclusive (YYYY-MM-DD).
+         */
+        date_from?: string | null;
+        /**
+         * End of the window, inclusive (YYYY-MM-DD).
+         */
+        date_to?: string | null;
+    };
+    url: '/company/v3/payroll/single-adjustments';
+};
+
+export type GetCompanyV3PayrollSingleAdjustmentsErrors = {
+    /**
+     * No token, or one this surface does not accept — code `unauthenticated`
+     */
+    401: Refusal;
+    /**
+     * A token without the company ability — code `forbidden`
+     */
+    403: Refusal;
+    /**
+     * No such row in the calling company — code `not_found`
+     */
+    404: Refusal;
+    /**
+     * Refused; `error.code` says why and `error.errors` names the fields
+     */
+    422: ValidationRefusal;
+    /**
+     * Rate limited; `Retry-After` says when — code `rate_limited`
+     */
+    429: Refusal;
+};
+
+export type GetCompanyV3PayrollSingleAdjustmentsError = GetCompanyV3PayrollSingleAdjustmentsErrors[keyof GetCompanyV3PayrollSingleAdjustmentsErrors];
+
+export type GetCompanyV3PayrollSingleAdjustmentsResponses = {
+    /**
+     * Success
+     */
+    200: {
+        data: Array<{
+            id: number;
+            user: {
+                id: number;
+                external_id: null | string;
+            };
+            type: string;
+            title: null | string;
+            amount: null | number;
+            date: string;
+            created_at: string;
+        }>;
+        links: PageLinks;
+        meta: PageMeta;
+    };
+};
+
+export type GetCompanyV3PayrollSingleAdjustmentsResponse = GetCompanyV3PayrollSingleAdjustmentsResponses[keyof GetCompanyV3PayrollSingleAdjustmentsResponses];
+
+export type PostCompanyV3PayrollSingleAdjustmentsData = {
+    body: {
+        /**
+         * The adjustments to file, up to 100 a call.
+         */
+        adjustments: Array<{
+            /**
+             * The employee this belongs to, by the id this API issued.
+             */
+            user_id: number;
+            /**
+             * What the amount does: an addition or a deduction, before or after tax, a service charge or a one-off loan.
+             */
+            type: 'service_charge' | 'single_addition_pre_tax' | 'single_addition_post_tax' | 'single_loan' | 'single_deduction_pre_tax' | 'single_deduction_post_tax';
+            /**
+             * How much, never negative — `type` says which way it goes. At most two decimal places.
+             */
+            amount: number;
+            /**
+             * The day it is dated, `YYYY-MM-DD`. The payslip whose period holds this day takes it in.
+             */
+            date: string;
+            /**
+             * The name this is shown under.
+             */
+            title?: string | null;
+        }>;
+    };
+    headers?: {
+        /**
+         * A value you choose, unique per attempt. Send the same one when retrying and the first answer is replayed instead of the write happening twice. Optional, and only on the writes that carry no key of your own.
+         */
+        'Idempotency-Key'?: string;
+    };
+    path?: never;
+    query?: never;
+    url: '/company/v3/payroll/single-adjustments';
+};
+
+export type PostCompanyV3PayrollSingleAdjustmentsErrors = {
+    /**
+     * No token, or one this surface does not accept — code `unauthenticated`
+     */
+    401: Refusal;
+    /**
+     * A token without the company ability — code `forbidden`
+     */
+    403: Refusal;
+    /**
+     * No such row in the calling company — code `not_found`
+     */
+    404: Refusal;
+    /**
+     * Refused; `error.code` says why and `error.errors` names the fields
+     */
+    422: ValidationRefusal;
+    /**
+     * Rate limited; `Retry-After` says when — code `rate_limited`
+     */
+    429: Refusal;
+};
+
+export type PostCompanyV3PayrollSingleAdjustmentsError = PostCompanyV3PayrollSingleAdjustmentsErrors[keyof PostCompanyV3PayrollSingleAdjustmentsErrors];
+
+export type PostCompanyV3PayrollSingleAdjustmentsResponses = {
+    /**
+     * Created
+     */
+    201: {
+        data: Array<{
+            id: number;
+            user: {
+                id: number;
+                external_id: null | string;
+            };
+            type: string;
+            title: null | string;
+            amount: null | number;
+            date: string;
+            created_at: string;
+        }>;
+    };
+};
+
+export type PostCompanyV3PayrollSingleAdjustmentsResponse = PostCompanyV3PayrollSingleAdjustmentsResponses[keyof PostCompanyV3PayrollSingleAdjustmentsResponses];
+
+export type DeleteCompanyV3PayrollSingleAdjustmentsByIdData = {
+    body?: never;
+    path: {
+        /**
+         * The id of the row, as this API issued it.
+         */
+        id: number;
+    };
+    query?: never;
+    url: '/company/v3/payroll/single-adjustments/{id}';
+};
+
+export type DeleteCompanyV3PayrollSingleAdjustmentsByIdErrors = {
+    /**
+     * No token, or one this surface does not accept — code `unauthenticated`
+     */
+    401: Refusal;
+    /**
+     * A token without the company ability — code `forbidden`
+     */
+    403: Refusal;
+    /**
+     * No such row in the calling company — code `not_found`
+     */
+    404: Refusal;
+    /**
+     * Refused; `error.code` says why and `error.errors` names the fields
+     */
+    422: ValidationRefusal;
+    /**
+     * Rate limited; `Retry-After` says when — code `rate_limited`
+     */
+    429: Refusal;
+};
+
+export type DeleteCompanyV3PayrollSingleAdjustmentsByIdError = DeleteCompanyV3PayrollSingleAdjustmentsByIdErrors[keyof DeleteCompanyV3PayrollSingleAdjustmentsByIdErrors];
+
+export type DeleteCompanyV3PayrollSingleAdjustmentsByIdResponses = {
+    /**
+     * Success
+     */
+    200: {
+        data: DeleteOutcome;
+    };
+};
+
+export type DeleteCompanyV3PayrollSingleAdjustmentsByIdResponse = DeleteCompanyV3PayrollSingleAdjustmentsByIdResponses[keyof DeleteCompanyV3PayrollSingleAdjustmentsByIdResponses];
+
 export type GetCompanyV3PositionsData = {
     body?: never;
     path?: never;
