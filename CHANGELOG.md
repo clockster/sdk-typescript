@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.10.0
+
+### May break your build (types only)
+
+Nothing. Three operations are new.
+
+### Changed in the API
+
+Reaches you whether or not you update this package.
+
+- `GET /payroll/payslips` answers the `external_id` of a dismissed employee. It was `null` on their
+  payslips.
+
+### New
+
+- `clockster.payroll.singleAdjustments`: `list`, `create` and `delete` over
+  `/payroll/single-adjustments` — one-off additions and deductions that the next calculation of a
+  payslip takes in. `create` files up to 100 at a time, all or nothing; send an `Idempotency-Key` in
+  `headers` so a retry does not file them twice. `type` is the union of the six types.
+
 ## 0.9.0
 
 ### May break your build (types only)
