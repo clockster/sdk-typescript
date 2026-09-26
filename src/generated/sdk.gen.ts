@@ -2,7 +2,7 @@
 
 import { client } from './client.gen.js';
 import { type Client, type ClientMeta, formDataBodySerializer, type Options as Options2, type RequestResult, type TDataShape } from './client/index.js';
-import type { DeleteCompanyV3DepartmentsByIdData, DeleteCompanyV3DepartmentsByIdErrors, DeleteCompanyV3DepartmentsByIdResponses, DeleteCompanyV3DocumentsByIdData, DeleteCompanyV3DocumentsByIdErrors, DeleteCompanyV3DocumentsByIdResponses, DeleteCompanyV3LocationsByIdData, DeleteCompanyV3LocationsByIdErrors, DeleteCompanyV3LocationsByIdResponses, DeleteCompanyV3PositionsByIdData, DeleteCompanyV3PositionsByIdErrors, DeleteCompanyV3PositionsByIdResponses, DeleteCompanyV3SchedulesByIdData, DeleteCompanyV3SchedulesByIdErrors, DeleteCompanyV3SchedulesByIdResponses, DeleteCompanyV3UserFiltersByIdData, DeleteCompanyV3UserFiltersByIdErrors, DeleteCompanyV3UserFiltersByIdResponses, DeleteCompanyV3WebhooksByIdData, DeleteCompanyV3WebhooksByIdErrors, DeleteCompanyV3WebhooksByIdResponses, GetCompanyV3AttendanceData, GetCompanyV3AttendanceErrors, GetCompanyV3AttendanceResponses, GetCompanyV3DepartmentsByIdData, GetCompanyV3DepartmentsByIdErrors, GetCompanyV3DepartmentsByIdResponses, GetCompanyV3DepartmentsData, GetCompanyV3DepartmentsErrors, GetCompanyV3DepartmentsResponses, GetCompanyV3DocumentsByIdData, GetCompanyV3DocumentsByIdErrors, GetCompanyV3DocumentsByIdResponses, GetCompanyV3DocumentsData, GetCompanyV3DocumentsErrors, GetCompanyV3DocumentsResponses, GetCompanyV3LocationsByIdData, GetCompanyV3LocationsByIdErrors, GetCompanyV3LocationsByIdResponses, GetCompanyV3LocationsData, GetCompanyV3LocationsErrors, GetCompanyV3LocationsResponses, GetCompanyV3MeData, GetCompanyV3MeErrors, GetCompanyV3MeResponses, GetCompanyV3PayrollPayslipsData, GetCompanyV3PayrollPayslipsErrors, GetCompanyV3PayrollPayslipsResponses, GetCompanyV3PositionsByIdData, GetCompanyV3PositionsByIdErrors, GetCompanyV3PositionsByIdResponses, GetCompanyV3PositionsData, GetCompanyV3PositionsErrors, GetCompanyV3PositionsResponses, GetCompanyV3SchedulesByIdData, GetCompanyV3SchedulesByIdErrors, GetCompanyV3SchedulesByIdResponses, GetCompanyV3TasksByIdData, GetCompanyV3TasksByIdErrors, GetCompanyV3TasksByIdResponses, GetCompanyV3TasksData, GetCompanyV3TasksErrors, GetCompanyV3TasksResponses, GetCompanyV3TimesheetsData, GetCompanyV3TimesheetsErrors, GetCompanyV3TimesheetsResponses, GetCompanyV3UserFiltersByIdData, GetCompanyV3UserFiltersByIdErrors, GetCompanyV3UserFiltersByIdResponses, GetCompanyV3UserFiltersData, GetCompanyV3UserFiltersErrors, GetCompanyV3UserFiltersResponses, GetCompanyV3UserRequestsByIdData, GetCompanyV3UserRequestsByIdErrors, GetCompanyV3UserRequestsByIdResponses, GetCompanyV3UserRequestsData, GetCompanyV3UserRequestsErrors, GetCompanyV3UserRequestsResponses, GetCompanyV3UsersByIdData, GetCompanyV3UsersByIdErrors, GetCompanyV3UsersByIdResponses, GetCompanyV3UsersData, GetCompanyV3UsersErrors, GetCompanyV3UsersResponses, GetCompanyV3WebhooksByIdData, GetCompanyV3WebhooksByIdErrors, GetCompanyV3WebhooksByIdResponses, GetCompanyV3WebhooksData, GetCompanyV3WebhooksDeliveriesByIdData, GetCompanyV3WebhooksDeliveriesByIdErrors, GetCompanyV3WebhooksDeliveriesByIdResponses, GetCompanyV3WebhooksDeliveriesData, GetCompanyV3WebhooksDeliveriesErrors, GetCompanyV3WebhooksDeliveriesResponses, GetCompanyV3WebhooksErrors, GetCompanyV3WebhooksEventsData, GetCompanyV3WebhooksEventsErrors, GetCompanyV3WebhooksEventsResponses, GetCompanyV3WebhooksResponses, PostCompanyV3AttendanceData, PostCompanyV3AttendanceErrors, PostCompanyV3AttendanceResponses, PostCompanyV3DepartmentsUpsertData, PostCompanyV3DepartmentsUpsertErrors, PostCompanyV3DepartmentsUpsertResponses, PostCompanyV3DocumentsUpsertData, PostCompanyV3DocumentsUpsertErrors, PostCompanyV3DocumentsUpsertResponses, PostCompanyV3FilesData, PostCompanyV3FilesErrors, PostCompanyV3FilesResponses, PostCompanyV3LocationsUpsertData, PostCompanyV3LocationsUpsertErrors, PostCompanyV3LocationsUpsertResponses, PostCompanyV3PositionsUpsertData, PostCompanyV3PositionsUpsertErrors, PostCompanyV3PositionsUpsertResponses, PostCompanyV3SchedulesData, PostCompanyV3SchedulesErrors, PostCompanyV3SchedulesResponses, PostCompanyV3TasksUpsertData, PostCompanyV3TasksUpsertErrors, PostCompanyV3TasksUpsertResponses, PostCompanyV3UserFiltersUpsertData, PostCompanyV3UserFiltersUpsertErrors, PostCompanyV3UserFiltersUpsertResponses, PostCompanyV3UsersDismissData, PostCompanyV3UsersDismissErrors, PostCompanyV3UsersDismissResponses, PostCompanyV3UsersUpsertData, PostCompanyV3UsersUpsertErrors, PostCompanyV3UsersUpsertResponses, PostCompanyV3WebhooksByIdSecretData, PostCompanyV3WebhooksByIdSecretErrors, PostCompanyV3WebhooksByIdSecretResponses, PostCompanyV3WebhooksData, PostCompanyV3WebhooksDeliveriesByIdRedeliverData, PostCompanyV3WebhooksDeliveriesByIdRedeliverErrors, PostCompanyV3WebhooksDeliveriesByIdRedeliverResponses, PostCompanyV3WebhooksErrors, PostCompanyV3WebhooksResponses, PutCompanyV3WebhooksByIdData, PutCompanyV3WebhooksByIdErrors, PutCompanyV3WebhooksByIdResponses } from './types.gen.js';
+import type { DeleteCompanyV3DepartmentsByIdData, DeleteCompanyV3DepartmentsByIdErrors, DeleteCompanyV3DepartmentsByIdResponses, DeleteCompanyV3DocumentsByIdData, DeleteCompanyV3DocumentsByIdErrors, DeleteCompanyV3DocumentsByIdResponses, DeleteCompanyV3LocationsByIdData, DeleteCompanyV3LocationsByIdErrors, DeleteCompanyV3LocationsByIdResponses, DeleteCompanyV3PayrollSingleAdjustmentsByIdData, DeleteCompanyV3PayrollSingleAdjustmentsByIdErrors, DeleteCompanyV3PayrollSingleAdjustmentsByIdResponses, DeleteCompanyV3PositionsByIdData, DeleteCompanyV3PositionsByIdErrors, DeleteCompanyV3PositionsByIdResponses, DeleteCompanyV3SchedulesByIdData, DeleteCompanyV3SchedulesByIdErrors, DeleteCompanyV3SchedulesByIdResponses, DeleteCompanyV3UserFiltersByIdData, DeleteCompanyV3UserFiltersByIdErrors, DeleteCompanyV3UserFiltersByIdResponses, DeleteCompanyV3WebhooksByIdData, DeleteCompanyV3WebhooksByIdErrors, DeleteCompanyV3WebhooksByIdResponses, GetCompanyV3AttendanceData, GetCompanyV3AttendanceErrors, GetCompanyV3AttendanceResponses, GetCompanyV3DepartmentsByIdData, GetCompanyV3DepartmentsByIdErrors, GetCompanyV3DepartmentsByIdResponses, GetCompanyV3DepartmentsData, GetCompanyV3DepartmentsErrors, GetCompanyV3DepartmentsResponses, GetCompanyV3DocumentsByIdData, GetCompanyV3DocumentsByIdErrors, GetCompanyV3DocumentsByIdResponses, GetCompanyV3DocumentsData, GetCompanyV3DocumentsErrors, GetCompanyV3DocumentsResponses, GetCompanyV3LocationsByIdData, GetCompanyV3LocationsByIdErrors, GetCompanyV3LocationsByIdResponses, GetCompanyV3LocationsData, GetCompanyV3LocationsErrors, GetCompanyV3LocationsResponses, GetCompanyV3MeData, GetCompanyV3MeErrors, GetCompanyV3MeResponses, GetCompanyV3PayrollPayslipsData, GetCompanyV3PayrollPayslipsErrors, GetCompanyV3PayrollPayslipsResponses, GetCompanyV3PayrollSingleAdjustmentsData, GetCompanyV3PayrollSingleAdjustmentsErrors, GetCompanyV3PayrollSingleAdjustmentsResponses, GetCompanyV3PositionsByIdData, GetCompanyV3PositionsByIdErrors, GetCompanyV3PositionsByIdResponses, GetCompanyV3PositionsData, GetCompanyV3PositionsErrors, GetCompanyV3PositionsResponses, GetCompanyV3SchedulesByIdData, GetCompanyV3SchedulesByIdErrors, GetCompanyV3SchedulesByIdResponses, GetCompanyV3TasksByIdData, GetCompanyV3TasksByIdErrors, GetCompanyV3TasksByIdResponses, GetCompanyV3TasksData, GetCompanyV3TasksErrors, GetCompanyV3TasksResponses, GetCompanyV3TimesheetsData, GetCompanyV3TimesheetsErrors, GetCompanyV3TimesheetsResponses, GetCompanyV3UserFiltersByIdData, GetCompanyV3UserFiltersByIdErrors, GetCompanyV3UserFiltersByIdResponses, GetCompanyV3UserFiltersData, GetCompanyV3UserFiltersErrors, GetCompanyV3UserFiltersResponses, GetCompanyV3UserRequestsByIdData, GetCompanyV3UserRequestsByIdErrors, GetCompanyV3UserRequestsByIdResponses, GetCompanyV3UserRequestsData, GetCompanyV3UserRequestsErrors, GetCompanyV3UserRequestsResponses, GetCompanyV3UsersByIdData, GetCompanyV3UsersByIdErrors, GetCompanyV3UsersByIdResponses, GetCompanyV3UsersData, GetCompanyV3UsersErrors, GetCompanyV3UsersResponses, GetCompanyV3WebhooksByIdData, GetCompanyV3WebhooksByIdErrors, GetCompanyV3WebhooksByIdResponses, GetCompanyV3WebhooksData, GetCompanyV3WebhooksDeliveriesByIdData, GetCompanyV3WebhooksDeliveriesByIdErrors, GetCompanyV3WebhooksDeliveriesByIdResponses, GetCompanyV3WebhooksDeliveriesData, GetCompanyV3WebhooksDeliveriesErrors, GetCompanyV3WebhooksDeliveriesResponses, GetCompanyV3WebhooksErrors, GetCompanyV3WebhooksEventsData, GetCompanyV3WebhooksEventsErrors, GetCompanyV3WebhooksEventsResponses, GetCompanyV3WebhooksResponses, PostCompanyV3AttendanceData, PostCompanyV3AttendanceErrors, PostCompanyV3AttendanceResponses, PostCompanyV3DepartmentsUpsertData, PostCompanyV3DepartmentsUpsertErrors, PostCompanyV3DepartmentsUpsertResponses, PostCompanyV3DocumentsUpsertData, PostCompanyV3DocumentsUpsertErrors, PostCompanyV3DocumentsUpsertResponses, PostCompanyV3FilesData, PostCompanyV3FilesErrors, PostCompanyV3FilesResponses, PostCompanyV3LocationsUpsertData, PostCompanyV3LocationsUpsertErrors, PostCompanyV3LocationsUpsertResponses, PostCompanyV3PayrollSingleAdjustmentsData, PostCompanyV3PayrollSingleAdjustmentsErrors, PostCompanyV3PayrollSingleAdjustmentsResponses, PostCompanyV3PositionsUpsertData, PostCompanyV3PositionsUpsertErrors, PostCompanyV3PositionsUpsertResponses, PostCompanyV3SchedulesData, PostCompanyV3SchedulesErrors, PostCompanyV3SchedulesResponses, PostCompanyV3TasksUpsertData, PostCompanyV3TasksUpsertErrors, PostCompanyV3TasksUpsertResponses, PostCompanyV3UserFiltersUpsertData, PostCompanyV3UserFiltersUpsertErrors, PostCompanyV3UserFiltersUpsertResponses, PostCompanyV3UsersDismissData, PostCompanyV3UsersDismissErrors, PostCompanyV3UsersDismissResponses, PostCompanyV3UsersUpsertData, PostCompanyV3UsersUpsertErrors, PostCompanyV3UsersUpsertResponses, PostCompanyV3WebhooksByIdSecretData, PostCompanyV3WebhooksByIdSecretErrors, PostCompanyV3WebhooksByIdSecretResponses, PostCompanyV3WebhooksData, PostCompanyV3WebhooksDeliveriesByIdRedeliverData, PostCompanyV3WebhooksDeliveriesByIdRedeliverErrors, PostCompanyV3WebhooksDeliveriesByIdRedeliverResponses, PostCompanyV3WebhooksErrors, PostCompanyV3WebhooksResponses, PutCompanyV3WebhooksByIdData, PutCompanyV3WebhooksByIdErrors, PutCompanyV3WebhooksByIdResponses } from './types.gen.js';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean, TResponse = unknown> = Options2<TData, ThrowOnError, TResponse> & {
     /**
@@ -451,10 +451,81 @@ export class Payslips extends HeyApiClient {
     }
 }
 
+export class SingleAdjustments extends HeyApiClient {
+    /**
+     * List single adjustments
+     *
+     * One-off additions and deductions, oldest first, with who they are for and the day they
+     * are dated.
+     *
+     * `amount` is never negative: `type` says whether it is added or taken off, and whether
+     * before or after tax. `date_from` and `date_to` bound the day, inclusive.
+     *
+     * Rows filed in the web application are listed too, and may carry `13th_pay`, which is
+     * computed there rather than filed here.
+     */
+    public list<ThrowOnError extends boolean = false>(options?: Options<GetCompanyV3PayrollSingleAdjustmentsData, ThrowOnError>): RequestResult<GetCompanyV3PayrollSingleAdjustmentsResponses, GetCompanyV3PayrollSingleAdjustmentsErrors, ThrowOnError> {
+        return (options?.client ?? this.client).get<GetCompanyV3PayrollSingleAdjustmentsResponses, GetCompanyV3PayrollSingleAdjustmentsErrors, ThrowOnError>({
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/company/v3/payroll/single-adjustments',
+            ...options
+        });
+    }
+    
+    /**
+     * Create single adjustments
+     *
+     * Up to 100 one-off amounts — a bonus, a service charge, a penalty — each for one person
+     * and one day. All or nothing: a `422` means none of the batch landed.
+     *
+     * **An adjustment is read when a payslip is calculated.** A `draft` payslip whose period
+     * holds `date` takes it in on its next calculation. An `approved` or `paid` one does not:
+     * it is recalculated only by hand in the web application, and nothing here tells you
+     * whether that happened. Check the payslip's status for the month before filing into it.
+     *
+     * **Send an `Idempotency-Key`.** An adjustment carries no key of yours, so a retry after a
+     * timeout files it a second time unless the header says it is the same attempt. The
+     * answer lists what was created, in the order sent.
+     */
+    public create<ThrowOnError extends boolean = false>(options: Options<PostCompanyV3PayrollSingleAdjustmentsData, ThrowOnError>): RequestResult<PostCompanyV3PayrollSingleAdjustmentsResponses, PostCompanyV3PayrollSingleAdjustmentsErrors, ThrowOnError> {
+        return (options.client ?? this.client).post<PostCompanyV3PayrollSingleAdjustmentsResponses, PostCompanyV3PayrollSingleAdjustmentsErrors, ThrowOnError>({
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/company/v3/payroll/single-adjustments',
+            ...options,
+            headers: {
+                'Content-Type': 'application/json',
+                ...options.headers
+            }
+        });
+    }
+    
+    /**
+     * Delete a single adjustment
+     *
+     * Deletes the adjustment. A payslip already calculated with it keeps the amount until it
+     * is calculated again — for an `approved` or `paid` one, only by hand in the web
+     * application.
+     *
+     * Another company's id is a `404`.
+     */
+    public delete<ThrowOnError extends boolean = false>(options: Options<DeleteCompanyV3PayrollSingleAdjustmentsByIdData, ThrowOnError>): RequestResult<DeleteCompanyV3PayrollSingleAdjustmentsByIdResponses, DeleteCompanyV3PayrollSingleAdjustmentsByIdErrors, ThrowOnError> {
+        return (options.client ?? this.client).delete<DeleteCompanyV3PayrollSingleAdjustmentsByIdResponses, DeleteCompanyV3PayrollSingleAdjustmentsByIdErrors, ThrowOnError>({
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/company/v3/payroll/single-adjustments/{id}',
+            ...options
+        });
+    }
+}
+
 export class Payroll extends HeyApiClient {
     private _payslips?: Payslips;
     get payslips(): Payslips {
         return this._payslips ??= new Payslips({ client: this.client });
+    }
+    
+    private _singleAdjustments?: SingleAdjustments;
+    get singleAdjustments(): SingleAdjustments {
+        return this._singleAdjustments ??= new SingleAdjustments({ client: this.client });
     }
 }
 
