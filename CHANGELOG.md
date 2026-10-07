@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.11.0
+
+### May break your build (types only)
+
+Nothing. The seventeen values are additive.
+
+### Changed in the API
+
+Reaches you whether or not you update this package.
+
+- A company may hold up to ten API keys, each with full access or read or write access per
+  section, and every operation names the scope it needs. A call outside the key's scopes answers
+  `403` with `insufficient_scope`. A key issued before scopes has full access.
+- The limit of 100 requests a minute is counted against the company and shared by all of its keys.
+- A document's `type` also takes `srts`, `vaccination`, `social_id`, `disability_certificate`,
+  `large_family_certificate`, `asp_certificate`, `tech_passport`, `pension`, `rk_passport`,
+  `student_card`, `vnzh`, `pcr_certificate`, `lbg_card`, `insurance_policy`, `hunter`, `oralman`
+  and `attorney` — in the `types` filter, which now takes up to 49, and in
+  `POST /documents/upsert`.
+- The API is also served to AI agents as an MCP server at `https://api.clockster.com/company/mcp`;
+  the document's introduction says how to connect one.
+
 ## 0.10.0
 
 ### May break your build (types only)
