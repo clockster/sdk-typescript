@@ -257,7 +257,7 @@ export type GetCompanyV3AttendanceErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -364,7 +364,7 @@ export type PostCompanyV3AttendanceErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -434,7 +434,7 @@ export type GetCompanyV3DepartmentsErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -505,7 +505,7 @@ export type PostCompanyV3DepartmentsUpsertErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -553,7 +553,7 @@ export type DeleteCompanyV3DepartmentsByIdErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -610,7 +610,7 @@ export type GetCompanyV3DepartmentsByIdErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -691,7 +691,7 @@ export type GetCompanyV3DocumentsData = {
         /**
          * Only rows of these types.
          */
-        types?: Array<'passport' | 'cv' | 'diploma' | 'medical' | 'photo' | 'other' | 'medical_book' | 'employment_agreement' | 'termination_of_employment_agreement' | 'equipment_agreement' | 'application' | 'order' | 'supplementary_agreement' | 'job_description' | 'nda' | 'non_compete_agreement' | 'data_processing_agreement' | 'act_of_service_acceptance' | 'health_and_safety_briefing' | 'shift_schedule' | 'letter' | 'vacation_schedule' | 'contract' | 'agreement' | 'goods_release_note' | 'reconciliation_act' | 'return_to_supplier' | 'driver_license' | 'birth_certificate' | 'marriage_certificate' | 'divorce_certificate' | 'change_fio_certificate'> | null;
+        types?: Array<'passport' | 'cv' | 'diploma' | 'medical' | 'photo' | 'other' | 'medical_book' | 'employment_agreement' | 'termination_of_employment_agreement' | 'equipment_agreement' | 'application' | 'order' | 'supplementary_agreement' | 'job_description' | 'nda' | 'non_compete_agreement' | 'data_processing_agreement' | 'act_of_service_acceptance' | 'health_and_safety_briefing' | 'shift_schedule' | 'letter' | 'vacation_schedule' | 'contract' | 'agreement' | 'goods_release_note' | 'reconciliation_act' | 'return_to_supplier' | 'driver_license' | 'birth_certificate' | 'marriage_certificate' | 'divorce_certificate' | 'change_fio_certificate' | 'srts' | 'vaccination' | 'social_id' | 'disability_certificate' | 'large_family_certificate' | 'asp_certificate' | 'tech_passport' | 'pension' | 'rk_passport' | 'student_card' | 'vnzh' | 'pcr_certificate' | 'lbg_card' | 'insurance_policy' | 'hunter' | 'oralman' | 'attorney'> | null;
         /**
          * Only documents covering these employment terms.
          */
@@ -734,7 +734,7 @@ export type GetCompanyV3DocumentsErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -827,7 +827,7 @@ export type PostCompanyV3DocumentsUpsertData = {
             /**
              * Which kind of document this is.
              */
-            type: 'passport' | 'cv' | 'diploma' | 'medical' | 'photo' | 'other' | 'medical_book' | 'employment_agreement' | 'termination_of_employment_agreement' | 'equipment_agreement' | 'application' | 'order' | 'supplementary_agreement' | 'job_description' | 'nda' | 'non_compete_agreement' | 'data_processing_agreement' | 'act_of_service_acceptance' | 'health_and_safety_briefing' | 'shift_schedule' | 'letter' | 'vacation_schedule' | 'contract' | 'agreement' | 'goods_release_note' | 'reconciliation_act' | 'return_to_supplier' | 'driver_license' | 'birth_certificate' | 'marriage_certificate' | 'divorce_certificate' | 'change_fio_certificate';
+            type: 'passport' | 'cv' | 'diploma' | 'medical' | 'photo' | 'other' | 'medical_book' | 'employment_agreement' | 'termination_of_employment_agreement' | 'equipment_agreement' | 'application' | 'order' | 'supplementary_agreement' | 'job_description' | 'nda' | 'non_compete_agreement' | 'data_processing_agreement' | 'act_of_service_acceptance' | 'health_and_safety_briefing' | 'shift_schedule' | 'letter' | 'vacation_schedule' | 'contract' | 'agreement' | 'goods_release_note' | 'reconciliation_act' | 'return_to_supplier' | 'driver_license' | 'birth_certificate' | 'marriage_certificate' | 'divorce_certificate' | 'change_fio_certificate' | 'srts' | 'vaccination' | 'social_id' | 'disability_certificate' | 'large_family_certificate' | 'asp_certificate' | 'tech_passport' | 'pension' | 'rk_passport' | 'student_card' | 'vnzh' | 'pcr_certificate' | 'lbg_card' | 'insurance_policy' | 'hunter' | 'oralman' | 'attorney';
             /**
              * The employee this belongs to, by the id this API issued.
              */
@@ -877,7 +877,7 @@ export type PostCompanyV3DocumentsUpsertErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -925,7 +925,7 @@ export type DeleteCompanyV3DocumentsByIdErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -978,7 +978,7 @@ export type GetCompanyV3DocumentsByIdErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -1075,7 +1075,7 @@ export type PostCompanyV3FilesErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -1149,7 +1149,7 @@ export type GetCompanyV3LocationsErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -1240,7 +1240,7 @@ export type PostCompanyV3LocationsUpsertErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -1288,7 +1288,7 @@ export type DeleteCompanyV3LocationsByIdErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -1345,7 +1345,7 @@ export type GetCompanyV3LocationsByIdErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -1400,7 +1400,7 @@ export type GetCompanyV3MeErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -1471,7 +1471,7 @@ export type GetCompanyV3PayrollPayslipsErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -1589,7 +1589,7 @@ export type GetCompanyV3PayrollSingleAdjustmentsErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -1677,7 +1677,7 @@ export type PostCompanyV3PayrollSingleAdjustmentsErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -1736,7 +1736,7 @@ export type DeleteCompanyV3PayrollSingleAdjustmentsByIdErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -1800,7 +1800,7 @@ export type GetCompanyV3PositionsErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -1870,7 +1870,7 @@ export type PostCompanyV3PositionsUpsertErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -1918,7 +1918,7 @@ export type DeleteCompanyV3PositionsByIdErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -1975,7 +1975,7 @@ export type GetCompanyV3PositionsByIdErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -2036,7 +2036,7 @@ export type PostCompanyV3SchedulesErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -2113,7 +2113,7 @@ export type DeleteCompanyV3SchedulesByIdErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -2165,7 +2165,7 @@ export type GetCompanyV3SchedulesByIdErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -2286,7 +2286,7 @@ export type GetCompanyV3TasksErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -2451,7 +2451,7 @@ export type PostCompanyV3TasksUpsertErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -2504,7 +2504,7 @@ export type GetCompanyV3TasksByIdErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -2618,7 +2618,7 @@ export type GetCompanyV3TimesheetsErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -2773,7 +2773,7 @@ export type GetCompanyV3UserFiltersErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -2844,7 +2844,7 @@ export type PostCompanyV3UserFiltersUpsertErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -2892,7 +2892,7 @@ export type DeleteCompanyV3UserFiltersByIdErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -2949,7 +2949,7 @@ export type GetCompanyV3UserFiltersByIdErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -3033,7 +3033,7 @@ export type GetCompanyV3UserRequestsErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -3110,7 +3110,7 @@ export type GetCompanyV3UserRequestsByIdErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -3233,7 +3233,7 @@ export type GetCompanyV3UsersErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -3406,7 +3406,7 @@ export type PostCompanyV3UsersDismissErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -3555,7 +3555,7 @@ export type PostCompanyV3UsersUpsertErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -3608,7 +3608,7 @@ export type GetCompanyV3UsersByIdErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -3778,7 +3778,7 @@ export type GetCompanyV3WebhooksErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -3887,7 +3887,7 @@ export type PostCompanyV3WebhooksErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -3983,7 +3983,7 @@ export type GetCompanyV3WebhooksDeliveriesErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -4047,7 +4047,7 @@ export type GetCompanyV3WebhooksDeliveriesByIdErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -4115,7 +4115,7 @@ export type PostCompanyV3WebhooksDeliveriesByIdRedeliverErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -4158,7 +4158,7 @@ export type GetCompanyV3WebhooksEventsErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -4206,7 +4206,7 @@ export type DeleteCompanyV3WebhooksByIdErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -4254,7 +4254,7 @@ export type GetCompanyV3WebhooksByIdErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -4360,7 +4360,7 @@ export type PutCompanyV3WebhooksByIdErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
@@ -4434,7 +4434,7 @@ export type PostCompanyV3WebhooksByIdSecretErrors = {
      */
     401: Refusal;
     /**
-     * A token without the company ability — code `forbidden`
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
      */
     403: Refusal;
     /**
