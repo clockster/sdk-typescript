@@ -1570,7 +1570,7 @@ export type GetCompanyV3PayrollSingleAdjustmentsData = {
         /**
          * Only rows of these types.
          */
-        types?: Array<'service_charge' | 'single_addition_pre_tax' | 'single_addition_post_tax' | 'single_loan' | 'single_deduction_pre_tax' | 'single_deduction_post_tax'> | null;
+        types?: Array<'service_charge' | 'single_addition_pre_tax' | 'single_addition_post_tax' | 'single_loan' | 'single_deduction_pre_tax' | 'single_deduction_post_tax' | 'withholding'> | null;
         /**
          * Start of the window, inclusive (YYYY-MM-DD).
          */
@@ -1643,9 +1643,9 @@ export type PostCompanyV3PayrollSingleAdjustmentsData = {
              */
             user_id: number;
             /**
-             * What the amount does: an addition or a deduction, before or after tax, a service charge or a one-off loan.
+             * What the amount does: an addition or a deduction, before or after tax, a service charge, a one-off loan, or a withholding from the take-home pay that leaves the company's cost as it is.
              */
-            type: 'service_charge' | 'single_addition_pre_tax' | 'single_addition_post_tax' | 'single_loan' | 'single_deduction_pre_tax' | 'single_deduction_post_tax';
+            type: 'service_charge' | 'single_addition_pre_tax' | 'single_addition_post_tax' | 'single_loan' | 'single_deduction_pre_tax' | 'single_deduction_post_tax' | 'withholding';
             /**
              * How much, never negative — `type` says which way it goes. At most two decimal places.
              */
