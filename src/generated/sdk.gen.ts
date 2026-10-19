@@ -274,6 +274,10 @@ export class Documents extends HeyApiClient {
      *
      * **A document everyone has signed cannot be deleted** — `409`, code `document_signed`.
      *
+     * **A document sent to a counterparty**, by e-mail or a copied signing link, **cannot be
+     * deleted** — `409`, code `document_sent_to_counterparty`. It is withdrawn in the app
+     * instead, as the web app requires.
+     *
      * Another company's id is a `404`.
      */
     public delete<ThrowOnError extends boolean = false>(options: Options<DeleteCompanyV3DocumentsByIdData, ThrowOnError>): RequestResult<DeleteCompanyV3DocumentsByIdResponses, DeleteCompanyV3DocumentsByIdErrors, ThrowOnError> {
@@ -460,6 +464,9 @@ export class SingleAdjustments extends HeyApiClient {
      *
      * `amount` is never negative: `type` says whether it is added or taken off, and whether
      * before or after tax. `date_from` and `date_to` bound the day, inclusive.
+     *
+     * A `withholding` comes off the take-home pay alone, as a loan repayment does: the
+     * company's cost keeps it, where a `single_deduction_post_tax` lowers both.
      *
      * Rows filed in the web application are listed too, and may carry `13th_pay`, which is
      * computed there rather than filed here.

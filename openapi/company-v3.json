@@ -3884,7 +3884,7 @@
             }
           }
         },
-        "description": "Deletes the document, its file records and the stored objects behind them.\n\n**A document everyone has signed cannot be deleted** — `409`, code `document_signed`.\n\nAnother company's id is a `404`.",
+        "description": "Deletes the document, its file records and the stored objects behind them.\n\n**A document everyone has signed cannot be deleted** — `409`, code `document_signed`.\n\n**A document sent to a counterparty**, by e-mail or a copied signing link, **cannot be\ndeleted** — `409`, code `document_sent_to_counterparty`. It is withdrawn in the app\ninstead, as the web app requires.\n\nAnother company's id is a `404`.",
         "security": [
           {
             "companyToken": [
@@ -5778,7 +5778,7 @@
                 "array",
                 "null"
               ],
-              "maxItems": 6,
+              "maxItems": 7,
               "items": {
                 "type": "string",
                 "enum": [
@@ -5787,7 +5787,8 @@
                   "single_addition_post_tax",
                   "single_loan",
                   "single_deduction_pre_tax",
-                  "single_deduction_post_tax"
+                  "single_deduction_post_tax",
+                  "withholding"
                 ],
                 "x-clockster-set": "PayrollSingleAdjustmentsType"
               }
@@ -6034,7 +6035,7 @@
             }
           }
         },
-        "description": "One-off additions and deductions, oldest first, with who they are for and the day they\nare dated.\n\n`amount` is never negative: `type` says whether it is added or taken off, and whether\nbefore or after tax. `date_from` and `date_to` bound the day, inclusive.\n\nRows filed in the web application are listed too, and may carry `13th_pay`, which is\ncomputed there rather than filed here.",
+        "description": "One-off additions and deductions, oldest first, with who they are for and the day they\nare dated.\n\n`amount` is never negative: `type` says whether it is added or taken off, and whether\nbefore or after tax. `date_from` and `date_to` bound the day, inclusive.\n\nA `withholding` comes off the take-home pay alone, as a loan repayment does: the\ncompany's cost keeps it, where a `single_deduction_post_tax` lowers both.\n\nRows filed in the web application are listed too, and may carry `13th_pay`, which is\ncomputed there rather than filed here.",
         "security": [
           {
             "companyToken": [
@@ -6282,10 +6283,11 @@
                             "single_addition_post_tax",
                             "single_loan",
                             "single_deduction_pre_tax",
-                            "single_deduction_post_tax"
+                            "single_deduction_post_tax",
+                            "withholding"
                           ],
                           "x-clockster-set": "PayrollSingleAdjustmentsType",
-                          "description": "What the amount does: an addition or a deduction, before or after tax, a service charge or a one-off loan."
+                          "description": "What the amount does: an addition or a deduction, before or after tax, a service charge, a one-off loan, or a withholding from the take-home pay that leaves the company's cost as it is."
                         },
                         "amount": {
                           "type": "number",
