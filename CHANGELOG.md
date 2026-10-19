@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.12.0
+
+### May break your build (types only)
+
+Nothing. The value is additive.
+
+### Changed in the API
+
+Reaches you whether or not you update this package.
+
+- A single adjustment's `type` also takes `withholding` — in the `types` filter, which now takes up
+  to seven, and in `POST /payroll/single-adjustments`. It comes off the take-home pay alone, as a
+  loan repayment does, and leaves the company's cost as it is, where `single_deduction_post_tax`
+  lowers both.
+- `DELETE /documents/{id}` refuses a document sent to a counterparty, by e-mail or a copied signing
+  link: `409` with `document_sent_to_counterparty`. It is withdrawn in the app instead.
+
 ## 0.11.0
 
 ### May break your build (types only)
