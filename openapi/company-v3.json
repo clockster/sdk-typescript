@@ -62,6 +62,10 @@
       "description": "Work issued from your system and read back with its state. Written with your own key, so re-sending the same task updates it instead of duplicating it."
     },
     {
+      "name": "Checklists",
+      "description": "Today's checklists issued from your system and read back with their answers. Created once under your own key, so re-sending one answers `exists` instead of duplicating it."
+    },
+    {
       "name": "Documents",
       "description": "Contracts and the rest of the personnel file, with their signing state. Filed against a person, and pointed at a file uploaded first."
     },
@@ -1347,6 +1351,2683 @@
           {
             "companyToken": [
               "attendance:write"
+            ]
+          }
+        ]
+      }
+    },
+    "/company/v3/checklists": {
+      "get": {
+        "operationId": "company.v3.checklists.index",
+        "tags": [
+          "Checklists"
+        ],
+        "summary": "List checklists",
+        "parameters": [
+          {
+            "name": "per_page",
+            "in": "query",
+            "required": false,
+            "description": "How many rows one page holds. Defaults to 50.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 50
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "description": "The `meta.next_cursor` of the previous page. Omit it for the first. A cursor is bound to the filters it was issued under — change them and start again.",
+            "schema": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "maxLength": 512
+            }
+          },
+          {
+            "name": "external_ids",
+            "in": "query",
+            "required": false,
+            "description": "Only rows carrying these keys of yours: write with your key, read back with it.",
+            "style": "form",
+            "explode": false,
+            "schema": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "maxItems": 100,
+              "items": {
+                "type": "string",
+                "maxLength": 64
+              }
+            }
+          },
+          {
+            "name": "statuses",
+            "in": "query",
+            "required": false,
+            "description": "Only rows in these states.",
+            "style": "form",
+            "explode": false,
+            "schema": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "maxItems": 6,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "created",
+                  "started",
+                  "completed",
+                  "incompleted",
+                  "pastdue",
+                  "pending"
+                ],
+                "x-clockster-set": "ChecklistsStatus"
+              }
+            }
+          },
+          {
+            "name": "types",
+            "in": "query",
+            "required": false,
+            "description": "Only rows of these types.",
+            "style": "form",
+            "explode": false,
+            "schema": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "maxItems": 2,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "default",
+                  "audit"
+                ],
+                "x-clockster-set": "ChecklistsType"
+              }
+            }
+          },
+          {
+            "name": "templates",
+            "in": "query",
+            "required": false,
+            "description": "Only rows issued from these templates, by id.",
+            "style": "form",
+            "explode": false,
+            "schema": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "maxItems": 100,
+              "items": {
+                "type": "integer"
+              }
+            }
+          },
+          {
+            "name": "locations",
+            "in": "query",
+            "required": false,
+            "description": "Only checklists aimed at one of these locations, by id. Your company's own locations only: one shared from a parent company, which `GET /company/v3/locations` also lists, is a `422`.",
+            "style": "form",
+            "explode": false,
+            "schema": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "maxItems": 100,
+              "items": {
+                "type": "integer"
+              }
+            }
+          },
+          {
+            "name": "start_from",
+            "in": "query",
+            "required": false,
+            "description": "Starting on or after this date (YYYY-MM-DD).",
+            "schema": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "date"
+            }
+          },
+          {
+            "name": "start_to",
+            "in": "query",
+            "required": false,
+            "description": "Starting on or before this date (YYYY-MM-DD).",
+            "schema": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "date"
+            }
+          },
+          {
+            "name": "updated_since",
+            "in": "query",
+            "required": false,
+            "description": "Only rows changed at or after this instant (ISO 8601). The cheap way to sync: ask for what moved, not for everything.",
+            "schema": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "description": "Free text over the title.",
+            "schema": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "maxLength": 50
+            }
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "required": false,
+            "description": "Relations to load, comma-separated. Anything not named is absent from the answer rather than null.",
+            "style": "form",
+            "explode": false,
+            "schema": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": "string",
+                "enum": [
+                  "items",
+                  "managers",
+                  "users",
+                  "issues",
+                  "comments",
+                  "attachments",
+                  "author"
+                ],
+                "x-clockster-set": "ChecklistsInclude"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer"
+                          },
+                          "external_id": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "title": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "type": {
+                            "type": "string"
+                          },
+                          "status": {
+                            "type": "string"
+                          },
+                          "priority": {
+                            "type": "string"
+                          },
+                          "min_score": {
+                            "type": [
+                              "integer",
+                              "null"
+                            ]
+                          },
+                          "score_percent": {
+                            "type": "integer"
+                          },
+                          "template_id": {
+                            "type": [
+                              "integer",
+                              "null"
+                            ]
+                          },
+                          "author_id": {
+                            "type": [
+                              "integer",
+                              "null"
+                            ]
+                          },
+                          "locations": {
+                            "type": "array",
+                            "items": {
+                              "type": "integer"
+                            }
+                          },
+                          "departments": {
+                            "type": "array",
+                            "items": {
+                              "type": "integer"
+                            }
+                          },
+                          "positions": {
+                            "type": "array",
+                            "items": {
+                              "type": "integer"
+                            }
+                          },
+                          "user_filters": {
+                            "type": "array",
+                            "items": {
+                              "type": "integer"
+                            }
+                          },
+                          "date_start": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "date_end": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "time_start": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "time_end": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "timezone": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "time_notify": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "req_approve": {
+                            "type": "boolean"
+                          },
+                          "req_notify": {
+                            "type": "boolean"
+                          },
+                          "geofence": {
+                            "type": "boolean"
+                          },
+                          "gallery": {
+                            "type": "boolean"
+                          },
+                          "is_keep_status": {
+                            "type": "boolean"
+                          },
+                          "time_worked": {
+                            "type": "integer"
+                          },
+                          "started_at": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "completed_at": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "created_at": {
+                            "type": "string"
+                          },
+                          "updated_at": {
+                            "type": "string"
+                          },
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "integer"
+                                },
+                                "section": {
+                                  "type": [
+                                    "null",
+                                    "string"
+                                  ]
+                                },
+                                "title": {
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "type": "string"
+                                },
+                                "is_required": {
+                                  "type": "boolean"
+                                },
+                                "photos": {
+                                  "type": "integer"
+                                },
+                                "geofence": {
+                                  "type": "boolean"
+                                },
+                                "time_start": {
+                                  "type": [
+                                    "null",
+                                    "string"
+                                  ]
+                                },
+                                "time_end": {
+                                  "type": [
+                                    "null",
+                                    "string"
+                                  ]
+                                },
+                                "min_number": {
+                                  "type": [
+                                    "integer",
+                                    "null"
+                                  ]
+                                },
+                                "max_number": {
+                                  "type": [
+                                    "integer",
+                                    "null"
+                                  ]
+                                },
+                                "value": {
+                                  "type": [
+                                    "boolean",
+                                    "integer",
+                                    "null",
+                                    "string"
+                                  ]
+                                },
+                                "note": {
+                                  "type": [
+                                    "null",
+                                    "string"
+                                  ]
+                                },
+                                "score": {
+                                  "type": "integer"
+                                },
+                                "is_completed": {
+                                  "type": "boolean"
+                                },
+                                "completed_at": {
+                                  "type": [
+                                    "null",
+                                    "string"
+                                  ]
+                                },
+                                "user": {
+                                  "type": [
+                                    "null",
+                                    "object"
+                                  ],
+                                  "properties": {
+                                    "id": {
+                                      "type": "integer"
+                                    },
+                                    "external_id": {
+                                      "type": [
+                                        "null",
+                                        "string"
+                                      ]
+                                    },
+                                    "code": {
+                                      "type": [
+                                        "null",
+                                        "string"
+                                      ]
+                                    },
+                                    "first_name": {
+                                      "type": "string"
+                                    },
+                                    "middle_name": {
+                                      "type": [
+                                        "null",
+                                        "string"
+                                      ]
+                                    },
+                                    "last_name": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "external_id",
+                                    "code",
+                                    "first_name",
+                                    "middle_name",
+                                    "last_name"
+                                  ]
+                                },
+                                "latitude": {
+                                  "type": [
+                                    "null",
+                                    "number"
+                                  ]
+                                },
+                                "longitude": {
+                                  "type": [
+                                    "null",
+                                    "number"
+                                  ]
+                                },
+                                "has_issue": {
+                                  "type": "boolean"
+                                },
+                                "issue": {
+                                  "type": [
+                                    "null",
+                                    "string"
+                                  ]
+                                },
+                                "attachments": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "integer"
+                                      },
+                                      "name": {
+                                        "type": "string"
+                                      },
+                                      "description": {
+                                        "type": [
+                                          "null",
+                                          "string"
+                                        ]
+                                      },
+                                      "format": {
+                                        "type": "string"
+                                      },
+                                      "url": {
+                                        "type": "string"
+                                      },
+                                      "created_at": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "name",
+                                      "description",
+                                      "format",
+                                      "url",
+                                      "created_at"
+                                    ]
+                                  }
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "section",
+                                "title",
+                                "type",
+                                "is_required",
+                                "photos",
+                                "geofence",
+                                "time_start",
+                                "time_end",
+                                "min_number",
+                                "max_number",
+                                "value",
+                                "note",
+                                "score",
+                                "is_completed",
+                                "completed_at",
+                                "user",
+                                "latitude",
+                                "longitude",
+                                "has_issue",
+                                "issue",
+                                "attachments"
+                              ]
+                            }
+                          },
+                          "managers": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "integer"
+                                },
+                                "external_id": {
+                                  "type": [
+                                    "null",
+                                    "string"
+                                  ]
+                                },
+                                "code": {
+                                  "type": [
+                                    "null",
+                                    "string"
+                                  ]
+                                },
+                                "first_name": {
+                                  "type": "string"
+                                },
+                                "middle_name": {
+                                  "type": [
+                                    "null",
+                                    "string"
+                                  ]
+                                },
+                                "last_name": {
+                                  "type": "string"
+                                },
+                                "status": {
+                                  "type": "string"
+                                },
+                                "updated_at": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "external_id",
+                                "code",
+                                "first_name",
+                                "middle_name",
+                                "last_name",
+                                "status",
+                                "updated_at"
+                              ]
+                            }
+                          },
+                          "users": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/EmployeeShort"
+                            }
+                          },
+                          "issues": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "integer"
+                                },
+                                "item_id": {
+                                  "type": "integer"
+                                },
+                                "stage": {
+                                  "type": "string"
+                                },
+                                "severity": {
+                                  "type": "string"
+                                },
+                                "description": {
+                                  "type": [
+                                    "null",
+                                    "string"
+                                  ]
+                                },
+                                "reporter_id": {
+                                  "type": [
+                                    "integer",
+                                    "null"
+                                  ]
+                                },
+                                "assignee_id": {
+                                  "type": [
+                                    "integer",
+                                    "null"
+                                  ]
+                                },
+                                "due_date": {
+                                  "type": [
+                                    "null",
+                                    "string"
+                                  ]
+                                },
+                                "resolved_note": {
+                                  "type": [
+                                    "null",
+                                    "string"
+                                  ]
+                                },
+                                "resolved_at": {
+                                  "type": [
+                                    "null",
+                                    "string"
+                                  ]
+                                },
+                                "resolved_by": {
+                                  "type": [
+                                    "integer",
+                                    "null"
+                                  ]
+                                },
+                                "verified_at": {
+                                  "type": [
+                                    "null",
+                                    "string"
+                                  ]
+                                },
+                                "verified_by": {
+                                  "type": [
+                                    "integer",
+                                    "null"
+                                  ]
+                                },
+                                "created_at": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "item_id",
+                                "stage",
+                                "severity",
+                                "description",
+                                "reporter_id",
+                                "assignee_id",
+                                "due_date",
+                                "resolved_note",
+                                "resolved_at",
+                                "resolved_by",
+                                "verified_at",
+                                "verified_by",
+                                "created_at"
+                              ]
+                            }
+                          },
+                          "comments": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "integer"
+                                },
+                                "parent_id": {
+                                  "type": [
+                                    "integer",
+                                    "null"
+                                  ]
+                                },
+                                "user": {
+                                  "type": [
+                                    "null",
+                                    "object"
+                                  ],
+                                  "properties": {
+                                    "id": {
+                                      "type": "integer"
+                                    },
+                                    "external_id": {
+                                      "type": [
+                                        "null",
+                                        "string"
+                                      ]
+                                    },
+                                    "code": {
+                                      "type": [
+                                        "null",
+                                        "string"
+                                      ]
+                                    },
+                                    "first_name": {
+                                      "type": "string"
+                                    },
+                                    "middle_name": {
+                                      "type": [
+                                        "null",
+                                        "string"
+                                      ]
+                                    },
+                                    "last_name": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "external_id",
+                                    "code",
+                                    "first_name",
+                                    "middle_name",
+                                    "last_name"
+                                  ]
+                                },
+                                "text": {
+                                  "type": "string"
+                                },
+                                "created_at": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "parent_id",
+                                "user",
+                                "text",
+                                "created_at"
+                              ]
+                            }
+                          },
+                          "attachments": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "description": {
+                                  "type": [
+                                    "null",
+                                    "string"
+                                  ]
+                                },
+                                "format": {
+                                  "type": "string"
+                                },
+                                "url": {
+                                  "type": "string"
+                                },
+                                "created_at": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "name",
+                                "description",
+                                "format",
+                                "url",
+                                "created_at"
+                              ]
+                            }
+                          },
+                          "author": {
+                            "type": [
+                              "null",
+                              "object"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "external_id": {
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              "code": {
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              "first_name": {
+                                "type": "string"
+                              },
+                              "middle_name": {
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              "last_name": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "external_id",
+                              "code",
+                              "first_name",
+                              "middle_name",
+                              "last_name"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "external_id",
+                          "title",
+                          "description",
+                          "type",
+                          "status",
+                          "priority",
+                          "min_score",
+                          "score_percent",
+                          "template_id",
+                          "author_id",
+                          "locations",
+                          "departments",
+                          "positions",
+                          "user_filters",
+                          "date_start",
+                          "date_end",
+                          "time_start",
+                          "time_end",
+                          "timezone",
+                          "time_notify",
+                          "req_approve",
+                          "req_notify",
+                          "geofence",
+                          "gallery",
+                          "is_keep_status",
+                          "time_worked",
+                          "started_at",
+                          "completed_at",
+                          "created_at",
+                          "updated_at"
+                        ]
+                      }
+                    },
+                    "meta": {
+                      "type": "object",
+                      "properties": {
+                        "per_page": {
+                          "type": "integer"
+                        },
+                        "next_cursor": {
+                          "type": [
+                            "null",
+                            "string"
+                          ]
+                        },
+                        "prev_cursor": {
+                          "type": [
+                            "null",
+                            "string"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "per_page",
+                        "next_cursor",
+                        "prev_cursor"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                },
+                "example": {
+                  "data": [
+                    {
+                      "id": 62871,
+                      "external_id": "CL-4471",
+                      "title": "Opening round",
+                      "description": "Before the doors open",
+                      "type": "audit",
+                      "status": "completed",
+                      "priority": "high",
+                      "min_score": 80,
+                      "score_percent": 100,
+                      "template_id": 49139,
+                      "author_id": 11251,
+                      "locations": [
+                        38267
+                      ],
+                      "departments": [
+                        57562
+                      ],
+                      "positions": [
+                        67317
+                      ],
+                      "user_filters": [
+                        25456
+                      ],
+                      "date_start": "2026-03-02",
+                      "date_end": "2026-03-02",
+                      "time_start": "09:00:00",
+                      "time_end": "18:00:00",
+                      "timezone": "+05:00",
+                      "time_notify": "08:30:00",
+                      "req_approve": true,
+                      "req_notify": false,
+                      "geofence": true,
+                      "gallery": true,
+                      "is_keep_status": true,
+                      "time_worked": 1800,
+                      "started_at": "2026-03-02T11:00:00+00:00",
+                      "completed_at": "2026-03-02T12:00:00+00:00",
+                      "created_at": "2026-03-02T12:00:00+00:00",
+                      "updated_at": "2026-03-02T12:00:00+00:00"
+                    },
+                    {
+                      "id": 62871,
+                      "external_id": "CL-4472",
+                      "title": "Closing round",
+                      "description": null,
+                      "type": "default",
+                      "status": "created",
+                      "priority": "normal",
+                      "min_score": null,
+                      "score_percent": 0,
+                      "template_id": null,
+                      "author_id": null,
+                      "locations": [],
+                      "departments": [],
+                      "positions": [],
+                      "user_filters": [],
+                      "date_start": "2026-03-02",
+                      "date_end": "2026-03-03",
+                      "time_start": null,
+                      "time_end": null,
+                      "timezone": "+05:00",
+                      "time_notify": null,
+                      "req_approve": false,
+                      "req_notify": false,
+                      "geofence": false,
+                      "gallery": false,
+                      "is_keep_status": false,
+                      "time_worked": 0,
+                      "started_at": null,
+                      "completed_at": null,
+                      "created_at": "2026-03-02T12:00:00+00:00",
+                      "updated_at": "2026-03-02T12:00:00+00:00"
+                    },
+                    {
+                      "id": 62871,
+                      "external_id": null,
+                      "title": "Web round",
+                      "description": null,
+                      "type": "default",
+                      "status": "created",
+                      "priority": "normal",
+                      "min_score": null,
+                      "score_percent": 0,
+                      "template_id": null,
+                      "author_id": null,
+                      "locations": [],
+                      "departments": [],
+                      "positions": [],
+                      "user_filters": [],
+                      "date_start": null,
+                      "date_end": null,
+                      "time_start": null,
+                      "time_end": null,
+                      "timezone": null,
+                      "time_notify": null,
+                      "req_approve": false,
+                      "req_notify": false,
+                      "geofence": false,
+                      "gallery": false,
+                      "is_keep_status": false,
+                      "time_worked": 0,
+                      "started_at": null,
+                      "completed_at": null,
+                      "created_at": "2026-03-02T12:00:00+00:00",
+                      "updated_at": "2026-03-02T12:00:00+00:00"
+                    }
+                  ],
+                  "meta": {
+                    "per_page": 50,
+                    "next_cursor": null,
+                    "prev_cursor": null
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "No token, or one this surface does not accept — code `unauthenticated`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Refusal"
+                },
+                "example": {
+                  "error": {
+                    "code": "unauthenticated",
+                    "message": "Unauthenticated.",
+                    "request_id": "9f2b1c7a-4d3e-4b8a-9f10-2c5d6e7a8b90"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Refusal"
+                },
+                "example": {
+                  "error": {
+                    "code": "forbidden",
+                    "message": "Forbidden.",
+                    "request_id": "9f2b1c7a-4d3e-4b8a-9f10-2c5d6e7a8b90"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No such row in the calling company — code `not_found`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Refusal"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No such resource in this company.",
+                    "request_id": "9f2b1c7a-4d3e-4b8a-9f10-2c5d6e7a8b90"
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Refused; `error.code` says why and `error.errors` names the fields",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationRefusal"
+                },
+                "example": {
+                  "error": {
+                    "code": "validation_failed",
+                    "message": "The per page must be at least 1.",
+                    "request_id": "9f2b1c7a-4d3e-4b8a-9f10-2c5d6e7a8b90",
+                    "errors": {
+                      "per_page": [
+                        "The per page must be at least 1."
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited; `Retry-After` says when — code `rate_limited`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Refusal"
+                },
+                "example": {
+                  "error": {
+                    "code": "rate_limited",
+                    "message": "Too Many Attempts.",
+                    "request_id": "9f2b1c7a-4d3e-4b8a-9f10-2c5d6e7a8b90"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Checklists as we hold them, oldest first, paged on a cursor: what was issued, how far it\ngot, and what was answered.\n\n**One checklist is one row shared by everyone it is aimed at.** Whoever fills it in\nanswers for all of them: its author, its `users`, or anyone at its `locations`,\n`departments` or `positions`. `user_filters` narrows who sees it but lets nobody fill it\nin. A result per location needs a checklist per location.\n\n`include=items` adds the questions with their answers. **An item's `value` follows its\n`type`**: `checkbox` and `boolean` answer a boolean, `option` one of `bad`, `normal` or\n`good`, `number` an integer, `comment` a string. It is null until somebody answers.\n\n`score_percent` is what the answered items scored, weighted by their `score`. A\nhanded-in checklist below `min_score`, or with any item left unticked, is `incompleted`;\nan open required item refuses the hand-in. With `req_approve` it goes to `pending`, and\nthe same rule settles it once approved.\n\n`locations` matches a checklist aimed at one of those locations; one aimed at every\nlocation (empty `locations`) is not matched. `start_from` and `start_to` are on\n`date_start`, and a checklist without one is not matched.\n\n**`updated_since` sees the work**: an answer, a file added to or removed from the\nchecklist or one of its items, an approver's decision and an issue resolved from its task\nall move `updated_at`. A comment does not, and neither does a template or a person\ndeleted for good, which empties `template_id`, `author_id` or an item's `user`, or drops\nthe person from `managers` and `users`. A deleted checklist is simply no longer listed,\nso polling cannot see a deletion.",
+        "security": [
+          {
+            "companyToken": [
+              "checklists:read"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "operationId": "company.v3.checklists.store",
+        "tags": [
+          "Checklists"
+        ],
+        "summary": "Create checklists",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/UpsertOutcome"
+                      }
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                },
+                "example": {
+                  "data": [
+                    {
+                      "external_id": "CL-4471",
+                      "id": 39011,
+                      "result": "exists"
+                    },
+                    {
+                      "external_id": "CL-4473",
+                      "id": 70722,
+                      "result": "created"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "No token, or one this surface does not accept — code `unauthenticated`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Refusal"
+                },
+                "example": {
+                  "error": {
+                    "code": "unauthenticated",
+                    "message": "Unauthenticated.",
+                    "request_id": "9f2b1c7a-4d3e-4b8a-9f10-2c5d6e7a8b90"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Refusal"
+                },
+                "example": {
+                  "error": {
+                    "code": "forbidden",
+                    "message": "Forbidden.",
+                    "request_id": "9f2b1c7a-4d3e-4b8a-9f10-2c5d6e7a8b90"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No such row in the calling company — code `not_found`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Refusal"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No such resource in this company.",
+                    "request_id": "9f2b1c7a-4d3e-4b8a-9f10-2c5d6e7a8b90"
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Refused; `error.code` says why and `error.errors` names the fields",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationRefusal"
+                },
+                "example": {
+                  "error": {
+                    "code": "validation_failed",
+                    "message": "The per page must be at least 1.",
+                    "request_id": "9f2b1c7a-4d3e-4b8a-9f10-2c5d6e7a8b90",
+                    "errors": {
+                      "per_page": [
+                        "The per page must be at least 1."
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited; `Retry-After` says when — code `rate_limited`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Refusal"
+                },
+                "example": {
+                  "error": {
+                    "code": "rate_limited",
+                    "message": "Too Many Attempts.",
+                    "request_id": "9f2b1c7a-4d3e-4b8a-9f10-2c5d6e7a8b90"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Up to 100 checklists in one call, each created once under your `external_id`, which is\nrequired here.\n\n**One checklist is one row shared by everyone it is aimed at**, as the web app creates\nit, and whoever fills it in answers for all of them. A result per location needs a\nchecklist per location.\n\n**Somebody has to be able to fill it in**: its author, its `users`, or anyone at its\n`locations`, `departments` or `positions`. A new row that names none of them is a `422`.\n\n**Only today's checklists.** A new key's `date_start` is today in its `timezone`. The\nlists in the product file a checklist by the UTC date it was created on, so send a day's\nchecklists while that date is also the date in UTC, or they show under another day.\n\n**The \"new checklist\" push** goes out at `time_notify`, else at `time_start`, today — at\nonce when neither is set, and not at all once that time has passed. It reaches the people\nin a named audience, plus `users` and `author_id`.\n\n**Create only, so `exists` means nothing was applied.** A key already on file answers\n`exists` with its id, whatever the row sent now says, so a resend after a timeout is\nsafe. A checklist nobody has touched yet is changed by deleting it and creating it again;\na missed one is rescheduled under a new `external_id`.\n\nA new key's ids are checked against your company, and the flags left out stay off. The\nanswer lists every row, in the order sent, as `created` or `exists`.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "checklists": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 100,
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "external_id": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 64,
+                          "description": "Your own key for this checklist. A key already on file answers `exists` and nothing is applied."
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 255,
+                          "description": "The name this is shown under."
+                        },
+                        "description": {
+                          "type": [
+                            "string",
+                            "null"
+                          ],
+                          "maxLength": 2000,
+                          "description": "Free text about this row, for people rather than for your code."
+                        },
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "default",
+                            "audit"
+                          ],
+                          "x-clockster-set": "ChecklistsType",
+                          "description": "On a checklist, `default` or `audit`. On an item, the answer it takes: `checkbox` or `boolean` a boolean, `option` one of `bad`, `normal` or `good`, `number` an integer, `comment` free text."
+                        },
+                        "priority": {
+                          "type": "string",
+                          "enum": [
+                            "low",
+                            "normal",
+                            "high"
+                          ],
+                          "x-clockster-set": "ChecklistsPriority"
+                        },
+                        "timezone": {
+                          "type": "string",
+                          "pattern": "^(?:Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])$",
+                          "description": "The UTC offset the clock times beside it are read in — `Z`, or `+05:00`. An offset rather than a zone name, so the day is fixed to a moment rather than to a rule that may be changed later."
+                        },
+                        "date_start": {
+                          "type": "string",
+                          "format": "date",
+                          "description": "The day it opens, `YYYY-MM-DD`: today in `timezone` for a new key."
+                        },
+                        "date_end": {
+                          "type": "string",
+                          "format": "date",
+                          "description": "The last day it may be filled in, `YYYY-MM-DD`: on or after `date_start`, at most 30 days past it."
+                        },
+                        "time_start": {
+                          "type": [
+                            "string",
+                            "null"
+                          ],
+                          "format": "date-time",
+                          "description": "When in the day it starts, as a clock time `HH:MM:SS`."
+                        },
+                        "time_end": {
+                          "type": [
+                            "string",
+                            "null"
+                          ],
+                          "format": "date-time",
+                          "description": "When in the day it ends, as a clock time `HH:MM:SS`."
+                        },
+                        "time_notify": {
+                          "type": [
+                            "string",
+                            "null"
+                          ],
+                          "format": "date-time",
+                          "description": "When today the \"new checklist\" push goes out, `HH:MM:SS` in `timezone`."
+                        },
+                        "req_approve": {
+                          "type": "boolean"
+                        },
+                        "req_notify": {
+                          "type": "boolean"
+                        },
+                        "geofence": {
+                          "type": "boolean"
+                        },
+                        "gallery": {
+                          "type": "boolean"
+                        },
+                        "is_keep_status": {
+                          "type": "boolean",
+                          "description": "Keeps the status when the time runs out: an untouched checklist stays `created` rather than turning `pastdue`, and a started one stays `started` rather than being handed in by itself."
+                        },
+                        "min_score": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ],
+                          "minimum": 0,
+                          "maximum": 100,
+                          "description": "The pass mark for `score_percent`. A handed-in checklist below `min_score`, or with any item left unticked, is `incompleted`; an open required item refuses the hand-in. With `req_approve` it goes to `pending`, and the same rule settles it once approved."
+                        },
+                        "author_id": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ],
+                          "description": "Who it is filed under, by id; the author can fill it in too. Without it the checklist has no author, and the checklists report names the calling key instead."
+                        },
+                        "locations": {
+                          "type": [
+                            "array",
+                            "null"
+                          ],
+                          "maxItems": 100,
+                          "items": {
+                            "type": "integer"
+                          },
+                          "description": "Aimed at people at these locations, by id. Left out or empty: every location. Your company's own locations only: one shared from a parent company, which `GET /company/v3/locations` also lists, is a `422`."
+                        },
+                        "departments": {
+                          "type": [
+                            "array",
+                            "null"
+                          ],
+                          "maxItems": 100,
+                          "items": {
+                            "type": "integer"
+                          },
+                          "description": "Aimed at people in these departments, by id. Left out or empty: every department."
+                        },
+                        "positions": {
+                          "type": [
+                            "array",
+                            "null"
+                          ],
+                          "maxItems": 100,
+                          "items": {
+                            "type": "integer"
+                          },
+                          "description": "Aimed at people in these positions, by id. Left out or empty: every position."
+                        },
+                        "user_filters": {
+                          "type": [
+                            "array",
+                            "null"
+                          ],
+                          "maxItems": 100,
+                          "items": {
+                            "type": "integer"
+                          },
+                          "description": "Aimed at people in these user filters, by id. Left out or empty: every user filter. It narrows who sees the checklist but lets nobody fill it in."
+                        },
+                        "users": {
+                          "type": [
+                            "array",
+                            "null"
+                          ],
+                          "maxItems": 100,
+                          "items": {
+                            "type": "integer"
+                          },
+                          "description": "People the checklist is assigned to by name, by id, on top of the audience."
+                        },
+                        "managers": {
+                          "type": [
+                            "array",
+                            "null"
+                          ],
+                          "maxItems": 10,
+                          "items": {
+                            "type": "integer"
+                          },
+                          "description": "Who approves or is notified, by id. Required with `req_approve` or `req_notify`."
+                        },
+                        "items": {
+                          "type": "array",
+                          "minItems": 1,
+                          "maxItems": 200,
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "section": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "maxLength": 255,
+                                "description": "The heading the item sits under. Items naming the same section share it; an item without one sits under an unnamed one."
+                              },
+                              "title": {
+                                "type": "string",
+                                "maxLength": 255,
+                                "description": "The name this is shown under."
+                              },
+                              "type": {
+                                "type": "string",
+                                "enum": [
+                                  "checkbox",
+                                  "boolean",
+                                  "option",
+                                  "number",
+                                  "comment"
+                                ],
+                                "x-clockster-set": "ChecklistsItemType",
+                                "description": "On a checklist, `default` or `audit`. On an item, the answer it takes: `checkbox` or `boolean` a boolean, `option` one of `bad`, `normal` or `good`, `number` an integer, `comment` free text."
+                              },
+                              "is_required": {
+                                "type": "boolean"
+                              },
+                              "photos": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 10
+                              },
+                              "geofence": {
+                                "type": "boolean"
+                              },
+                              "time_start": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "format": "date-time",
+                                "description": "When in the day it starts, as a clock time `HH:MM:SS`."
+                              },
+                              "time_end": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "format": "date-time",
+                                "description": "When in the day it ends, as a clock time `HH:MM:SS`."
+                              },
+                              "score": {
+                                "type": [
+                                  "integer",
+                                  "null"
+                                ],
+                                "minimum": 0,
+                                "maximum": 100,
+                                "description": "What the item weighs in `score_percent`."
+                              },
+                              "min_number": {
+                                "type": [
+                                  "integer",
+                                  "null"
+                                ],
+                                "minimum": -2147483648,
+                                "maximum": 2147483647
+                              },
+                              "max_number": {
+                                "type": [
+                                  "integer",
+                                  "null"
+                                ],
+                                "minimum": -2147483648,
+                                "maximum": 2147483647
+                              }
+                            },
+                            "required": [
+                              "title",
+                              "type",
+                              "is_required",
+                              "photos",
+                              "geofence"
+                            ]
+                          },
+                          "description": "The questions, in the order given."
+                        }
+                      },
+                      "required": [
+                        "external_id",
+                        "title",
+                        "type",
+                        "priority",
+                        "timezone",
+                        "date_start",
+                        "date_end",
+                        "items"
+                      ]
+                    },
+                    "description": "The checklists to create, up to 100 a call and 2,000 items across them."
+                  }
+                },
+                "required": [
+                  "checklists"
+                ]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "companyToken": [
+              "checklists:write"
+            ]
+          }
+        ]
+      }
+    },
+    "/company/v3/checklists/{id}": {
+      "get": {
+        "operationId": "company.v3.checklists.show",
+        "tags": [
+          "Checklists"
+        ],
+        "summary": "Read one checklist",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the row, as this API issued it.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "required": false,
+            "description": "Relations to load, comma-separated. Anything not named is absent from the answer rather than null.",
+            "style": "form",
+            "explode": false,
+            "schema": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": "string",
+                "enum": [
+                  "items",
+                  "managers",
+                  "users",
+                  "issues",
+                  "comments",
+                  "attachments",
+                  "author"
+                ],
+                "x-clockster-set": "ChecklistsInclude"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "external_id": {
+                          "type": [
+                            "null",
+                            "string"
+                          ]
+                        },
+                        "title": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": [
+                            "null",
+                            "string"
+                          ]
+                        },
+                        "type": {
+                          "type": "string"
+                        },
+                        "status": {
+                          "type": "string"
+                        },
+                        "priority": {
+                          "type": "string"
+                        },
+                        "min_score": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ]
+                        },
+                        "score_percent": {
+                          "type": "integer"
+                        },
+                        "template_id": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ]
+                        },
+                        "author_id": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ]
+                        },
+                        "locations": {
+                          "type": "array",
+                          "items": {
+                            "type": "integer"
+                          }
+                        },
+                        "departments": {
+                          "type": "array",
+                          "items": {
+                            "type": "integer"
+                          }
+                        },
+                        "positions": {
+                          "type": "array",
+                          "items": {
+                            "type": "integer"
+                          }
+                        },
+                        "user_filters": {
+                          "type": "array",
+                          "items": {
+                            "type": "integer"
+                          }
+                        },
+                        "date_start": {
+                          "type": [
+                            "null",
+                            "string"
+                          ]
+                        },
+                        "date_end": {
+                          "type": [
+                            "null",
+                            "string"
+                          ]
+                        },
+                        "time_start": {
+                          "type": [
+                            "null",
+                            "string"
+                          ]
+                        },
+                        "time_end": {
+                          "type": [
+                            "null",
+                            "string"
+                          ]
+                        },
+                        "timezone": {
+                          "type": [
+                            "null",
+                            "string"
+                          ]
+                        },
+                        "time_notify": {
+                          "type": [
+                            "null",
+                            "string"
+                          ]
+                        },
+                        "req_approve": {
+                          "type": "boolean"
+                        },
+                        "req_notify": {
+                          "type": "boolean"
+                        },
+                        "geofence": {
+                          "type": "boolean"
+                        },
+                        "gallery": {
+                          "type": "boolean"
+                        },
+                        "is_keep_status": {
+                          "type": "boolean"
+                        },
+                        "time_worked": {
+                          "type": "integer"
+                        },
+                        "started_at": {
+                          "type": [
+                            "null",
+                            "string"
+                          ]
+                        },
+                        "completed_at": {
+                          "type": [
+                            "null",
+                            "string"
+                          ]
+                        },
+                        "created_at": {
+                          "type": "string"
+                        },
+                        "updated_at": {
+                          "type": "string"
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "section": {
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              "title": {
+                                "type": "string"
+                              },
+                              "type": {
+                                "type": "string"
+                              },
+                              "is_required": {
+                                "type": "boolean"
+                              },
+                              "photos": {
+                                "type": "integer"
+                              },
+                              "geofence": {
+                                "type": "boolean"
+                              },
+                              "time_start": {
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              "time_end": {
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              "min_number": {
+                                "type": [
+                                  "integer",
+                                  "null"
+                                ]
+                              },
+                              "max_number": {
+                                "type": [
+                                  "integer",
+                                  "null"
+                                ]
+                              },
+                              "value": {
+                                "type": [
+                                  "boolean",
+                                  "integer",
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              "note": {
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              "score": {
+                                "type": "integer"
+                              },
+                              "is_completed": {
+                                "type": "boolean"
+                              },
+                              "completed_at": {
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              "user": {
+                                "type": [
+                                  "null",
+                                  "object"
+                                ],
+                                "properties": {
+                                  "id": {
+                                    "type": "integer"
+                                  },
+                                  "external_id": {
+                                    "type": [
+                                      "null",
+                                      "string"
+                                    ]
+                                  },
+                                  "code": {
+                                    "type": [
+                                      "null",
+                                      "string"
+                                    ]
+                                  },
+                                  "first_name": {
+                                    "type": "string"
+                                  },
+                                  "middle_name": {
+                                    "type": [
+                                      "null",
+                                      "string"
+                                    ]
+                                  },
+                                  "last_name": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "external_id",
+                                  "code",
+                                  "first_name",
+                                  "middle_name",
+                                  "last_name"
+                                ]
+                              },
+                              "latitude": {
+                                "type": [
+                                  "null",
+                                  "number"
+                                ]
+                              },
+                              "longitude": {
+                                "type": [
+                                  "null",
+                                  "number"
+                                ]
+                              },
+                              "has_issue": {
+                                "type": "boolean"
+                              },
+                              "issue": {
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              "attachments": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "integer"
+                                    },
+                                    "name": {
+                                      "type": "string"
+                                    },
+                                    "description": {
+                                      "type": [
+                                        "null",
+                                        "string"
+                                      ]
+                                    },
+                                    "format": {
+                                      "type": "string"
+                                    },
+                                    "url": {
+                                      "type": "string"
+                                    },
+                                    "created_at": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "name",
+                                    "description",
+                                    "format",
+                                    "url",
+                                    "created_at"
+                                  ]
+                                }
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "section",
+                              "title",
+                              "type",
+                              "is_required",
+                              "photos",
+                              "geofence",
+                              "time_start",
+                              "time_end",
+                              "min_number",
+                              "max_number",
+                              "value",
+                              "note",
+                              "score",
+                              "is_completed",
+                              "completed_at",
+                              "user",
+                              "latitude",
+                              "longitude",
+                              "has_issue",
+                              "issue",
+                              "attachments"
+                            ]
+                          }
+                        },
+                        "managers": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "external_id": {
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              "code": {
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              "first_name": {
+                                "type": "string"
+                              },
+                              "middle_name": {
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              "last_name": {
+                                "type": "string"
+                              },
+                              "status": {
+                                "type": "string"
+                              },
+                              "updated_at": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "external_id",
+                              "code",
+                              "first_name",
+                              "middle_name",
+                              "last_name",
+                              "status",
+                              "updated_at"
+                            ]
+                          }
+                        },
+                        "users": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/EmployeeShort"
+                          }
+                        },
+                        "issues": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "item_id": {
+                                "type": "integer"
+                              },
+                              "stage": {
+                                "type": "string"
+                              },
+                              "severity": {
+                                "type": "string"
+                              },
+                              "description": {
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              "reporter_id": {
+                                "type": [
+                                  "integer",
+                                  "null"
+                                ]
+                              },
+                              "assignee_id": {
+                                "type": [
+                                  "integer",
+                                  "null"
+                                ]
+                              },
+                              "due_date": {
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              "resolved_note": {
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              "resolved_at": {
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              "resolved_by": {
+                                "type": [
+                                  "integer",
+                                  "null"
+                                ]
+                              },
+                              "verified_at": {
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              "verified_by": {
+                                "type": [
+                                  "integer",
+                                  "null"
+                                ]
+                              },
+                              "created_at": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "item_id",
+                              "stage",
+                              "severity",
+                              "description",
+                              "reporter_id",
+                              "assignee_id",
+                              "due_date",
+                              "resolved_note",
+                              "resolved_at",
+                              "resolved_by",
+                              "verified_at",
+                              "verified_by",
+                              "created_at"
+                            ]
+                          }
+                        },
+                        "comments": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "parent_id": {
+                                "type": [
+                                  "integer",
+                                  "null"
+                                ]
+                              },
+                              "user": {
+                                "type": [
+                                  "null",
+                                  "object"
+                                ],
+                                "properties": {
+                                  "id": {
+                                    "type": "integer"
+                                  },
+                                  "external_id": {
+                                    "type": [
+                                      "null",
+                                      "string"
+                                    ]
+                                  },
+                                  "code": {
+                                    "type": [
+                                      "null",
+                                      "string"
+                                    ]
+                                  },
+                                  "first_name": {
+                                    "type": "string"
+                                  },
+                                  "middle_name": {
+                                    "type": [
+                                      "null",
+                                      "string"
+                                    ]
+                                  },
+                                  "last_name": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "external_id",
+                                  "code",
+                                  "first_name",
+                                  "middle_name",
+                                  "last_name"
+                                ]
+                              },
+                              "text": {
+                                "type": "string"
+                              },
+                              "created_at": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "parent_id",
+                              "user",
+                              "text",
+                              "created_at"
+                            ]
+                          }
+                        },
+                        "attachments": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "description": {
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              "format": {
+                                "type": "string"
+                              },
+                              "url": {
+                                "type": "string"
+                              },
+                              "created_at": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "name",
+                              "description",
+                              "format",
+                              "url",
+                              "created_at"
+                            ]
+                          }
+                        },
+                        "author": {
+                          "type": [
+                            "null",
+                            "object"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "integer"
+                            },
+                            "external_id": {
+                              "type": [
+                                "null",
+                                "string"
+                              ]
+                            },
+                            "code": {
+                              "type": [
+                                "null",
+                                "string"
+                              ]
+                            },
+                            "first_name": {
+                              "type": "string"
+                            },
+                            "middle_name": {
+                              "type": [
+                                "null",
+                                "string"
+                              ]
+                            },
+                            "last_name": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "external_id",
+                            "code",
+                            "first_name",
+                            "middle_name",
+                            "last_name"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "external_id",
+                        "title",
+                        "description",
+                        "type",
+                        "status",
+                        "priority",
+                        "min_score",
+                        "score_percent",
+                        "template_id",
+                        "author_id",
+                        "locations",
+                        "departments",
+                        "positions",
+                        "user_filters",
+                        "date_start",
+                        "date_end",
+                        "time_start",
+                        "time_end",
+                        "timezone",
+                        "time_notify",
+                        "req_approve",
+                        "req_notify",
+                        "geofence",
+                        "gallery",
+                        "is_keep_status",
+                        "time_worked",
+                        "started_at",
+                        "completed_at",
+                        "created_at",
+                        "updated_at"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                },
+                "example": {
+                  "data": {
+                    "id": 62871,
+                    "external_id": "CL-4471",
+                    "title": "Opening round",
+                    "description": "Before the doors open",
+                    "type": "audit",
+                    "status": "completed",
+                    "priority": "high",
+                    "min_score": 80,
+                    "score_percent": 100,
+                    "template_id": 49139,
+                    "author_id": 11251,
+                    "locations": [
+                      38267
+                    ],
+                    "departments": [
+                      57562
+                    ],
+                    "positions": [
+                      67317
+                    ],
+                    "user_filters": [
+                      25456
+                    ],
+                    "date_start": "2026-03-02",
+                    "date_end": "2026-03-02",
+                    "time_start": "09:00:00",
+                    "time_end": "18:00:00",
+                    "timezone": "+05:00",
+                    "time_notify": "08:30:00",
+                    "req_approve": true,
+                    "req_notify": false,
+                    "geofence": true,
+                    "gallery": true,
+                    "is_keep_status": true,
+                    "time_worked": 1800,
+                    "started_at": "2026-03-02T11:00:00+00:00",
+                    "completed_at": "2026-03-02T12:00:00+00:00",
+                    "created_at": "2026-03-02T12:00:00+00:00",
+                    "updated_at": "2026-03-02T12:00:00+00:00"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "No token, or one this surface does not accept — code `unauthenticated`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Refusal"
+                },
+                "example": {
+                  "error": {
+                    "code": "unauthenticated",
+                    "message": "Unauthenticated.",
+                    "request_id": "9f2b1c7a-4d3e-4b8a-9f10-2c5d6e7a8b90"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Refusal"
+                },
+                "example": {
+                  "error": {
+                    "code": "forbidden",
+                    "message": "Forbidden.",
+                    "request_id": "9f2b1c7a-4d3e-4b8a-9f10-2c5d6e7a8b90"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No such row in the calling company — code `not_found`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Refusal"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No such resource in this company.",
+                    "request_id": "9f2b1c7a-4d3e-4b8a-9f10-2c5d6e7a8b90"
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Refused; `error.code` says why and `error.errors` names the fields",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationRefusal"
+                },
+                "example": {
+                  "error": {
+                    "code": "validation_failed",
+                    "message": "The per page must be at least 1.",
+                    "request_id": "9f2b1c7a-4d3e-4b8a-9f10-2c5d6e7a8b90",
+                    "errors": {
+                      "per_page": [
+                        "The per page must be at least 1."
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited; `Retry-After` says when — code `rate_limited`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Refusal"
+                },
+                "example": {
+                  "error": {
+                    "code": "rate_limited",
+                    "message": "Too Many Attempts.",
+                    "request_id": "9f2b1c7a-4d3e-4b8a-9f10-2c5d6e7a8b90"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "The same keys the listing answers with, and the same `include` vocabulary. Another company's id is a `404`.",
+        "security": [
+          {
+            "companyToken": [
+              "checklists:read"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "company.v3.checklists.destroy",
+        "tags": [
+          "Checklists"
+        ],
+        "summary": "Delete a checklist",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the row, as this API issued it.",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/DeleteOutcome"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                },
+                "example": {
+                  "data": {
+                    "id": 80256,
+                    "result": "deleted"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "No token, or one this surface does not accept — code `unauthenticated`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Refusal"
+                },
+                "example": {
+                  "error": {
+                    "code": "unauthenticated",
+                    "message": "Unauthenticated.",
+                    "request_id": "9f2b1c7a-4d3e-4b8a-9f10-2c5d6e7a8b90"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Refusal"
+                },
+                "example": {
+                  "error": {
+                    "code": "forbidden",
+                    "message": "Forbidden.",
+                    "request_id": "9f2b1c7a-4d3e-4b8a-9f10-2c5d6e7a8b90"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No such row in the calling company — code `not_found`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Refusal"
+                },
+                "example": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "No such resource in this company.",
+                    "request_id": "9f2b1c7a-4d3e-4b8a-9f10-2c5d6e7a8b90"
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Refusal"
+                },
+                "example": {
+                  "error": {
+                    "code": "checklist_locked",
+                    "message": "A checklist somebody has started, answered, commented on or attached a file to cannot be deleted; reschedule it under a new external_id.",
+                    "request_id": "9f2b1c7a-4d3e-4b8a-9f10-2c5d6e7a8b90"
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Refused; `error.code` says why and `error.errors` names the fields",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationRefusal"
+                },
+                "example": {
+                  "error": {
+                    "code": "validation_failed",
+                    "message": "The per page must be at least 1.",
+                    "request_id": "9f2b1c7a-4d3e-4b8a-9f10-2c5d6e7a8b90",
+                    "errors": {
+                      "per_page": [
+                        "The per page must be at least 1."
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited; `Retry-After` says when — code `rate_limited`",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Refusal"
+                },
+                "example": {
+                  "error": {
+                    "code": "rate_limited",
+                    "message": "Too Many Attempts.",
+                    "request_id": "9f2b1c7a-4d3e-4b8a-9f10-2c5d6e7a8b90"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Deletes a checklist nobody has touched, and its discussion.\n\n**Refused once anybody has worked on it** — 409, `checklist_locked`: it was started or\nis past due, an item was answered, it or one of its items carries a file (the author's\nreference files included), or it has an issue or a comment. One with `is_keep_status`\nnever turns past due, so it stays deletable after its dates until somebody works on it.\nThe refusal is final; reschedule under a new `external_id` instead. A checklist the web\napp or a template issued with files therefore cannot be deleted here.\n\nA `404` on a repeated delete means it is gone. The id comes from the create answer or\nfrom `GET /company/v3/checklists?external_ids=`. A deletion is not visible to polling\nwith `updated_since`.",
+        "security": [
+          {
+            "companyToken": [
+              "checklists:write"
             ]
           }
         ]

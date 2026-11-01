@@ -400,6 +400,626 @@ export type PostCompanyV3AttendanceResponses = {
 
 export type PostCompanyV3AttendanceResponse = PostCompanyV3AttendanceResponses[keyof PostCompanyV3AttendanceResponses];
 
+export type GetCompanyV3ChecklistsData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * How many rows one page holds. Defaults to 50.
+         */
+        per_page?: number;
+        /**
+         * The `meta.next_cursor` of the previous page. Omit it for the first. A cursor is bound to the filters it was issued under — change them and start again.
+         */
+        cursor?: string | null;
+        /**
+         * Only rows carrying these keys of yours: write with your key, read back with it.
+         */
+        external_ids?: Array<string> | null;
+        /**
+         * Only rows in these states.
+         */
+        statuses?: Array<'created' | 'started' | 'completed' | 'incompleted' | 'pastdue' | 'pending'> | null;
+        /**
+         * Only rows of these types.
+         */
+        types?: Array<'default' | 'audit'> | null;
+        /**
+         * Only rows issued from these templates, by id.
+         */
+        templates?: Array<number> | null;
+        /**
+         * Only checklists aimed at one of these locations, by id. Your company's own locations only: one shared from a parent company, which `GET /company/v3/locations` also lists, is a `422`.
+         */
+        locations?: Array<number> | null;
+        /**
+         * Starting on or after this date (YYYY-MM-DD).
+         */
+        start_from?: string | null;
+        /**
+         * Starting on or before this date (YYYY-MM-DD).
+         */
+        start_to?: string | null;
+        /**
+         * Only rows changed at or after this instant (ISO 8601). The cheap way to sync: ask for what moved, not for everything.
+         */
+        updated_since?: string | null;
+        /**
+         * Free text over the title.
+         */
+        search?: string | null;
+        /**
+         * Relations to load, comma-separated. Anything not named is absent from the answer rather than null.
+         */
+        include?: Array<'items' | 'managers' | 'users' | 'issues' | 'comments' | 'attachments' | 'author'> | null;
+    };
+    url: '/company/v3/checklists';
+};
+
+export type GetCompanyV3ChecklistsErrors = {
+    /**
+     * No token, or one this surface does not accept — code `unauthenticated`
+     */
+    401: Refusal;
+    /**
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
+     */
+    403: Refusal;
+    /**
+     * No such row in the calling company — code `not_found`
+     */
+    404: Refusal;
+    /**
+     * Refused; `error.code` says why and `error.errors` names the fields
+     */
+    422: ValidationRefusal;
+    /**
+     * Rate limited; `Retry-After` says when — code `rate_limited`
+     */
+    429: Refusal;
+};
+
+export type GetCompanyV3ChecklistsError = GetCompanyV3ChecklistsErrors[keyof GetCompanyV3ChecklistsErrors];
+
+export type GetCompanyV3ChecklistsResponses = {
+    /**
+     * Success
+     */
+    200: {
+        data: Array<{
+            id: number;
+            external_id: null | string;
+            title: string;
+            description: null | string;
+            type: string;
+            status: string;
+            priority: string;
+            min_score: number | null;
+            score_percent: number;
+            template_id: number | null;
+            author_id: number | null;
+            locations: Array<number>;
+            departments: Array<number>;
+            positions: Array<number>;
+            user_filters: Array<number>;
+            date_start: null | string;
+            date_end: null | string;
+            time_start: null | string;
+            time_end: null | string;
+            timezone: null | string;
+            time_notify: null | string;
+            req_approve: boolean;
+            req_notify: boolean;
+            geofence: boolean;
+            gallery: boolean;
+            is_keep_status: boolean;
+            time_worked: number;
+            started_at: null | string;
+            completed_at: null | string;
+            created_at: string;
+            updated_at: string;
+            items?: Array<{
+                id: number;
+                section: null | string;
+                title: string;
+                type: string;
+                is_required: boolean;
+                photos: number;
+                geofence: boolean;
+                time_start: null | string;
+                time_end: null | string;
+                min_number: number | null;
+                max_number: number | null;
+                value: boolean | number | null | string;
+                note: null | string;
+                score: number;
+                is_completed: boolean;
+                completed_at: null | string;
+                user: null | {
+                    id: number;
+                    external_id: null | string;
+                    code: null | string;
+                    first_name: string;
+                    middle_name: null | string;
+                    last_name: string;
+                };
+                latitude: null | number;
+                longitude: null | number;
+                has_issue: boolean;
+                issue: null | string;
+                attachments: Array<{
+                    id: number;
+                    name: string;
+                    description: null | string;
+                    format: string;
+                    url: string;
+                    created_at: string;
+                }>;
+            }>;
+            managers?: Array<{
+                id: number;
+                external_id: null | string;
+                code: null | string;
+                first_name: string;
+                middle_name: null | string;
+                last_name: string;
+                status: string;
+                updated_at: string;
+            }>;
+            users?: Array<EmployeeShort>;
+            issues?: Array<{
+                id: number;
+                item_id: number;
+                stage: string;
+                severity: string;
+                description: null | string;
+                reporter_id: number | null;
+                assignee_id: number | null;
+                due_date: null | string;
+                resolved_note: null | string;
+                resolved_at: null | string;
+                resolved_by: number | null;
+                verified_at: null | string;
+                verified_by: number | null;
+                created_at: string;
+            }>;
+            comments?: Array<{
+                id: number;
+                parent_id: number | null;
+                user: null | {
+                    id: number;
+                    external_id: null | string;
+                    code: null | string;
+                    first_name: string;
+                    middle_name: null | string;
+                    last_name: string;
+                };
+                text: string;
+                created_at: string;
+            }>;
+            attachments?: Array<{
+                id: number;
+                name: string;
+                description: null | string;
+                format: string;
+                url: string;
+                created_at: string;
+            }>;
+            author?: null | {
+                id: number;
+                external_id: null | string;
+                code: null | string;
+                first_name: string;
+                middle_name: null | string;
+                last_name: string;
+            };
+        }>;
+        meta: {
+            per_page: number;
+            next_cursor: null | string;
+            prev_cursor: null | string;
+        };
+    };
+};
+
+export type GetCompanyV3ChecklistsResponse = GetCompanyV3ChecklistsResponses[keyof GetCompanyV3ChecklistsResponses];
+
+export type PostCompanyV3ChecklistsData = {
+    body: {
+        /**
+         * The checklists to create, up to 100 a call and 2,000 items across them.
+         */
+        checklists: Array<{
+            /**
+             * Your own key for this checklist. A key already on file answers `exists` and nothing is applied.
+             */
+            external_id: string;
+            /**
+             * The name this is shown under.
+             */
+            title: string;
+            /**
+             * Free text about this row, for people rather than for your code.
+             */
+            description?: string | null;
+            /**
+             * On a checklist, `default` or `audit`. On an item, the answer it takes: `checkbox` or `boolean` a boolean, `option` one of `bad`, `normal` or `good`, `number` an integer, `comment` free text.
+             */
+            type: 'default' | 'audit';
+            priority: 'low' | 'normal' | 'high';
+            /**
+             * The UTC offset the clock times beside it are read in — `Z`, or `+05:00`. An offset rather than a zone name, so the day is fixed to a moment rather than to a rule that may be changed later.
+             */
+            timezone: string;
+            /**
+             * The day it opens, `YYYY-MM-DD`: today in `timezone` for a new key.
+             */
+            date_start: string;
+            /**
+             * The last day it may be filled in, `YYYY-MM-DD`: on or after `date_start`, at most 30 days past it.
+             */
+            date_end: string;
+            /**
+             * When in the day it starts, as a clock time `HH:MM:SS`.
+             */
+            time_start?: string | null;
+            /**
+             * When in the day it ends, as a clock time `HH:MM:SS`.
+             */
+            time_end?: string | null;
+            /**
+             * When today the "new checklist" push goes out, `HH:MM:SS` in `timezone`.
+             */
+            time_notify?: string | null;
+            req_approve?: boolean;
+            req_notify?: boolean;
+            geofence?: boolean;
+            gallery?: boolean;
+            /**
+             * Keeps the status when the time runs out: an untouched checklist stays `created` rather than turning `pastdue`, and a started one stays `started` rather than being handed in by itself.
+             */
+            is_keep_status?: boolean;
+            /**
+             * The pass mark for `score_percent`. A handed-in checklist below `min_score`, or with any item left unticked, is `incompleted`; an open required item refuses the hand-in. With `req_approve` it goes to `pending`, and the same rule settles it once approved.
+             */
+            min_score?: number | null;
+            /**
+             * Who it is filed under, by id; the author can fill it in too. Without it the checklist has no author, and the checklists report names the calling key instead.
+             */
+            author_id?: number | null;
+            /**
+             * Aimed at people at these locations, by id. Left out or empty: every location. Your company's own locations only: one shared from a parent company, which `GET /company/v3/locations` also lists, is a `422`.
+             */
+            locations?: Array<number> | null;
+            /**
+             * Aimed at people in these departments, by id. Left out or empty: every department.
+             */
+            departments?: Array<number> | null;
+            /**
+             * Aimed at people in these positions, by id. Left out or empty: every position.
+             */
+            positions?: Array<number> | null;
+            /**
+             * Aimed at people in these user filters, by id. Left out or empty: every user filter. It narrows who sees the checklist but lets nobody fill it in.
+             */
+            user_filters?: Array<number> | null;
+            /**
+             * People the checklist is assigned to by name, by id, on top of the audience.
+             */
+            users?: Array<number> | null;
+            /**
+             * Who approves or is notified, by id. Required with `req_approve` or `req_notify`.
+             */
+            managers?: Array<number> | null;
+            /**
+             * The questions, in the order given.
+             */
+            items: Array<{
+                /**
+                 * The heading the item sits under. Items naming the same section share it; an item without one sits under an unnamed one.
+                 */
+                section?: string | null;
+                /**
+                 * The name this is shown under.
+                 */
+                title: string;
+                /**
+                 * On a checklist, `default` or `audit`. On an item, the answer it takes: `checkbox` or `boolean` a boolean, `option` one of `bad`, `normal` or `good`, `number` an integer, `comment` free text.
+                 */
+                type: 'checkbox' | 'boolean' | 'option' | 'number' | 'comment';
+                is_required: boolean;
+                photos: number;
+                geofence: boolean;
+                /**
+                 * When in the day it starts, as a clock time `HH:MM:SS`.
+                 */
+                time_start?: string | null;
+                /**
+                 * When in the day it ends, as a clock time `HH:MM:SS`.
+                 */
+                time_end?: string | null;
+                /**
+                 * What the item weighs in `score_percent`.
+                 */
+                score?: number | null;
+                min_number?: number | null;
+                max_number?: number | null;
+            }>;
+        }>;
+    };
+    path?: never;
+    query?: never;
+    url: '/company/v3/checklists';
+};
+
+export type PostCompanyV3ChecklistsErrors = {
+    /**
+     * No token, or one this surface does not accept — code `unauthenticated`
+     */
+    401: Refusal;
+    /**
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
+     */
+    403: Refusal;
+    /**
+     * No such row in the calling company — code `not_found`
+     */
+    404: Refusal;
+    /**
+     * Refused; `error.code` says why and `error.errors` names the fields
+     */
+    422: ValidationRefusal;
+    /**
+     * Rate limited; `Retry-After` says when — code `rate_limited`
+     */
+    429: Refusal;
+};
+
+export type PostCompanyV3ChecklistsError = PostCompanyV3ChecklistsErrors[keyof PostCompanyV3ChecklistsErrors];
+
+export type PostCompanyV3ChecklistsResponses = {
+    /**
+     * Success
+     */
+    200: {
+        data: Array<UpsertOutcome>;
+    };
+};
+
+export type PostCompanyV3ChecklistsResponse = PostCompanyV3ChecklistsResponses[keyof PostCompanyV3ChecklistsResponses];
+
+export type DeleteCompanyV3ChecklistsByIdData = {
+    body?: never;
+    path: {
+        /**
+         * The id of the row, as this API issued it.
+         */
+        id: number;
+    };
+    query?: never;
+    url: '/company/v3/checklists/{id}';
+};
+
+export type DeleteCompanyV3ChecklistsByIdErrors = {
+    /**
+     * No token, or one this surface does not accept — code `unauthenticated`
+     */
+    401: Refusal;
+    /**
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
+     */
+    403: Refusal;
+    /**
+     * No such row in the calling company — code `not_found`
+     */
+    404: Refusal;
+    /**
+     * Response
+     */
+    409: Refusal;
+    /**
+     * Refused; `error.code` says why and `error.errors` names the fields
+     */
+    422: ValidationRefusal;
+    /**
+     * Rate limited; `Retry-After` says when — code `rate_limited`
+     */
+    429: Refusal;
+};
+
+export type DeleteCompanyV3ChecklistsByIdError = DeleteCompanyV3ChecklistsByIdErrors[keyof DeleteCompanyV3ChecklistsByIdErrors];
+
+export type DeleteCompanyV3ChecklistsByIdResponses = {
+    /**
+     * Success
+     */
+    200: {
+        data: DeleteOutcome;
+    };
+};
+
+export type DeleteCompanyV3ChecklistsByIdResponse = DeleteCompanyV3ChecklistsByIdResponses[keyof DeleteCompanyV3ChecklistsByIdResponses];
+
+export type GetCompanyV3ChecklistsByIdData = {
+    body?: never;
+    path: {
+        /**
+         * The id of the row, as this API issued it.
+         */
+        id: number;
+    };
+    query?: {
+        /**
+         * Relations to load, comma-separated. Anything not named is absent from the answer rather than null.
+         */
+        include?: Array<'items' | 'managers' | 'users' | 'issues' | 'comments' | 'attachments' | 'author'> | null;
+    };
+    url: '/company/v3/checklists/{id}';
+};
+
+export type GetCompanyV3ChecklistsByIdErrors = {
+    /**
+     * No token, or one this surface does not accept — code `unauthenticated`
+     */
+    401: Refusal;
+    /**
+     * A token without the company ability — code `forbidden`; a key without the scope the operation needs — code `insufficient_scope`
+     */
+    403: Refusal;
+    /**
+     * No such row in the calling company — code `not_found`
+     */
+    404: Refusal;
+    /**
+     * Refused; `error.code` says why and `error.errors` names the fields
+     */
+    422: ValidationRefusal;
+    /**
+     * Rate limited; `Retry-After` says when — code `rate_limited`
+     */
+    429: Refusal;
+};
+
+export type GetCompanyV3ChecklistsByIdError = GetCompanyV3ChecklistsByIdErrors[keyof GetCompanyV3ChecklistsByIdErrors];
+
+export type GetCompanyV3ChecklistsByIdResponses = {
+    /**
+     * Success
+     */
+    200: {
+        data: {
+            id: number;
+            external_id: null | string;
+            title: string;
+            description: null | string;
+            type: string;
+            status: string;
+            priority: string;
+            min_score: number | null;
+            score_percent: number;
+            template_id: number | null;
+            author_id: number | null;
+            locations: Array<number>;
+            departments: Array<number>;
+            positions: Array<number>;
+            user_filters: Array<number>;
+            date_start: null | string;
+            date_end: null | string;
+            time_start: null | string;
+            time_end: null | string;
+            timezone: null | string;
+            time_notify: null | string;
+            req_approve: boolean;
+            req_notify: boolean;
+            geofence: boolean;
+            gallery: boolean;
+            is_keep_status: boolean;
+            time_worked: number;
+            started_at: null | string;
+            completed_at: null | string;
+            created_at: string;
+            updated_at: string;
+            items?: Array<{
+                id: number;
+                section: null | string;
+                title: string;
+                type: string;
+                is_required: boolean;
+                photos: number;
+                geofence: boolean;
+                time_start: null | string;
+                time_end: null | string;
+                min_number: number | null;
+                max_number: number | null;
+                value: boolean | number | null | string;
+                note: null | string;
+                score: number;
+                is_completed: boolean;
+                completed_at: null | string;
+                user: null | {
+                    id: number;
+                    external_id: null | string;
+                    code: null | string;
+                    first_name: string;
+                    middle_name: null | string;
+                    last_name: string;
+                };
+                latitude: null | number;
+                longitude: null | number;
+                has_issue: boolean;
+                issue: null | string;
+                attachments: Array<{
+                    id: number;
+                    name: string;
+                    description: null | string;
+                    format: string;
+                    url: string;
+                    created_at: string;
+                }>;
+            }>;
+            managers?: Array<{
+                id: number;
+                external_id: null | string;
+                code: null | string;
+                first_name: string;
+                middle_name: null | string;
+                last_name: string;
+                status: string;
+                updated_at: string;
+            }>;
+            users?: Array<EmployeeShort>;
+            issues?: Array<{
+                id: number;
+                item_id: number;
+                stage: string;
+                severity: string;
+                description: null | string;
+                reporter_id: number | null;
+                assignee_id: number | null;
+                due_date: null | string;
+                resolved_note: null | string;
+                resolved_at: null | string;
+                resolved_by: number | null;
+                verified_at: null | string;
+                verified_by: number | null;
+                created_at: string;
+            }>;
+            comments?: Array<{
+                id: number;
+                parent_id: number | null;
+                user: null | {
+                    id: number;
+                    external_id: null | string;
+                    code: null | string;
+                    first_name: string;
+                    middle_name: null | string;
+                    last_name: string;
+                };
+                text: string;
+                created_at: string;
+            }>;
+            attachments?: Array<{
+                id: number;
+                name: string;
+                description: null | string;
+                format: string;
+                url: string;
+                created_at: string;
+            }>;
+            author?: null | {
+                id: number;
+                external_id: null | string;
+                code: null | string;
+                first_name: string;
+                middle_name: null | string;
+                last_name: string;
+            };
+        };
+    };
+};
+
+export type GetCompanyV3ChecklistsByIdResponse = GetCompanyV3ChecklistsByIdResponses[keyof GetCompanyV3ChecklistsByIdResponses];
+
 export type GetCompanyV3DepartmentsData = {
     body?: never;
     path?: never;

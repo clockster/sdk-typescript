@@ -2,7 +2,7 @@
 
 import { client } from './client.gen.js';
 import { type Client, type ClientMeta, formDataBodySerializer, type Options as Options2, type RequestResult, type TDataShape } from './client/index.js';
-import type { DeleteCompanyV3DepartmentsByIdData, DeleteCompanyV3DepartmentsByIdErrors, DeleteCompanyV3DepartmentsByIdResponses, DeleteCompanyV3DocumentsByIdData, DeleteCompanyV3DocumentsByIdErrors, DeleteCompanyV3DocumentsByIdResponses, DeleteCompanyV3LocationsByIdData, DeleteCompanyV3LocationsByIdErrors, DeleteCompanyV3LocationsByIdResponses, DeleteCompanyV3PayrollSingleAdjustmentsByIdData, DeleteCompanyV3PayrollSingleAdjustmentsByIdErrors, DeleteCompanyV3PayrollSingleAdjustmentsByIdResponses, DeleteCompanyV3PositionsByIdData, DeleteCompanyV3PositionsByIdErrors, DeleteCompanyV3PositionsByIdResponses, DeleteCompanyV3SchedulesByIdData, DeleteCompanyV3SchedulesByIdErrors, DeleteCompanyV3SchedulesByIdResponses, DeleteCompanyV3UserFiltersByIdData, DeleteCompanyV3UserFiltersByIdErrors, DeleteCompanyV3UserFiltersByIdResponses, DeleteCompanyV3WebhooksByIdData, DeleteCompanyV3WebhooksByIdErrors, DeleteCompanyV3WebhooksByIdResponses, GetCompanyV3AttendanceData, GetCompanyV3AttendanceErrors, GetCompanyV3AttendanceResponses, GetCompanyV3DepartmentsByIdData, GetCompanyV3DepartmentsByIdErrors, GetCompanyV3DepartmentsByIdResponses, GetCompanyV3DepartmentsData, GetCompanyV3DepartmentsErrors, GetCompanyV3DepartmentsResponses, GetCompanyV3DocumentsByIdData, GetCompanyV3DocumentsByIdErrors, GetCompanyV3DocumentsByIdResponses, GetCompanyV3DocumentsData, GetCompanyV3DocumentsErrors, GetCompanyV3DocumentsResponses, GetCompanyV3LocationsByIdData, GetCompanyV3LocationsByIdErrors, GetCompanyV3LocationsByIdResponses, GetCompanyV3LocationsData, GetCompanyV3LocationsErrors, GetCompanyV3LocationsResponses, GetCompanyV3MeData, GetCompanyV3MeErrors, GetCompanyV3MeResponses, GetCompanyV3PayrollPayslipsData, GetCompanyV3PayrollPayslipsErrors, GetCompanyV3PayrollPayslipsResponses, GetCompanyV3PayrollSingleAdjustmentsData, GetCompanyV3PayrollSingleAdjustmentsErrors, GetCompanyV3PayrollSingleAdjustmentsResponses, GetCompanyV3PositionsByIdData, GetCompanyV3PositionsByIdErrors, GetCompanyV3PositionsByIdResponses, GetCompanyV3PositionsData, GetCompanyV3PositionsErrors, GetCompanyV3PositionsResponses, GetCompanyV3SchedulesByIdData, GetCompanyV3SchedulesByIdErrors, GetCompanyV3SchedulesByIdResponses, GetCompanyV3TasksByIdData, GetCompanyV3TasksByIdErrors, GetCompanyV3TasksByIdResponses, GetCompanyV3TasksData, GetCompanyV3TasksErrors, GetCompanyV3TasksResponses, GetCompanyV3TimesheetsData, GetCompanyV3TimesheetsErrors, GetCompanyV3TimesheetsResponses, GetCompanyV3UserFiltersByIdData, GetCompanyV3UserFiltersByIdErrors, GetCompanyV3UserFiltersByIdResponses, GetCompanyV3UserFiltersData, GetCompanyV3UserFiltersErrors, GetCompanyV3UserFiltersResponses, GetCompanyV3UserRequestsByIdData, GetCompanyV3UserRequestsByIdErrors, GetCompanyV3UserRequestsByIdResponses, GetCompanyV3UserRequestsData, GetCompanyV3UserRequestsErrors, GetCompanyV3UserRequestsResponses, GetCompanyV3UsersByIdData, GetCompanyV3UsersByIdErrors, GetCompanyV3UsersByIdResponses, GetCompanyV3UsersData, GetCompanyV3UsersErrors, GetCompanyV3UsersResponses, GetCompanyV3WebhooksByIdData, GetCompanyV3WebhooksByIdErrors, GetCompanyV3WebhooksByIdResponses, GetCompanyV3WebhooksData, GetCompanyV3WebhooksDeliveriesByIdData, GetCompanyV3WebhooksDeliveriesByIdErrors, GetCompanyV3WebhooksDeliveriesByIdResponses, GetCompanyV3WebhooksDeliveriesData, GetCompanyV3WebhooksDeliveriesErrors, GetCompanyV3WebhooksDeliveriesResponses, GetCompanyV3WebhooksErrors, GetCompanyV3WebhooksEventsData, GetCompanyV3WebhooksEventsErrors, GetCompanyV3WebhooksEventsResponses, GetCompanyV3WebhooksResponses, PostCompanyV3AttendanceData, PostCompanyV3AttendanceErrors, PostCompanyV3AttendanceResponses, PostCompanyV3DepartmentsUpsertData, PostCompanyV3DepartmentsUpsertErrors, PostCompanyV3DepartmentsUpsertResponses, PostCompanyV3DocumentsUpsertData, PostCompanyV3DocumentsUpsertErrors, PostCompanyV3DocumentsUpsertResponses, PostCompanyV3FilesData, PostCompanyV3FilesErrors, PostCompanyV3FilesResponses, PostCompanyV3LocationsUpsertData, PostCompanyV3LocationsUpsertErrors, PostCompanyV3LocationsUpsertResponses, PostCompanyV3PayrollSingleAdjustmentsData, PostCompanyV3PayrollSingleAdjustmentsErrors, PostCompanyV3PayrollSingleAdjustmentsResponses, PostCompanyV3PositionsUpsertData, PostCompanyV3PositionsUpsertErrors, PostCompanyV3PositionsUpsertResponses, PostCompanyV3SchedulesData, PostCompanyV3SchedulesErrors, PostCompanyV3SchedulesResponses, PostCompanyV3TasksUpsertData, PostCompanyV3TasksUpsertErrors, PostCompanyV3TasksUpsertResponses, PostCompanyV3UserFiltersUpsertData, PostCompanyV3UserFiltersUpsertErrors, PostCompanyV3UserFiltersUpsertResponses, PostCompanyV3UsersDismissData, PostCompanyV3UsersDismissErrors, PostCompanyV3UsersDismissResponses, PostCompanyV3UsersUpsertData, PostCompanyV3UsersUpsertErrors, PostCompanyV3UsersUpsertResponses, PostCompanyV3WebhooksByIdSecretData, PostCompanyV3WebhooksByIdSecretErrors, PostCompanyV3WebhooksByIdSecretResponses, PostCompanyV3WebhooksData, PostCompanyV3WebhooksDeliveriesByIdRedeliverData, PostCompanyV3WebhooksDeliveriesByIdRedeliverErrors, PostCompanyV3WebhooksDeliveriesByIdRedeliverResponses, PostCompanyV3WebhooksErrors, PostCompanyV3WebhooksResponses, PutCompanyV3WebhooksByIdData, PutCompanyV3WebhooksByIdErrors, PutCompanyV3WebhooksByIdResponses } from './types.gen.js';
+import type { DeleteCompanyV3ChecklistsByIdData, DeleteCompanyV3ChecklistsByIdErrors, DeleteCompanyV3ChecklistsByIdResponses, DeleteCompanyV3DepartmentsByIdData, DeleteCompanyV3DepartmentsByIdErrors, DeleteCompanyV3DepartmentsByIdResponses, DeleteCompanyV3DocumentsByIdData, DeleteCompanyV3DocumentsByIdErrors, DeleteCompanyV3DocumentsByIdResponses, DeleteCompanyV3LocationsByIdData, DeleteCompanyV3LocationsByIdErrors, DeleteCompanyV3LocationsByIdResponses, DeleteCompanyV3PayrollSingleAdjustmentsByIdData, DeleteCompanyV3PayrollSingleAdjustmentsByIdErrors, DeleteCompanyV3PayrollSingleAdjustmentsByIdResponses, DeleteCompanyV3PositionsByIdData, DeleteCompanyV3PositionsByIdErrors, DeleteCompanyV3PositionsByIdResponses, DeleteCompanyV3SchedulesByIdData, DeleteCompanyV3SchedulesByIdErrors, DeleteCompanyV3SchedulesByIdResponses, DeleteCompanyV3UserFiltersByIdData, DeleteCompanyV3UserFiltersByIdErrors, DeleteCompanyV3UserFiltersByIdResponses, DeleteCompanyV3WebhooksByIdData, DeleteCompanyV3WebhooksByIdErrors, DeleteCompanyV3WebhooksByIdResponses, GetCompanyV3AttendanceData, GetCompanyV3AttendanceErrors, GetCompanyV3AttendanceResponses, GetCompanyV3ChecklistsByIdData, GetCompanyV3ChecklistsByIdErrors, GetCompanyV3ChecklistsByIdResponses, GetCompanyV3ChecklistsData, GetCompanyV3ChecklistsErrors, GetCompanyV3ChecklistsResponses, GetCompanyV3DepartmentsByIdData, GetCompanyV3DepartmentsByIdErrors, GetCompanyV3DepartmentsByIdResponses, GetCompanyV3DepartmentsData, GetCompanyV3DepartmentsErrors, GetCompanyV3DepartmentsResponses, GetCompanyV3DocumentsByIdData, GetCompanyV3DocumentsByIdErrors, GetCompanyV3DocumentsByIdResponses, GetCompanyV3DocumentsData, GetCompanyV3DocumentsErrors, GetCompanyV3DocumentsResponses, GetCompanyV3LocationsByIdData, GetCompanyV3LocationsByIdErrors, GetCompanyV3LocationsByIdResponses, GetCompanyV3LocationsData, GetCompanyV3LocationsErrors, GetCompanyV3LocationsResponses, GetCompanyV3MeData, GetCompanyV3MeErrors, GetCompanyV3MeResponses, GetCompanyV3PayrollPayslipsData, GetCompanyV3PayrollPayslipsErrors, GetCompanyV3PayrollPayslipsResponses, GetCompanyV3PayrollSingleAdjustmentsData, GetCompanyV3PayrollSingleAdjustmentsErrors, GetCompanyV3PayrollSingleAdjustmentsResponses, GetCompanyV3PositionsByIdData, GetCompanyV3PositionsByIdErrors, GetCompanyV3PositionsByIdResponses, GetCompanyV3PositionsData, GetCompanyV3PositionsErrors, GetCompanyV3PositionsResponses, GetCompanyV3SchedulesByIdData, GetCompanyV3SchedulesByIdErrors, GetCompanyV3SchedulesByIdResponses, GetCompanyV3TasksByIdData, GetCompanyV3TasksByIdErrors, GetCompanyV3TasksByIdResponses, GetCompanyV3TasksData, GetCompanyV3TasksErrors, GetCompanyV3TasksResponses, GetCompanyV3TimesheetsData, GetCompanyV3TimesheetsErrors, GetCompanyV3TimesheetsResponses, GetCompanyV3UserFiltersByIdData, GetCompanyV3UserFiltersByIdErrors, GetCompanyV3UserFiltersByIdResponses, GetCompanyV3UserFiltersData, GetCompanyV3UserFiltersErrors, GetCompanyV3UserFiltersResponses, GetCompanyV3UserRequestsByIdData, GetCompanyV3UserRequestsByIdErrors, GetCompanyV3UserRequestsByIdResponses, GetCompanyV3UserRequestsData, GetCompanyV3UserRequestsErrors, GetCompanyV3UserRequestsResponses, GetCompanyV3UsersByIdData, GetCompanyV3UsersByIdErrors, GetCompanyV3UsersByIdResponses, GetCompanyV3UsersData, GetCompanyV3UsersErrors, GetCompanyV3UsersResponses, GetCompanyV3WebhooksByIdData, GetCompanyV3WebhooksByIdErrors, GetCompanyV3WebhooksByIdResponses, GetCompanyV3WebhooksData, GetCompanyV3WebhooksDeliveriesByIdData, GetCompanyV3WebhooksDeliveriesByIdErrors, GetCompanyV3WebhooksDeliveriesByIdResponses, GetCompanyV3WebhooksDeliveriesData, GetCompanyV3WebhooksDeliveriesErrors, GetCompanyV3WebhooksDeliveriesResponses, GetCompanyV3WebhooksErrors, GetCompanyV3WebhooksEventsData, GetCompanyV3WebhooksEventsErrors, GetCompanyV3WebhooksEventsResponses, GetCompanyV3WebhooksResponses, PostCompanyV3AttendanceData, PostCompanyV3AttendanceErrors, PostCompanyV3AttendanceResponses, PostCompanyV3ChecklistsData, PostCompanyV3ChecklistsErrors, PostCompanyV3ChecklistsResponses, PostCompanyV3DepartmentsUpsertData, PostCompanyV3DepartmentsUpsertErrors, PostCompanyV3DepartmentsUpsertResponses, PostCompanyV3DocumentsUpsertData, PostCompanyV3DocumentsUpsertErrors, PostCompanyV3DocumentsUpsertResponses, PostCompanyV3FilesData, PostCompanyV3FilesErrors, PostCompanyV3FilesResponses, PostCompanyV3LocationsUpsertData, PostCompanyV3LocationsUpsertErrors, PostCompanyV3LocationsUpsertResponses, PostCompanyV3PayrollSingleAdjustmentsData, PostCompanyV3PayrollSingleAdjustmentsErrors, PostCompanyV3PayrollSingleAdjustmentsResponses, PostCompanyV3PositionsUpsertData, PostCompanyV3PositionsUpsertErrors, PostCompanyV3PositionsUpsertResponses, PostCompanyV3SchedulesData, PostCompanyV3SchedulesErrors, PostCompanyV3SchedulesResponses, PostCompanyV3TasksUpsertData, PostCompanyV3TasksUpsertErrors, PostCompanyV3TasksUpsertResponses, PostCompanyV3UserFiltersUpsertData, PostCompanyV3UserFiltersUpsertErrors, PostCompanyV3UserFiltersUpsertResponses, PostCompanyV3UsersDismissData, PostCompanyV3UsersDismissErrors, PostCompanyV3UsersDismissResponses, PostCompanyV3UsersUpsertData, PostCompanyV3UsersUpsertErrors, PostCompanyV3UsersUpsertResponses, PostCompanyV3WebhooksByIdSecretData, PostCompanyV3WebhooksByIdSecretErrors, PostCompanyV3WebhooksByIdSecretResponses, PostCompanyV3WebhooksData, PostCompanyV3WebhooksDeliveriesByIdRedeliverData, PostCompanyV3WebhooksDeliveriesByIdRedeliverErrors, PostCompanyV3WebhooksDeliveriesByIdRedeliverResponses, PostCompanyV3WebhooksErrors, PostCompanyV3WebhooksResponses, PutCompanyV3WebhooksByIdData, PutCompanyV3WebhooksByIdErrors, PutCompanyV3WebhooksByIdResponses } from './types.gen.js';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean, TResponse = unknown> = Options2<TData, ThrowOnError, TResponse> & {
     /**
@@ -111,6 +111,125 @@ export class Attendance extends HeyApiClient {
                 'Content-Type': 'application/json',
                 ...options.headers
             }
+        });
+    }
+}
+
+export class Checklists extends HeyApiClient {
+    /**
+     * List checklists
+     *
+     * Checklists as we hold them, oldest first, paged on a cursor: what was issued, how far it
+     * got, and what was answered.
+     *
+     * **One checklist is one row shared by everyone it is aimed at.** Whoever fills it in
+     * answers for all of them: its author, its `users`, or anyone at its `locations`,
+     * `departments` or `positions`. `user_filters` narrows who sees it but lets nobody fill it
+     * in. A result per location needs a checklist per location.
+     *
+     * `include=items` adds the questions with their answers. **An item's `value` follows its
+     * `type`**: `checkbox` and `boolean` answer a boolean, `option` one of `bad`, `normal` or
+     * `good`, `number` an integer, `comment` a string. It is null until somebody answers.
+     *
+     * `score_percent` is what the answered items scored, weighted by their `score`. A
+     * handed-in checklist below `min_score`, or with any item left unticked, is `incompleted`;
+     * an open required item refuses the hand-in. With `req_approve` it goes to `pending`, and
+     * the same rule settles it once approved.
+     *
+     * `locations` matches a checklist aimed at one of those locations; one aimed at every
+     * location (empty `locations`) is not matched. `start_from` and `start_to` are on
+     * `date_start`, and a checklist without one is not matched.
+     *
+     * **`updated_since` sees the work**: an answer, a file added to or removed from the
+     * checklist or one of its items, an approver's decision and an issue resolved from its task
+     * all move `updated_at`. A comment does not, and neither does a template or a person
+     * deleted for good, which empties `template_id`, `author_id` or an item's `user`, or drops
+     * the person from `managers` and `users`. A deleted checklist is simply no longer listed,
+     * so polling cannot see a deletion.
+     */
+    public list<ThrowOnError extends boolean = false>(options?: Options<GetCompanyV3ChecklistsData, ThrowOnError>): RequestResult<GetCompanyV3ChecklistsResponses, GetCompanyV3ChecklistsErrors, ThrowOnError> {
+        return (options?.client ?? this.client).get<GetCompanyV3ChecklistsResponses, GetCompanyV3ChecklistsErrors, ThrowOnError>({
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/company/v3/checklists',
+            ...options
+        });
+    }
+    
+    /**
+     * Create checklists
+     *
+     * Up to 100 checklists in one call, each created once under your `external_id`, which is
+     * required here.
+     *
+     * **One checklist is one row shared by everyone it is aimed at**, as the web app creates
+     * it, and whoever fills it in answers for all of them. A result per location needs a
+     * checklist per location.
+     *
+     * **Somebody has to be able to fill it in**: its author, its `users`, or anyone at its
+     * `locations`, `departments` or `positions`. A new row that names none of them is a `422`.
+     *
+     * **Only today's checklists.** A new key's `date_start` is today in its `timezone`. The
+     * lists in the product file a checklist by the UTC date it was created on, so send a day's
+     * checklists while that date is also the date in UTC, or they show under another day.
+     *
+     * **The "new checklist" push** goes out at `time_notify`, else at `time_start`, today — at
+     * once when neither is set, and not at all once that time has passed. It reaches the people
+     * in a named audience, plus `users` and `author_id`.
+     *
+     * **Create only, so `exists` means nothing was applied.** A key already on file answers
+     * `exists` with its id, whatever the row sent now says, so a resend after a timeout is
+     * safe. A checklist nobody has touched yet is changed by deleting it and creating it again;
+     * a missed one is rescheduled under a new `external_id`.
+     *
+     * A new key's ids are checked against your company, and the flags left out stay off. The
+     * answer lists every row, in the order sent, as `created` or `exists`.
+     */
+    public create<ThrowOnError extends boolean = false>(options: Options<PostCompanyV3ChecklistsData, ThrowOnError>): RequestResult<PostCompanyV3ChecklistsResponses, PostCompanyV3ChecklistsErrors, ThrowOnError> {
+        return (options.client ?? this.client).post<PostCompanyV3ChecklistsResponses, PostCompanyV3ChecklistsErrors, ThrowOnError>({
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/company/v3/checklists',
+            ...options,
+            headers: {
+                'Content-Type': 'application/json',
+                ...options.headers
+            }
+        });
+    }
+    
+    /**
+     * Delete a checklist
+     *
+     * Deletes a checklist nobody has touched, and its discussion.
+     *
+     * **Refused once anybody has worked on it** — 409, `checklist_locked`: it was started or
+     * is past due, an item was answered, it or one of its items carries a file (the author's
+     * reference files included), or it has an issue or a comment. One with `is_keep_status`
+     * never turns past due, so it stays deletable after its dates until somebody works on it.
+     * The refusal is final; reschedule under a new `external_id` instead. A checklist the web
+     * app or a template issued with files therefore cannot be deleted here.
+     *
+     * A `404` on a repeated delete means it is gone. The id comes from the create answer or
+     * from `GET /company/v3/checklists?external_ids=`. A deletion is not visible to polling
+     * with `updated_since`.
+     */
+    public delete<ThrowOnError extends boolean = false>(options: Options<DeleteCompanyV3ChecklistsByIdData, ThrowOnError>): RequestResult<DeleteCompanyV3ChecklistsByIdResponses, DeleteCompanyV3ChecklistsByIdErrors, ThrowOnError> {
+        return (options.client ?? this.client).delete<DeleteCompanyV3ChecklistsByIdResponses, DeleteCompanyV3ChecklistsByIdErrors, ThrowOnError>({
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/company/v3/checklists/{id}',
+            ...options
+        });
+    }
+    
+    /**
+     * Read one checklist
+     *
+     * The same keys the listing answers with, and the same `include` vocabulary. Another company's id is a `404`.
+     */
+    public get<ThrowOnError extends boolean = false>(options: Options<GetCompanyV3ChecklistsByIdData, ThrowOnError>): RequestResult<GetCompanyV3ChecklistsByIdResponses, GetCompanyV3ChecklistsByIdErrors, ThrowOnError> {
+        return (options.client ?? this.client).get<GetCompanyV3ChecklistsByIdResponses, GetCompanyV3ChecklistsByIdErrors, ThrowOnError>({
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/company/v3/checklists/{id}',
+            ...options
         });
     }
 }
@@ -1310,6 +1429,11 @@ export class Clockster extends HeyApiClient {
     private _attendance?: Attendance;
     get attendance(): Attendance {
         return this._attendance ??= new Attendance({ client: this.client });
+    }
+    
+    private _checklists?: Checklists;
+    get checklists(): Checklists {
+        return this._checklists ??= new Checklists({ client: this.client });
     }
     
     private _departments?: Departments;
