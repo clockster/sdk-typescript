@@ -4467,7 +4467,7 @@ export type PostCompanyV3WebhooksData = {
         /**
          * Which events this endpoint receives. At least one, and no repeats.
          */
-        events: Array<'user.created' | 'user.updated' | 'user.deleted' | 'user.restored' | 'user.purged' | 'location.created' | 'location.updated' | 'location.deleted' | 'department.created' | 'department.updated' | 'department.deleted' | 'position.created' | 'position.updated' | 'position.deleted' | 'task.created' | 'task.completed' | 'task.approved' | 'task.rejected' | 'task.deleted'>;
+        events: Array<'user.created' | 'user.updated' | 'user.deleted' | 'user.restored' | 'user.purged' | 'location.created' | 'location.updated' | 'location.deleted' | 'department.created' | 'department.updated' | 'department.deleted' | 'position.created' | 'position.updated' | 'position.deleted' | 'task.created' | 'task.completed' | 'task.approved' | 'task.rejected' | 'task.reopened' | 'task.deleted'>;
         /**
          * Send deliveries with HTTP basic authentication. Not alongside `auth_token`.
          */
@@ -4576,7 +4576,7 @@ export type GetCompanyV3WebhooksDeliveriesData = {
         /**
          * Only deliveries of these events.
          */
-        events?: Array<'user.created' | 'user.updated' | 'user.deleted' | 'user.restored' | 'user.purged' | 'location.created' | 'location.updated' | 'location.deleted' | 'department.created' | 'department.updated' | 'department.deleted' | 'position.created' | 'position.updated' | 'position.deleted' | 'task.created' | 'task.completed' | 'task.approved' | 'task.rejected' | 'task.deleted'> | null;
+        events?: Array<'user.created' | 'user.updated' | 'user.deleted' | 'user.restored' | 'user.purged' | 'location.created' | 'location.updated' | 'location.deleted' | 'department.created' | 'department.updated' | 'department.deleted' | 'position.created' | 'position.updated' | 'position.deleted' | 'task.created' | 'task.completed' | 'task.approved' | 'task.rejected' | 'task.reopened' | 'task.deleted'> | null;
         /**
          * Only deliveries that were accepted (`true`) or that were not (`false`).
          */
@@ -4941,7 +4941,7 @@ export type PutCompanyV3WebhooksByIdData = {
         /**
          * Which events this endpoint receives. At least one, and no repeats.
          */
-        events: Array<'user.created' | 'user.updated' | 'user.deleted' | 'user.restored' | 'user.purged' | 'location.created' | 'location.updated' | 'location.deleted' | 'department.created' | 'department.updated' | 'department.deleted' | 'position.created' | 'position.updated' | 'position.deleted' | 'task.created' | 'task.completed' | 'task.approved' | 'task.rejected' | 'task.deleted'>;
+        events: Array<'user.created' | 'user.updated' | 'user.deleted' | 'user.restored' | 'user.purged' | 'location.created' | 'location.updated' | 'location.deleted' | 'department.created' | 'department.updated' | 'department.deleted' | 'position.created' | 'position.updated' | 'position.deleted' | 'task.created' | 'task.completed' | 'task.approved' | 'task.rejected' | 'task.reopened' | 'task.deleted'>;
         /**
          * Send deliveries with HTTP basic authentication. Not alongside `auth_token`.
          */

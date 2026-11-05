@@ -3976,7 +3976,7 @@
                 "example": {
                   "error": {
                     "code": "checklist_locked",
-                    "message": "A checklist somebody has started, answered, commented on or attached a file to cannot be deleted; reschedule it under a new external_id.",
+                    "message": "A checklist that is started or past due, or has an answer, an issue, a comment or a file on an item, cannot be deleted; reschedule it under a new external_id.",
                     "request_id": "9f2b1c7a-4d3e-4b8a-9f10-2c5d6e7a8b90"
                   }
                 }
@@ -4023,7 +4023,7 @@
             }
           }
         },
-        "description": "Deletes a checklist nobody has touched, and its discussion.\n\n**Refused once anybody has worked on it** — 409, `checklist_locked`: it was started or\nis past due, an item was answered, it or one of its items carries a file (the author's\nreference files included), or it has an issue or a comment. One with `is_keep_status`\nnever turns past due, so it stays deletable after its dates until somebody works on it.\nThe refusal is final; reschedule under a new `external_id` instead. A checklist the web\napp or a template issued with files therefore cannot be deleted here.\n\nA `404` on a repeated delete means it is gone. The id comes from the create answer or\nfrom `GET /company/v3/checklists?external_ids=`. A deletion is not visible to polling\nwith `updated_since`.",
+        "description": "Deletes a checklist nobody has touched, and its discussion.\n\n**Refused once anybody has worked on it** — 409, `checklist_locked`: it was started or\nis past due, an item was answered or carries a file, or it has an issue or a comment.\nFiles on the checklist itself lock nothing, whoever uploaded them, and go with it. One\nwith `is_keep_status` never turns past due, so it stays deletable after its dates until\nsomebody works on it. The refusal is final; reschedule under a new `external_id` instead.\n\nA `404` on a repeated delete means it is gone. The id comes from the create answer or\nfrom `GET /company/v3/checklists?external_ids=`. A deletion is not visible to polling\nwith `updated_since`.",
         "security": [
           {
             "companyToken": [
@@ -15705,7 +15705,7 @@
             }
           }
         },
-        "description": "Up to 100 people in one call, each named by `external_id` or by `id`, exactly one per\nitem.\n\n**This is dismissal, not erasure.** The record stays and stays readable: the person\nappears under `status=dismissed` with `dismissed_at` set, and the seat is freed for\nsomebody else. It is the shape leaving actually has — a nightly sync noticing that\ntwelve people are no longer on the roster.\n\n**There is no hard delete on this API.** Erasing a person takes their attendance,\npayroll, documents and bank details with them, with no way to undo it, and one ability\ngrants this whole API — an integrator that syncs your roster cannot be given that\nwithout also being given erasure. If a retention obligation needs it, ask us.\n\n**Somebody already gone answers `already_dismissed`** rather than failing, which matters\nhere because dismissing frees the key for a new hire.\n\n**If a key is held by two people** — one who left and one hired since — the living one\nis the one dismissed.\n\nWhat happens that you cannot see, and cannot undo:\n\n- Their sessions end immediately and their phone is unpaired.\n- Every terminal at their locations is told to forget their face. That is sent once and\n  not retried, so a terminal that is offline at the time keeps admitting them.\n- **Requests still waiting on them to approve are cancelled**, not just their own. Dismiss\n  a manager and their team's pending vacation requests are cancelled with them.\n- An offboarding process starts, if the company has one configured.\n- `date_leave` is filled in with today's date if it was empty.",
+        "description": "Up to 100 people in one call, each named by `external_id` or by `id`, exactly one per\nitem.\n\n**This is dismissal, not erasure.** The record stays and stays readable: the person\nappears under `status=dismissed` with `dismissed_at` set, and the seat is freed for\nsomebody else. It is the shape leaving actually has — a nightly sync noticing that\ntwelve people are no longer on the roster.\n\n**There is no hard delete on this API.** Erasing a person takes their attendance,\npayroll, documents and bank details with them, with no way to undo it, and one ability\ngrants this whole API — an integrator that syncs your roster cannot be given that\nwithout also being given erasure. If a retention obligation needs it, ask us.\n\n**Somebody already gone answers `already_dismissed`** rather than failing, which matters\nhere because dismissing frees the key for a new hire.\n\n**If a key is held by two people** — one who left and one hired since — the living one\nis the one dismissed.\n\nWhat happens that you cannot see, and cannot undo:\n\n- Their sessions end immediately and their phone is unpaired.\n- Every terminal at their locations is told to forget their face. That is sent once and\n  not retried, so a terminal that is offline at the time keeps admitting them.\n- Their own pending requests are cancelled. **A request still waiting on them to approve\n  skips their turn** and moves on to the next approver; it is cancelled only when they\n  were the last approver left to decide. Approvals they already gave stand.\n- An offboarding process starts, if the company has one configured.\n- `date_leave` is filled in with today's date if it was empty.",
         "requestBody": {
           "required": true,
           "content": {
@@ -17610,6 +17610,7 @@
                         "task.completed",
                         "task.approved",
                         "task.rejected",
+                        "task.reopened",
                         "task.deleted"
                       ],
                       "x-clockster-set": "WebhooksEvent"
@@ -17729,7 +17730,7 @@
                 "array",
                 "null"
               ],
-              "maxItems": 19,
+              "maxItems": 20,
               "items": {
                 "type": "string",
                 "enum": [
@@ -17751,6 +17752,7 @@
                   "task.completed",
                   "task.approved",
                   "task.rejected",
+                  "task.reopened",
                   "task.deleted"
                 ],
                 "x-clockster-set": "WebhooksEvent"
@@ -18463,6 +18465,7 @@
                     "task.completed",
                     "task.approved",
                     "task.rejected",
+                    "task.reopened",
                     "task.deleted"
                   ]
                 }
@@ -19141,6 +19144,7 @@
                         "task.completed",
                         "task.approved",
                         "task.rejected",
+                        "task.reopened",
                         "task.deleted"
                       ],
                       "x-clockster-set": "WebhooksEvent"
