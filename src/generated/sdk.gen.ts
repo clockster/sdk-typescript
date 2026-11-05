@@ -202,11 +202,10 @@ export class Checklists extends HeyApiClient {
      * Deletes a checklist nobody has touched, and its discussion.
      *
      * **Refused once anybody has worked on it** — 409, `checklist_locked`: it was started or
-     * is past due, an item was answered, it or one of its items carries a file (the author's
-     * reference files included), or it has an issue or a comment. One with `is_keep_status`
-     * never turns past due, so it stays deletable after its dates until somebody works on it.
-     * The refusal is final; reschedule under a new `external_id` instead. A checklist the web
-     * app or a template issued with files therefore cannot be deleted here.
+     * is past due, an item was answered or carries a file, or it has an issue or a comment.
+     * Files on the checklist itself lock nothing, whoever uploaded them, and go with it. One
+     * with `is_keep_status` never turns past due, so it stays deletable after its dates until
+     * somebody works on it. The refusal is final; reschedule under a new `external_id` instead.
      *
      * A `404` on a repeated delete means it is gone. The id comes from the create answer or
      * from `GET /company/v3/checklists?external_ids=`. A deletion is not visible to polling
@@ -1134,8 +1133,9 @@ export class Users extends HeyApiClient {
      * - Their sessions end immediately and their phone is unpaired.
      * - Every terminal at their locations is told to forget their face. That is sent once and
      * not retried, so a terminal that is offline at the time keeps admitting them.
-     * - **Requests still waiting on them to approve are cancelled**, not just their own. Dismiss
-     * a manager and their team's pending vacation requests are cancelled with them.
+     * - Their own pending requests are cancelled. **A request still waiting on them to approve
+     * skips their turn** and moves on to the next approver; it is cancelled only when they
+     * were the last approver left to decide. Approvals they already gave stand.
      * - An offboarding process starts, if the company has one configured.
      * - `date_leave` is filled in with today's date if it was empty.
      */
