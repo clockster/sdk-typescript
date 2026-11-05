@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.14.0
+
+### May break your build (types only)
+
+Nothing. The value is additive.
+
+### Changed in the API
+
+Reaches you whether or not you update this package.
+
+- Webhooks announce `task.reopened`: a `completed` or `incompleted` task reopened in the app, which
+  makes it `started` again. Subscribe to it in `events` of `POST /webhooks` and `PUT /webhooks/{id}`;
+  `GET /webhooks/events` lists it, and the `events` filter of `GET /webhooks/deliveries` takes it,
+  now up to 20.
+- `POST /users/dismiss`: a request still waiting on someone dismissed to approve skips their turn
+  and moves on to the next approver. It is cancelled only when they were the last approver left to
+  decide, and approvals they already gave stand. Before, every such request was cancelled.
+- `DELETE /checklists/{id}`: files on the checklist itself no longer keep it from being deleted,
+  whoever uploaded them, and go with it. A file on an item still does.
+
 ## 0.13.0
 
 ### May break your build (types only)
